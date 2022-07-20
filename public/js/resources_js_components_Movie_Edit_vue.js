@@ -85,14 +85,36 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/api/movie/".concat(this.$route.params.id)).then(function (res) {
-        _this.title = res.data.title;
-        _this.description = res.data.description;
-        _this.actors = res.data.actors;
-        _this.release_year = res.data.release_year;
+        _this.title = res.data.data.title;
+        _this.description = res.data.data.description;
+        _this.actors = res.data.data.actors;
+        _this.release_year = res.data.data.release_year;
         console.log(res);
       });
     },
-    update: function update() {// TODO написать обновление
+    update: function update() {
+      var _this2 = this;
+
+      axios.patch("/api/movie/".concat(this.$route.params.id), {
+        title: this.title,
+        description: this.description,
+        actors: this.actors,
+        release_year: this.release_year
+      }).then(function (res) {
+        console.log(res);
+
+        _this2.$router.push({
+          name: 'movie.show',
+          params: {
+            id: _this2.$route.params.id
+          }
+        });
+      });
+    }
+  },
+  computed: {
+    isDisabled: function isDisabled() {
+      return this.title;
     }
   }
 });
@@ -172,12 +194,7 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "btn btn-dark"
-}, " Редактировать ", -1
-/* HOISTED */
-);
-
+var _hoisted_14 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Datepicker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Datepicker");
 
@@ -222,7 +239,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Выберите дату выхода фильма"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), _hoisted_14])])])]);
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    disabled: !$options.isDisabled,
+    onClick: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.update && $options.update.apply($options, arguments);
+    }, ["prevent"])),
+    "class": "btn btn-warning"
+  }, " Редактировать ", 8
+  /* PROPS */
+  , _hoisted_14)])])])]);
 }
 
 /***/ }),

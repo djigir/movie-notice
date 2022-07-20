@@ -7,8 +7,15 @@
                 <hr>
                 <form>
                     <div class="form-group">
+                        <template v-for="error in errors">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ error }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                        </template>
                         <label for="title">Название фильма</label>
-                        <input v-model="title" type="text" id="title" class="form-control" placeholder="Название фильма">
+                        <input v-model="title" type="text" id="title" class="form-control" placeholder="Название фильма" style="margin-bottom: 1.5rem;">
                     </div>
                     <div class="form-group">
                         <label for="description">Описание</label>
@@ -21,17 +28,6 @@
                     <div class="form-group">
                         <label for="release_year">Год выпуска</label>
 
-<!--                        locale="ru"-->
-<!--                        :format-locale="ru"-->
-<!--                        format="d-MMMM-yyyy"-->
-<!--                        v-model="release_date"-->
-<!--                        type="date"-->
-<!--                        cancelText="Выйти"-->
-<!--                        selectText="Выбрать"-->
-<!--                        showNowButton-->
-<!--                        nowButtonLabel="Текущая дата"-->
-<!--                        :enableTimePicker="false"-->
-
                         <Datepicker
                             id="release_year"
                             yearPicker
@@ -40,9 +36,10 @@
                             placeholder="Выберите дату выхода фильма"
                         >
                         </Datepicker>
+
                     </div>
 
-                    <button @click.prevent="store" class="btn btn-dark">
+                    <button :disabled="!isDisabled" @click.prevent="store" class="btn btn-dark store-btn">
                         Создать
                     </button>
                 </form>
@@ -55,8 +52,6 @@
 <script>
     import Datepicker from '@vuepic/vue-datepicker';
     import '@vuepic/vue-datepicker/dist/main.css'
-    // import { ru } from 'date-fns/locale';
-    import router from '../../router';
 
     export default {
         name: "Create",
@@ -69,14 +64,13 @@
                 description: '',
                 actors: '',
                 release_year: null,
-                // ru,
+                errors: null,
             }
         },
 
         methods: {
 
             store() {
-                // TODO пофиксить роут что бы писать без localhost
                 axios.post('/api/movie', {
                     title: this.title,
                     description: this.description,
@@ -85,15 +79,25 @@
                 })
                 .then( res => {
                     console.log(res)
-                    router.push({name: 'movie.index'})
+                    this.$router.push({name: 'movie.index'})
                 })
+                .catch(err => {
+                    console.log(err.response.data.errors)
+                    this.errors = err.response.data.errors
+                })
+            }
+        },
+
+        computed: {
+            isDisabled() {
+                return this.title
             }
         }
     }
 </script>
 
 <style scoped>
-    button {
+    .store-btn {
         margin-top: 1rem;
     }
 </style>

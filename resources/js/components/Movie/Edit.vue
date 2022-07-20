@@ -29,7 +29,7 @@
                         </Datepicker>
                     </div>
 
-                    <button  class="btn btn-dark">
+                    <button :disabled="!isDisabled" @click.prevent="update" class="btn btn-warning">
                         Редактировать
                     </button>
                 </form>
@@ -64,16 +64,31 @@
             getMovie() {
                 axios.get(`/api/movie/${this.$route.params.id}`)
                 .then(res => {
-                    this.title = res.data.title
-                    this.description = res.data.description
-                    this.actors = res.data.actors
-                    this.release_year = res.data.release_year
+                    this.title = res.data.data.title
+                    this.description = res.data.data.description
+                    this.actors = res.data.data.actors
+                    this.release_year = res.data.data.release_year
                     console.log(res)
                 })
             },
 
             update() {
-                // TODO написать обновление
+                axios.patch(`/api/movie/${this.$route.params.id}`, {
+                    title: this.title,
+                    description: this.description,
+                    actors: this.actors,
+                    release_year: this.release_year
+                })
+                .then(res => {
+                    console.log(res)
+                    this.$router.push({name: 'movie.show', params: {id: this.$route.params.id}})
+                })
+            }
+        },
+
+        computed: {
+            isDisabled() {
+                return this.title
             }
         }
     }

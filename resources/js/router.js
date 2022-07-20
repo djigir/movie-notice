@@ -22,6 +22,11 @@ const routes = [
         name: 'movie.create'
     },
     {
+        path: '/movie/:id',
+        component: () => import('./components/Movie/Show'),
+        name: 'movie.show'
+    },
+    {
         path: '/movie/:id/edit',
         component: () => import('./components/Movie/Edit'),
         name: 'movie.edit'

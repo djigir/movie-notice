@@ -3,15 +3,14 @@
         <div class="row">
             <!-- Navigation -->
             <nav aria-label="navigation" class="main-navigation">
-                <a class="nav-btn btn btn-primary">
-                    <router-link :to="{ name: 'profile.index' }">profile</router-link>
-                </a>
-                <a class="nav-btn btn btn-primary">
-                    <router-link :to="{ name: 'movie.index' }">Фильмы</router-link>
-                </a>
-                <a class="nav-btn btn btn-primary">
-                    <router-link :to="{ name: 'movie.create' }">Добавить Фильм</router-link>
-                </a>
+                <router-link :to="{ name: 'profile.index' }" class="nav-btn btn btn-outline-primary">
+                    profile
+                </router-link>
+
+                <router-link :to="{ name: 'movie.index' }" class="nav-btn btn btn-outline-primary">
+                    Фильмы
+                </router-link>
+
             </nav>
             <!-- /Navigation -->
         </div>
