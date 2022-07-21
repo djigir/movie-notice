@@ -1,82 +1,64 @@
 <template>
 
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body tab-content">
-                <div class="tab-pane active" id="movies">
-
-<!--                    <div class="container">-->
-<!--                        <div class="row">-->
-<!--                            <div class="col">-->
-<!--                                <h6 class="text-center fw-bold">Фильмы</h6>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <router-link :to="{ name: 'movie.create' }" class="btn btn-success">-->
-<!--                                    Добавить Фильм-->
-<!--                                </router-link>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                     </div>-->
-
-                    <div class="app-page-title">
-                        <div class="page-title-wrapper">
-                            <div class="page-title-heading">
-                                <div class="page-title-icon">
-                                    <i class="pe-7s-car icon-gradient bg-mean-fruit"></i>
-                                </div>
-                                <div>Analytics Dashboard
-                                    <div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div>
-                                </div>
-                            </div>
-                            <div class="page-title-actions">
-                                <button type="button" data-toggle="tooltip" title="" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark" data-original-title="Example Tooltip">
-                                    <i class="fa fa-star"></i>
-                                </button>
-                                <div class="d-inline-block dropdown">
-                                    <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
-<span class="btn-icon-wrapper pr-2 opacity-7">
-<i class="fa fa-business-time fa-w-20"></i>
-</span>
-                                        Buttons
-                                    </button>
-                                    <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link">
-                                                    <i class="nav-link-icon lnr-inbox"></i>
-                                                    <span> Inbox</span>
-                                                    <div class="ml-auto badge badge-pill badge-secondary">86</div>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link">
-                                                    <i class="nav-link-icon lnr-book"></i>
-                                                    <span> Book</span>
-                                                    <div class="ml-auto badge badge-pill badge-danger">5</div>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link">
-                                                    <i class="nav-link-icon lnr-picture"></i>
-                                                    <span> Picture</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a disabled="" class="nav-link disabled">
-                                                    <i class="nav-link-icon lnr-file-empty"></i>
-                                                    <span> File Disabled</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div> </div>
+<!-- container если что поменять епросто без флуид -->
+    <div class="container-fluid m-5 p-2 rounded mx-auto bg-light shadow">
+        <!-- App title section -->
+        <div class="row m-1 p-4">
+            <div class="col">
+                <div class="p-1 h1 text-primary text-center mx-auto display-inline-block">
+                    <h2 class="text-center fw-bold">Фильмы</h2>
+                </div>
+            </div>
+        </div>
+        <!-- Create todo section -->
+        <div class="row m-1 p-3">
+            <div class="col col-11 mx-auto">
+                <div class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
+                    <div class="col">
+                        <input class="form-control search-inp form-control-lg border-0 add-todo-input bg-transparent rounded" type="text" placeholder="Поиск">
                     </div>
+                    <div class="col-auto px-0 mx-0 mr-2">
+                        <button type="button" class="btn btn-primary">Найти</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 mx-4 border-black-25 border-bottom"></div>
+        <!-- View options section -->
+        <div class="row m-1 p-3 px-5 justify-content-end">
+            <div class="col-auto d-flex align-items-center">
+                <label class="text-secondary my-2 pr-2 view-opt-label">Фильтр:</label>
+                <select class="custom-select custom-select-sm btn my-2">
+                    <option value="active" selected>Не просмотренные</option>
+                    <option value="completed">Просмотренные</option>
+                    <option value="has-due-date">Премьеры</option>
+                    <option value="all">Все</option>
 
+                </select>
+            </div>
+            <div class="col-auto d-flex align-items-center px-1 pr-3">
+                <label class="text-secondary my-2 pr-2 view-opt-label">Сортировка:</label>
+                <select class="custom-select custom-select-sm btn my-2">
+                    <option value="added-date-asc" selected>По дате добавления</option>
+                    <option value="added-date-asc">По году выпуска</option>
+                </select>
+            </div>
 
+            <div class="col-auto d-flex align-items-center px-1 pr-3" style="margin-left: 1rem;">
+                <router-link :to="{ name: 'movie.create' }" class="btn btn-primary">
+                    Добавить Фильм
+                </router-link>
+            </div>
 
-                    <hr>
-                        <table class="table text-center">
+        </div>
+        <!-- Todo list section -->
+        <div class="row mx-1 px-5 pb-3 w-80">
+            <div class="col mx-auto">
+                <!-- Todo Item 1 -->
+                <div class="row px-3 align-items-center todo-item rounded">
+
+                    <div class="table-responsive mt-4">
+                        <table class="table text-center table-hover">
                             <thead>
                             <tr>
                                 <th scope="col">№</th>
@@ -84,13 +66,13 @@
                                 <th scope="col">Описание</th>
                                 <th scope="col">Актеры</th>
                                 <th scope="col">Год выпуска</th>
-                                <th scope="col">Добавленно</th>
+                                <th scope="col">Добавлено</th>
                                 <th colspan="3">Действия</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="movie in movies">
-                                <th scope="row">{{ movie.id }}</th>
+                            <tr v-for="(movie, index) in movies">
+                                <th scope="row">{{ index+1 }}</th>
                                 <td>
                                     <router-link :to="{name: 'movie.show', params: {id: movie.id}}">
                                         {{ movie.title }}
@@ -127,10 +109,15 @@
                             </tr>
                             </tbody>
                         </table>
+                    </div>
+
                 </div>
+
             </div>
         </div>
     </div>
+
+
 
 </template>
 
@@ -170,14 +157,13 @@
 </script>
 
 <style scoped>
-    .app-theme-white .app-page-title {
-        background: rgba(255,255,255,.45);
+    /* TODO убрать подсветку инпута ПОИСКА при клике   */
+    .view-opt-label {
+        margin-right: 8px;
+
     }
 
-    .app-page-title {
-        padding: 30px;
-        margin: -30px -30px 30px;
-        position: relative;
+    .custom-select-sm {
+        border: 1px solid #0D6EFD;
     }
-    
 </style>

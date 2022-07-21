@@ -26,6 +26,7 @@
     "dependencies": {
         "@vuepic/vue-datepicker": "^3.3.1",
         "moment": "^2.29.4",
-        "vue-router": "^4.1.2"
+        "vue-router": "^4.1.2",
+        "vue3-star-ratings": "^1.1.0"
     }
 }
