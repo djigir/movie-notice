@@ -58,7 +58,7 @@
                                 </div>
 
                                 <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="is_viewed">
+                                    <input v-model="is_viewed" type="checkbox" class="form-check-input" id="is_viewed">
                                     <label class="form-check-label" for="is_viewed">Просмотренно</label>
                                 </div>
 
@@ -66,11 +66,11 @@
 
                                     <label for="rating" id="rating-label" class="form-check-label">Рейтинг:</label>
                                     <vue3starRatings id="rating" class="rating-stars" style="display: inline-block"
-                                                     v-model="rating"
-                                                     starSize="15"
-                                                     :numberOfStars="10"
-                                                     :step="1"
-                                                     :showControl="false"
+                                        v-model="rating"
+                                        starSize="15"
+                                        :numberOfStars="10"
+                                        :step="1"
+                                        :showControl="false"
                                     />
                                     {{ rating }}
 
@@ -109,19 +109,21 @@
                 description: '',
                 actors: '',
                 release_year: null,
+                is_viewed: 0,
                 errors: null,
                 rating: null,
             }
         },
 
         methods: {
-
             store() {
                 axios.post('/api/movie', {
                     title: this.title,
                     description: this.description,
                     actors: this.actors,
-                    release_year: this.release_year
+                    release_year: this.release_year,
+                    is_viewed: this.is_viewed,
+                    rating: this.rating,
                 })
                 .then( res => {
                     console.log(res)

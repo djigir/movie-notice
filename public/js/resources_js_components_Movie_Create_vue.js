@@ -78,6 +78,7 @@ __webpack_require__.r(__webpack_exports__);
       description: '',
       actors: '',
       release_year: null,
+      is_viewed: 0,
       errors: null,
       rating: null
     };
@@ -90,7 +91,9 @@ __webpack_require__.r(__webpack_exports__);
         title: this.title,
         description: this.description,
         actors: this.actors,
-        release_year: this.release_year
+        release_year: this.release_year,
+        is_viewed: this.is_viewed,
+        rating: this.rating
       }).then(function (res) {
         console.log(res);
 
@@ -228,26 +231,24 @@ var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "mb-3 form-check"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "checkbox",
-    "class": "form-check-input",
-    id: "is_viewed"
-  }), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_20 = {
+  "class": "mb-3 form-check"
+};
+
+var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "class": "form-check-label",
     "for": "is_viewed"
-  }, "Просмотренно")], -1
+  }, "Просмотренно", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_21 = {
+var _hoisted_22 = {
   "class": "mb-3 form-check rating-form"
 };
 
-var _hoisted_22 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "rating",
     id: "rating-label",
@@ -257,7 +258,7 @@ var _hoisted_22 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_23 = ["disabled"];
+var _hoisted_24 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Datepicker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Datepicker");
 
@@ -306,14 +307,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Добавте актеров к фильму если вы их знаете"
   }, "\n\n                                        ", 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.actors]])])]), _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue3starRatings, {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.actors]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $data.is_viewed = $event;
+    }),
+    type: "checkbox",
+    "class": "form-check-input",
+    id: "is_viewed"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.is_viewed]]), _hoisted_21]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue3starRatings, {
     id: "rating",
     "class": "rating-stars",
     style: {
       "display": "inline-block"
     },
     modelValue: $data.rating,
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.rating = $event;
     }),
     starSize: "15",
@@ -326,13 +336,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     disabled: !$options.isDisabled,
-    onClick: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onClick: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.store && $options.store.apply($options, arguments);
     }, ["prevent"])),
     "class": "btn btn-primary store-btn"
   }, " Создать ", 8
   /* PROPS */
-  , _hoisted_23)])])])])]);
+  , _hoisted_24)])])])])]);
 }
 
 /***/ }),

@@ -28,6 +28,8 @@ class UpdateRequest extends FormRequest
             'description' => 'nullable|string',
             'actors' => 'nullable|string',
             'release_year' => 'nullable|integer|digits:4|min:1900',
+            'is_viewed' => 'nullable|boolean',
+            'rating' => 'nullable|numeric',
         ];
     }
 

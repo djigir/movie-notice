@@ -8,12 +8,15 @@ use App\Http\Requests\Movie\UpdateRequest;
 use App\Http\Resources\IndexMovieResource;
 use App\Http\Resources\MovieResource;
 use App\Models\Movie;
+use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $movies = Movie::all()->sortByDesc('created_at');
+//        $movies = Movie::all()->sortByDesc('created_at');
+//        $movies = Movie::where('title', 'LIKE', '%'.$request->get('search').'%')->get();
+        $movies = Movie::where('title', 'LIKE', '%'.$request->get('search').'%')->paginate(2);
         return IndexMovieResource::collection($movies);
     }
 

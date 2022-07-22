@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('actors')->nullable();
             $table->year('release_year')->nullable();
+            $table->boolean('is_viewed')->default(0);
+            $table->decimal('rating')->nullable();
             $table->timestamps();
         });
     }

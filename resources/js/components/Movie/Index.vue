@@ -15,10 +15,7 @@
             <div class="col col-11 mx-auto">
                 <div class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
                     <div class="col">
-                        <input class="form-control search-inp form-control-lg border-0 add-todo-input bg-transparent rounded" type="text" placeholder="Поиск">
-                    </div>
-                    <div class="col-auto px-0 mx-0 mr-2">
-                        <button type="button" class="btn btn-primary">Найти</button>
+                        <input v-model="search" class="form-control search-inp form-control-lg border-0 add-todo-input bg-transparent rounded" type="text" placeholder="Введите название, описание или актера для поиска! ">
                     </div>
                 </div>
             </div>
@@ -66,6 +63,8 @@
                                 <th scope="col">Описание</th>
                                 <th scope="col">Актеры</th>
                                 <th scope="col">Год выпуска</th>
+                                <th scope="col">Просмотренно</th>
+                                <th scope="col">Рейтинг</th>
                                 <th scope="col">Добавлено</th>
                                 <th colspan="3">Действия</th>
                             </tr>
@@ -83,6 +82,16 @@
                                 <td>
                                     <a href="#">
                                         {{ movie.release_year }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a :class="movie.is_viewed === 1 ? 'text-success' : 'text-danger'" class="fw-bold" href="#">
+                                        {{ movie.is_viewed_text }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        {{ movie.rating }}
                                     </a>
                                 </td>
                                 <td>
@@ -129,11 +138,18 @@
         data() {
             return {
                 movies: null,
+                search: null,
             }
         },
 
         mounted() {
             this.getMovies()
+        },
+
+        watch: {
+            search(after, before) {
+                this.getResult()
+            }
         },
 
         methods: {
@@ -149,9 +165,17 @@
                 .then(res => {
                     this.getMovies()
                 })
+            },
+
+            getResult() {
+                axios.get('api/movie', {
+                    params: {search: this.search}
+                })
+                .then(res => {
+                    this.movies = res.data.data
+                })
             }
         },
-
 
     }
 </script>
