@@ -23,8 +23,6 @@ class IndexMovieResource extends JsonResource
             'is_viewed' => $this->is_viewed,
             'rating' => $this->rating,
             'created_at' => $this->created_at,
-            // custom fields
-            'is_viewed_text' => $this->is_viewed === 0 ? 'Нет' : 'Да',
         ];
     }
 }

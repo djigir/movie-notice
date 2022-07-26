@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('movies', function (Blueprint $table) {
+        Schema::create('movie_genres', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->text('actors')->nullable();
-            $table->year('release_year')->nullable();
-            $table->boolean('is_viewed')->default(0);
-            $table->float('rating')->nullable();
+            $table->foreignId('movie_id')->constrained();
+            $table->foreignId('genre_id')->constrained();
             $table->timestamps();
+
+            // IDX
+            $table->index('movie_id', 'movie_genre_movie_idx');
+            $table->index('genre_id', 'genre_movie_genre_idx');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movies');
+        Schema::dropIfExists('movie_genres');
     }
 };

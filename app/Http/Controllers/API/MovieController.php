@@ -14,9 +14,10 @@ class MovieController extends Controller
 {
     public function index(Request $request)
     {
-//        $movies = Movie::all()->sortByDesc('created_at');
-//        $movies = Movie::where('title', 'LIKE', '%'.$request->get('search').'%')->get();
-        $movies = Movie::where('title', 'LIKE', '%'.$request->get('search').'%')->paginate(2);
+        $movies = Movie::where('title', 'LIKE', '%'.$request->get('search').'%')
+            ->orWhere('description', 'LIKE', '%'.$request->get('search').'%')
+            ->orderByDesc('created_at')
+            ->paginate(7);
         return IndexMovieResource::collection($movies);
     }
 

@@ -57,6 +57,8 @@
                                     </div>
                                 </div>
 
+                                <!--  -->
+
                                 <div class="mb-3 form-check">
                                     <input v-model="is_viewed" type="checkbox" class="form-check-input" id="is_viewed">
                                     <label class="form-check-label" for="is_viewed">Просмотренно</label>
@@ -65,14 +67,12 @@
                                 <div class="mb-3 form-check rating-form">
 
                                     <label for="rating" id="rating-label" class="form-check-label">Рейтинг:</label>
-                                    <vue3starRatings id="rating" class="rating-stars" style="display: inline-block"
-                                        v-model="rating"
-                                        starSize="15"
-                                        :numberOfStars="10"
-                                        :step="1"
-                                        :showControl="false"
+                                    <star-rating id="rating" class="rating-stars"
+                                         v-model:rating="rating"
+                                         :increment="0.5"
+                                         :max-rating="10"
+                                         :star-size="18"
                                     />
-                                    {{ rating }}
 
                                 </div>
                             </div>
@@ -91,14 +91,14 @@
 <script>
     import Datepicker from '@vuepic/vue-datepicker';
     import '@vuepic/vue-datepicker/dist/main.css'
-    import vue3starRatings from "vue3-star-ratings";
+    import StarRating from 'vue-star-rating'
 
     export default {
         name: "Create",
 
         components: {
             Datepicker,
-            vue3starRatings,
+            StarRating,
         },
 
 

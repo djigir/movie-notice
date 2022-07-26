@@ -1,51 +1,103 @@
 <template>
-    <div class="card">
-        <div class="card-body tab-content">
-            <div class="tab-pane active" id="movie">
-                <h6 class="text-center fw-bold">Добавление фильма</h6>
-                <hr>
-                <form>
-                    <div class="form-group">
-                        <label for="title">Название фильма</label>
-                        <input v-model="title" type="text" id="title" class="form-control" placeholder="Название фильма">
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Описание</label>
-                        <input v-model="description" id="description" type="text" class="form-control" placeholder="Добавте ваше описание к фильму">
-                    </div>
-                    <div class="form-group">
-                        <label for="actors">Актеры</label>
-                        <input v-model="actors" id="actors" type="text" class="form-control" placeholder="Введите актеров">
-                    </div>
-                    <div class="form-group">
-                        <label for="release_year">Год выпуска</label>
-                        <Datepicker
-                            id="release_year"
-                            yearPicker
-                            v-model="release_year"
-                            autoApply
-                            placeholder="Выберите дату выхода фильма"
-                        >
-                        </Datepicker>
-                    </div>
 
-                    <button :disabled="!isDisabled" @click.prevent="update" class="btn btn-warning">
-                        Редактировать
-                    </button>
-                </form>
+
+    <div class="container-fluid m-5 p-2 rounded mx-auto bg-light shadow">
+        <!-- App title section -->
+        <div class="row m-1 p-4">
+            <div class="col">
+                <div class="p-1 h1 text-primary text-center mx-auto display-inline-block">
+                    <h2 class="text-center fw-bold">Редактирование фильма</h2>
+                </div>
+            </div>
+        </div>
+        <!--hr -->
+        <div class="p-2 mx-4 border-black-25 border-bottom"></div>
+
+        <!-- Todo list section -->
+        <div class="row mx-1 px-5 pb-3 w-80 mt-5">
+            <div class="col mx-auto">
+                <!-- Todo Item 1 -->
+                <div class="row px-3 align-items-center todo-item rounded">
+
+                    <div class="container">
+                        <div class="row">
+                            <!-- col-md-6 можно поделить на 2 части -->
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Название фильма</label>
+                                    <input v-model="title" type="text" class="form-control" id="title" placeholder="Введите название фильма" aria-describedby="title_error" required>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-group shadow-textarea">
+                                        <label for="description">Описание</label>
+                                        <textarea v-model="description" class="form-control z-depth-1" id="description" rows="3" placeholder="Добавте ваше описание к фильму">
+
+                                        </textarea>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="release_year">Год выпуска</label>
+
+                                    <Datepicker
+                                        id="release_year"
+                                        yearPicker
+                                        v-model="release_year"
+                                        autoApply
+                                        placeholder="Выберите дату выхода фильма"
+                                    >
+                                    </Datepicker>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-group shadow-textarea">
+                                        <label for="actors">Актеры</label>
+                                        <textarea v-model="actors" class="form-control z-depth-1" id="actors" rows="3" placeholder="Добавте актеров к фильму если вы их знаете">
+
+                                        </textarea>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                    <input v-model="is_viewed" type="checkbox" class="form-check-input" id="is_viewed">
+                                    <label class="form-check-label" for="is_viewed">Просмотренно</label>
+                                </div>
+
+                                <div class="mb-3 form-check rating-form">
+
+                                    <label for="rating" id="rating-label" class="form-check-label">Рейтинг:</label>
+                                    <star-rating id="rating" class="rating-stars"
+                                                 v-model:rating="rating"
+                                                 :increment="0.5"
+                                                 :max-rating="10"
+                                                 :star-size="18"
+                                    />
+
+                                </div>
+                            </div>
+                        </div>
+                        <button :disabled="!isDisabled" @click.prevent="update" class="btn btn-warning store-btn">
+                            Обновить
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 </template>
 
 <script>
     import Datepicker from "@vuepic/vue-datepicker";
     import '@vuepic/vue-datepicker/dist/main.css'
+    import StarRating from 'vue-star-rating'
 
     export default {
         name: "Edit",
 
-        components: { Datepicker},
+        components: {
+            Datepicker,
+            StarRating,
+        },
 
         data() {
             return {
@@ -53,6 +105,8 @@
                 description: '',
                 actors: '',
                 release_year: null,
+                is_viewed: null,
+                rating: null,
             }
         },
 
@@ -68,6 +122,8 @@
                     this.description = res.data.data.description
                     this.actors = res.data.data.actors
                     this.release_year = res.data.data.release_year
+                    this.is_viewed = Boolean(res.data.data.is_viewed)
+                    this.rating = Number(res.data.data.rating)
                     console.log(res)
                 })
             },
@@ -77,7 +133,9 @@
                     title: this.title,
                     description: this.description,
                     actors: this.actors,
-                    release_year: this.release_year
+                    release_year: this.release_year,
+                    is_viewed: this.is_viewed,
+                    rating: this.rating
                 })
                 .then(res => {
                     console.log(res)
@@ -95,5 +153,16 @@
 </script>
 
 <style scoped>
+    .rating-form {
+        padding-left: 0!important;
+    }
 
+    #rating-label {
+        margin-right: 5px;
+    }
+
+    .rating-stars {
+        margin: 0!important;
+        padding: 0!important;
+    }
 </style>

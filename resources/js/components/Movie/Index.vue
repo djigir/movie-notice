@@ -70,7 +70,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="(movie, index) in movies">
+                            <tr v-for="(movie, index) in movies.data">
                                 <th scope="row">{{ index+1 }}</th>
                                 <td>
                                     <router-link :to="{name: 'movie.show', params: {id: movie.id}}">
@@ -86,7 +86,7 @@
                                 </td>
                                 <td>
                                     <a :class="movie.is_viewed === 1 ? 'text-success' : 'text-danger'" class="fw-bold" href="#">
-                                        {{ movie.is_viewed_text }}
+                                        {{ isViewedText(movie) }}
                                     </a>
                                 </td>
                                 <td>
@@ -119,11 +119,20 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
-
             </div>
         </div>
+        <!-- START Pagination -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 d-flex">
+                    <ul class="pagination mx-auto">
+                        <LaravelVuePagination :data="movies" @pagination-change-page="getMovies" />
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- END  Pagination -->
     </div>
 
 
@@ -131,13 +140,16 @@
 </template>
 
 <script>
+    import LaravelVuePagination from 'laravel-vue-pagination';
 
     export default {
         name: "Index",
 
+        components: { LaravelVuePagination },
+
         data() {
             return {
-                movies: null,
+                movies: {},
                 search: null,
             }
         },
@@ -148,16 +160,22 @@
 
         watch: {
             search(after, before) {
-                this.getResult()
+                this.getMovies()
             }
         },
 
         methods: {
-            getMovies() {
-                axios.get('api/movie')
-                .then(res => {
-                    this.movies = res.data.data
+            getMovies(page = 1) {
+                axios.get(`api/movie?page=${page}`, {
+                    params: {search: this.search}
                 })
+                .then(res => {
+                    this.movies = res.data
+                })
+            },
+
+            isViewedText(movie) {
+                return movie.is_viewed === 1 ? 'Да' : 'Нет'
             },
 
             deleteMovie(id) {
@@ -166,16 +184,8 @@
                     this.getMovies()
                 })
             },
-
-            getResult() {
-                axios.get('api/movie', {
-                    params: {search: this.search}
-                })
-                .then(res => {
-                    this.movies = res.data.data
-                })
-            }
         },
+
 
     }
 </script>
