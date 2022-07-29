@@ -3,21 +3,38 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Movie\StoreRequest;
-use App\Http\Requests\Movie\UpdateRequest;
+use App\Http\Filters\MovieFilter;
+use App\Http\Requests\API\Movie\IndexRequest;
+use App\Http\Requests\API\Movie\StoreRequest;
+use App\Http\Requests\API\Movie\UpdateRequest;
 use App\Http\Resources\IndexMovieResource;
 use App\Http\Resources\MovieResource;
 use App\Models\Movie;
+use App\Service\MovieService;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
-    public function index(Request $request)
+    public function __construct(MovieService $movieService)
     {
-        $movies = Movie::where('title', 'LIKE', '%'.$request->get('search').'%')
+        $this->movieService = $movieService;
+    }
+
+    public function index(IndexRequest $request)
+    {
+        $movies = Movie::with('genres')
+            ->where('title', 'LIKE', '%'.$request->get('search').'%')
             ->orWhere('description', 'LIKE', '%'.$request->get('search').'%')
-            ->orderByDesc('created_at')
+//            ->orderByDesc('created_at')
+            ->orderBy($request->get('sort_column'), $request->get('sort_direction'))
             ->paginate(7);
+
+//        $data = $request->validated();
+//
+//        $filter = app()->make(MovieFilter::class, ['queryParams' => array_filter($data)]);
+//
+//        $movies = Movie::filter($filter)->paginate(4, ['*'], 'page', $data['page']);
+
         return IndexMovieResource::collection($movies);
     }
 
@@ -25,7 +42,7 @@ class MovieController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        Movie::create($data);
+        $this->movieService->movieStore($data);
 
         return response([]);
     }
@@ -40,7 +57,7 @@ class MovieController extends Controller
     public function update(UpdateRequest $request, Movie $movie)
     {
         $data = $request->validated();
-        $movie->update($data);
+        $this->movieService->movieUpdate($data, $movie);
 
         return response([]);
     }

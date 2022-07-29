@@ -26,7 +26,7 @@
     "dependencies": {
         "@vuepic/vue-datepicker": "^3.3.1",
         "laravel-vue-pagination": "^3.0.0",
-        "moment": "^2.29.4",
+        "vue-multiselect": "^3.0.0-alpha.2",
         "vue-router": "^4.1.2",
         "vue-star-rating": "^2.1.0"
     }

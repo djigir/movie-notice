@@ -57,6 +57,20 @@
                                     </div>
                                 </div>
 
+                                <div class="mb-3">
+                                    <label class="typo__label">Жанры</label>
+                                    <VueMultiselect
+                                        v-model="genres"
+                                        :options="genres_options"
+                                        :multiple="true"
+                                        :close-on-select="true"
+                                        :preserve-search="true"
+                                        label="title"
+                                        placeholder="Выберите жанры"
+                                        track-by="title"
+                                    />
+                                </div>
+
                                 <div class="mb-3 form-check">
                                     <input v-model="is_viewed" type="checkbox" class="form-check-input" id="is_viewed">
                                     <label class="form-check-label" for="is_viewed">Просмотренно</label>
@@ -66,16 +80,25 @@
 
                                     <label for="rating" id="rating-label" class="form-check-label">Рейтинг:</label>
                                     <star-rating id="rating" class="rating-stars"
-                                                 v-model:rating="rating"
-                                                 :increment="0.5"
-                                                 :max-rating="10"
-                                                 :star-size="18"
+                                         v-model:rating="rating"
+                                         :increment="0.5"
+                                         :max-rating="10"
+                                         :star-size="18"
                                     />
 
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="movie-image">Картинка</label>
+                                    <input v-model="image" type="text" class="form-control" id="movie-image" placeholder="Вставте ссылку на картинку к фильму">
+                                </div>
+                                <div class="preview-movie-image">
+                                    <img :src="defaultImage" alt="movie-img" width="540" height="340">
+                                </div>
+
                             </div>
                         </div>
-                        <button :disabled="!isDisabled" @click.prevent="update" class="btn btn-warning store-btn">
+                        <button :disabled="!isDisabled" @click.prevent="update" class="btn btn-warning store-btn mt-3">
                             Обновить
                         </button>
                     </div>
@@ -90,6 +113,7 @@
     import Datepicker from "@vuepic/vue-datepicker";
     import '@vuepic/vue-datepicker/dist/main.css'
     import StarRating from 'vue-star-rating'
+    import VueMultiselect from 'vue-multiselect/src/Multiselect.vue';
 
     export default {
         name: "Edit",
@@ -97,6 +121,7 @@
         components: {
             Datepicker,
             StarRating,
+            VueMultiselect
         },
 
         data() {
@@ -107,11 +132,15 @@
                 release_year: null,
                 is_viewed: null,
                 rating: null,
+                genres: [],
+                genres_options: [],
+                image: 'https://mizez.com/custom/mizez/img/general/no-image-available.png'
             }
         },
 
         mounted() {
             this.getMovie()
+            this.getGenres()
         },
 
         methods: {
@@ -119,26 +148,36 @@
                 axios.get(`/api/movie/${this.$route.params.id}`)
                 .then(res => {
                     this.title = res.data.data.title
+                    this.genres = res.data.data.genres
                     this.description = res.data.data.description
                     this.actors = res.data.data.actors
                     this.release_year = res.data.data.release_year
                     this.is_viewed = Boolean(res.data.data.is_viewed)
                     this.rating = Number(res.data.data.rating)
+                    this.image = res.data.data.image
                     console.log(res)
+                })
+            },
+
+            getGenres() {
+                axios.get('/api/genre')
+                .then( res => {
+                    this.genres_options = res.data.data
                 })
             },
 
             update() {
                 axios.patch(`/api/movie/${this.$route.params.id}`, {
                     title: this.title,
+                    genres: this.genres,
                     description: this.description,
                     actors: this.actors,
                     release_year: this.release_year,
                     is_viewed: this.is_viewed,
-                    rating: this.rating
+                    rating: this.rating,
+                    image: this.image
                 })
                 .then(res => {
-                    console.log(res)
                     this.$router.push({name: 'movie.show', params: {id: this.$route.params.id}})
                 })
             }
@@ -147,6 +186,10 @@
         computed: {
             isDisabled() {
                 return this.title
+            },
+
+            defaultImage() {
+                return this.image === '' ? 'https://mizez.com/custom/mizez/img/general/no-image-available.png' : this.image
             }
         }
     }

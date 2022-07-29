@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Movie;
+namespace App\Http\Requests\API\Movie;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class IndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,11 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string',
-            'description' => 'nullable|string',
-            'actors' => 'nullable|string',
-            'release_year' => 'nullable|integer|digits:4|min:1900',
-            'is_viewed' => 'nullable|boolean',
-            'rating' => 'nullable|numeric',
+            'search' => 'nullable|string',
+            'selected_genre' => 'nullable',
+            'sort_column' => 'nullable|string',
+            'sort_direction' => 'nullable|string',
+            'page' => 'nullable|integer',
         ];
     }
-
 }

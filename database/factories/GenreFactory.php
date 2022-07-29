@@ -1,21 +1,21 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Factories;
 
-use App\Models\Genre;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DatabaseSeeder extends Seeder
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Genre>
+ */
+class GenreFactory extends Factory
 {
     /**
-     * Seed the application's database.
+     * Define the model's default state.
      *
-     * @return void
+     * @return array<string, mixed>
      */
-    public function run()
+    public function definition()
     {
-
         $genres = [
             'Аниме',
             'Арт-хаус',
@@ -46,15 +46,13 @@ class DatabaseSeeder extends Seeder
             'Фэнтези',
         ];
 
+        $v = '';
         foreach ($genres as $genre) {
-            Genre::create(['title' => $genre]);
+            $v = $genre;
         }
 
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        return [
+            'title' => $v,
+        ];
     }
 }

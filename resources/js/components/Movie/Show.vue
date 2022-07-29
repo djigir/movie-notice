@@ -42,6 +42,15 @@
                         <td>{{ this.movie.title }}</td>
                     </tr>
                     <tr class="text-center">
+                        <td style="vertical-align: middle;">Жанры</td>
+                        <td>
+                            <span v-for="genre in this.movie.genres">
+                                {{ genre.title }}
+                                <br>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="text-center">
                         <td>Описание</td>
                         <td>{{ this.movie.description }}</td>
                     </tr>
@@ -70,6 +79,12 @@
                             | <span class="text-primary">{{ new Date(movie.created_at).toLocaleTimeString([], {timeStyle: 'short'}) }}</span>
                         </td>
                     </tr>
+                    <tr class="text-center">
+                        <td style="vertical-align: middle;">Картинка</td>
+                        <td>
+                            <img :src="this.movie.image" alt="movie-img" width="540" height="340">
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -79,7 +94,7 @@
 
 
 </template>
-
+<!-- TODO если неь жанров вывести какую-то надпись -->
 <script>
     export default {
         name: "Show",

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->year('release_year')->nullable();
             $table->boolean('is_viewed')->default(0);
             $table->float('rating')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

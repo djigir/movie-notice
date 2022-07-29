@@ -24,20 +24,30 @@
         <!-- View options section -->
         <div class="row m-1 p-3 px-5 justify-content-end">
             <div class="col-auto d-flex align-items-center">
+                <label class="text-secondary my-2 pr-2 view-opt-label">Жанр:</label>
+                <!-- genre  -->
+                <select @change="genreFilter($event)" class="custom-select custom-select-sm btn my-2">
+                    <option value="all" selected class="fw-bold">Все</option>
+                    <option v-for="genre_option in genres_options" :value="genre_option.id">{{ genre_option.title }}</option>
+                </select>
+            </div>
+            <div class="col-auto d-flex align-items-center">
                 <label class="text-secondary my-2 pr-2 view-opt-label">Фильтр:</label>
-                <select class="custom-select custom-select-sm btn my-2">
-                    <option value="active" selected>Не просмотренные</option>
-                    <option value="completed">Просмотренные</option>
-                    <option value="has-due-date">Премьеры</option>
-                    <option value="all">Все</option>
+                <select @click="sortColumn($event)" class="custom-select custom-select-sm btn my-2">
+                    <option value="all" selected>Все</option>
+                    <option value="is_viewed_false">Не просмотренные</option>
+                    <option value="created_at">По дате добавления</option>
+                    <option value="release_year">По году выпуска</option>
+                    <option value="is_viewed_true">Просмотренные</option>
 
                 </select>
             </div>
             <div class="col-auto d-flex align-items-center px-1 pr-3">
                 <label class="text-secondary my-2 pr-2 view-opt-label">Сортировка:</label>
-                <select class="custom-select custom-select-sm btn my-2">
-                    <option value="added-date-asc" selected>По дате добавления</option>
-                    <option value="added-date-asc">По году выпуска</option>
+                <select @change="sortDirection($event)" class="custom-select custom-select-sm btn my-2">
+                    <option value="desc" selected>По убыванию</option>
+                    <option value="asc">По возрастанию</option>
+
                 </select>
             </div>
 
@@ -60,6 +70,8 @@
                             <tr>
                                 <th scope="col">№</th>
                                 <th scope="col">Название</th>
+                                <th scope="col">Жанры</th>
+                                <th scope="col">Картинка</th>
                                 <th scope="col">Описание</th>
                                 <th scope="col">Актеры</th>
                                 <th scope="col">Год выпуска</th>
@@ -76,6 +88,16 @@
                                     <router-link :to="{name: 'movie.show', params: {id: movie.id}}">
                                         {{ movie.title }}
                                     </router-link>
+                                </td>
+                                <td>
+                                    <!-- TODO Посмотреть что можно сделать по стилям убрать br жедательно! -->
+                                    <router-link to="/" v-for="genre in movie.genres">
+                                        {{ genre.title }}
+                                        <br>
+                                    </router-link>
+                                </td>
+                                <td>
+                                    <img :src="movie.image" alt="movie-image" width="150">
                                 </td>
                                 <td>{{ movie.description }}</td>
                                 <td>{{ movie.actors }}</td>
@@ -150,12 +172,17 @@
         data() {
             return {
                 movies: {},
+                genres_options: [],
+                selected_genre: [],
                 search: null,
+                sort_column: 'created_at',
+                sort_direction: 'desc',
             }
         },
 
         mounted() {
             this.getMovies()
+            this.getGenres()
         },
 
         watch: {
@@ -167,10 +194,41 @@
         methods: {
             getMovies(page = 1) {
                 axios.get(`api/movie?page=${page}`, {
-                    params: {search: this.search}
+                    params: {
+                        search: this.search,
+                        sort_column: this.sort_column,
+                        sort_direction: this.sort_direction,
+                        // selected_genre: [this.selected_genre]
+
+                    }
                 })
                 .then(res => {
                     this.movies = res.data
+                })
+            },
+
+
+            sortColumn(event) {
+                console.log(event.target.value)
+            },
+
+            sortDirection(event) {
+                console.log(event.target.value)
+
+                // console.log(event.target.value)
+                // this.sort_column = event.target.value
+                // this.getMovies()
+            },
+
+            genreFilter(event) {
+                this.selected_genre = event.target.value
+                this.getMovies()
+            },
+
+            getGenres() {
+                axios.get('/api/genre')
+                .then( res => {
+                    this.genres_options = res.data.data
                 })
             },
 
