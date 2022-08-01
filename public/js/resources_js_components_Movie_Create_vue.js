@@ -66,6 +66,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_star_rating__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-star-rating */ "./node_modules/vue-star-rating/dist/VueStarRating.common.js");
 /* harmony import */ var vue_star_rating__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_star_rating__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue_multiselect_src_Multiselect_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-multiselect/src/Multiselect.vue */ "./node_modules/vue-multiselect/src/Multiselect.vue");
+var DEFAULT_IMAGE = 'https://mizez.com/custom/mizez/img/general/no-image-available.png';
 
 
 
@@ -88,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
       rating: null,
       genres: [],
       genres_options: [],
-      image: 'https://mizez.com/custom/mizez/img/general/no-image-available.png'
+      image: DEFAULT_IMAGE
     };
   },
   mounted: function mounted() {
@@ -113,7 +114,7 @@ __webpack_require__.r(__webpack_exports__);
         release_year: this.release_year,
         is_viewed: this.is_viewed,
         rating: this.rating,
-        image: this.image
+        image: this.image === '' ? DEFAULT_IMAGE : this.image
       }).then(function (res) {
         console.log(res);
 
@@ -130,8 +131,8 @@ __webpack_require__.r(__webpack_exports__);
     isDisabled: function isDisabled() {
       return this.title;
     },
-    defaultImage: function defaultImage() {
-      return this.image === '' ? 'https://mizez.com/custom/mizez/img/general/no-image-available.png' : this.image;
+    previewImage: function previewImage() {
+      return this.image === '' ? DEFAULT_IMAGE : this.image;
     }
   }
 });
@@ -407,7 +408,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.image]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: $options.defaultImage,
+    src: $options.previewImage,
     alt: "movie-img",
     width: "540",
     height: "340"

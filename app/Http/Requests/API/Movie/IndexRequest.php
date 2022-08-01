@@ -25,10 +25,11 @@ class IndexRequest extends FormRequest
     {
         return [
             'search' => 'nullable|string',
-            'selected_genre' => 'nullable',
+            'genre' => 'nullable',
             'sort_column' => 'nullable|string',
             'sort_direction' => 'nullable|string',
             'page' => 'nullable|integer',
+            'viewed' => 'nullable|string',
         ];
     }
 }

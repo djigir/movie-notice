@@ -93,7 +93,7 @@
                                     <input v-model="image" type="text" class="form-control" id="movie-image" placeholder="Вставте ссылку на картинку к фильму">
                                 </div>
                                 <div class="preview-movie-image">
-                                    <img :src="defaultImage" alt="movie-img" width="540" height="340">
+                                    <img :src="previewImage" alt="movie-img" width="540" height="340">
                                 </div>
 
                             </div>
@@ -110,6 +110,8 @@
 </template>
 
 <script>
+    const DEFAULT_IMAGE = 'https://mizez.com/custom/mizez/img/general/no-image-available.png'
+
     import Datepicker from "@vuepic/vue-datepicker";
     import '@vuepic/vue-datepicker/dist/main.css'
     import StarRating from 'vue-star-rating'
@@ -134,7 +136,7 @@
                 rating: null,
                 genres: [],
                 genres_options: [],
-                image: 'https://mizez.com/custom/mizez/img/general/no-image-available.png'
+                image: DEFAULT_IMAGE
             }
         },
 
@@ -155,7 +157,6 @@
                     this.is_viewed = Boolean(res.data.data.is_viewed)
                     this.rating = Number(res.data.data.rating)
                     this.image = res.data.data.image
-                    console.log(res)
                 })
             },
 
@@ -175,9 +176,9 @@
                     release_year: this.release_year,
                     is_viewed: this.is_viewed,
                     rating: this.rating,
-                    image: this.image
+                    image: this.image === '' ? DEFAULT_IMAGE : this.image
                 })
-                .then(res => {
+                .then( res => {
                     this.$router.push({name: 'movie.show', params: {id: this.$route.params.id}})
                 })
             }
@@ -188,8 +189,8 @@
                 return this.title
             },
 
-            defaultImage() {
-                return this.image === '' ? 'https://mizez.com/custom/mizez/img/general/no-image-available.png' : this.image
+            previewImage() {
+                return this.image === '' ? DEFAULT_IMAGE : this.image
             }
         }
     }

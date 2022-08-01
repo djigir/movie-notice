@@ -11,7 +11,6 @@ use App\Http\Resources\IndexMovieResource;
 use App\Http\Resources\MovieResource;
 use App\Models\Movie;
 use App\Service\MovieService;
-use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
@@ -22,18 +21,12 @@ class MovieController extends Controller
 
     public function index(IndexRequest $request)
     {
-        $movies = Movie::with('genres')
-            ->where('title', 'LIKE', '%'.$request->get('search').'%')
-            ->orWhere('description', 'LIKE', '%'.$request->get('search').'%')
-//            ->orderByDesc('created_at')
-            ->orderBy($request->get('sort_column'), $request->get('sort_direction'))
-            ->paginate(7);
+        $data = $request->validated();
 
-//        $data = $request->validated();
-//
-//        $filter = app()->make(MovieFilter::class, ['queryParams' => array_filter($data)]);
-//
-//        $movies = Movie::filter($filter)->paginate(4, ['*'], 'page', $data['page']);
+        $filter = app()->make(MovieFilter::class, ['queryParams' => array_filter($data)]);
+        $movies = Movie::filter($filter)
+            ->orderBy($data['sort_column'], $data['sort_direction'])
+            ->paginate(7, ['*'], 'page', $data['page']);
 
         return IndexMovieResource::collection($movies);
     }

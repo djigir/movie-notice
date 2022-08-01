@@ -14,7 +14,7 @@ class Movie extends Model
     protected $table = 'movies';
     protected $guarded = false;
 
-    protected $with = 'genres';
+    protected $with = ['genres'];
 
     /* Relations */
     public function genres()

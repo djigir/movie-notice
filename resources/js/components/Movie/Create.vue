@@ -92,7 +92,7 @@
                                     <input v-model="image" type="text" class="form-control" id="movie-image" placeholder="Вставте ссылку на картинку к фильму">
                                 </div>
                                 <div class="preview-movie-image">
-                                    <img :src="defaultImage" alt="movie-img" width="540" height="340">
+                                    <img :src="previewImage" alt="movie-img" width="540" height="340">
                                 </div>
 
                             </div>
@@ -109,6 +109,8 @@
 </template>
 
 <script>
+    const DEFAULT_IMAGE = 'https://mizez.com/custom/mizez/img/general/no-image-available.png'
+
     import Datepicker from '@vuepic/vue-datepicker';
     import '@vuepic/vue-datepicker/dist/main.css'
     import StarRating from 'vue-star-rating'
@@ -123,7 +125,6 @@
             VueMultiselect
         },
 
-
         data() {
 
             return {
@@ -136,7 +137,7 @@
                 rating: null,
                 genres: [],
                 genres_options: [],
-                image: 'https://mizez.com/custom/mizez/img/general/no-image-available.png'
+                image: DEFAULT_IMAGE
             }
         },
 
@@ -161,7 +162,7 @@
                     release_year: this.release_year,
                     is_viewed: this.is_viewed,
                     rating: this.rating,
-                    image: this.image
+                    image: this.image === '' ? DEFAULT_IMAGE : this.image
                 })
                 .then( res => {
                     console.log(res)
@@ -171,7 +172,7 @@
                     console.log(err.response.data.errors)
                     this.errors = err.response.data.errors
                 })
-            }
+            },
         },
 
         computed: {
@@ -179,8 +180,8 @@
                 return this.title
             },
 
-            defaultImage() {
-                return this.image === '' ? 'https://mizez.com/custom/mizez/img/general/no-image-available.png' : this.image
+            previewImage() {
+                return this.image === '' ? DEFAULT_IMAGE : this.image
             }
         }
     }
