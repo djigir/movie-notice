@@ -2,24 +2,21 @@
 
     <section class="show-movie" v-if="movie">
 
-        <!-- TODO  -->
-
-        <div class="col-2 mb-4">
-            <router-link class="btn btn-block btn-warning" :to="{name: 'movie.edit', params: {id: this.movie.id}}">
-                Редактировать
-            </router-link>
-        </div>
-
-        <div class="col-2 mb-4">
-            <button class="btn btn-block btn-danger">Удалить</button>
-        </div>
-        <!-- TODO  -->
-
         <div class="container-fluid m-5 p-2 rounded mx-auto bg-light shadow">
         <!-- App title section -->
-        <div class="row m-1 p-4">
+        <div class="row m-1">
             <div class="col">
-                <div class="p-1 h1 text-primary text-center mx-auto display-inline-block">
+                <div class="p-1 h1 text-primary mx-auto display-inline-block">
+                    <div class="row">
+                        <div class="col-md-2 mb-4">
+                            <router-link class="btn btn-block btn-warning" :to="{name: 'movie.edit', params: {id: this.movie.id}}">
+                                Редактировать
+                            </router-link>
+                        </div>
+                        <div class="col-md-2 mb-4">
+                            <button class="btn btn-block btn-danger">Удалить</button>
+                        </div>
+                    </div>
                     <h2 class="text-center fw-bold">Страница фильма:
                         <strong class="text-dark">{{ this.movie.title }}</strong>
                     </h2>

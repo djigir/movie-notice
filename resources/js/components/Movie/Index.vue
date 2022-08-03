@@ -4,8 +4,12 @@
         <!-- App title section -->
         <div class="row m-1 p-4">
             <div class="col">
-                <div class="p-1 h1 text-primary text-center mx-auto display-inline-block">
+                <!-- text-right -->
+                <div class="p-1 h1 text-primary mx-auto display-inline-block">
                     <h2 class="text-center fw-bold">Фильмы</h2>
+                    <router-link :to="{ name: 'movie.create' }" class="btn btn-primary add-movie-btn">
+                        Добавить Фильм
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -24,7 +28,7 @@
         <div class="row m-1 p-3 px-5 justify-content-end">
             <div class="col-auto d-flex align-items-center">
                 <input @change="changeIsViewedValue($event)" v-model="viewed" type="checkbox" class="form-check-input" id="is_viewed">
-                <label class="form-check-label" for="is_viewed">Показать только не просмотреные</label>
+                <label class="form-check-label" for="is_viewed">Только не просмотреные</label>
             </div>
             <div class="col-auto d-flex align-items-center">
                 <select @change="genreFilter($event)" class="custom-select custom-select-sm btn my-2">
@@ -51,17 +55,11 @@
                 <button @click.prevent="resetFilter()" class="btn btn-secondary">Сбросить</button>
             </div>
 
-            <div class="col-auto d-flex align-items-center px-1 pr-3" style="margin-left: 1rem;">
-                <router-link :to="{ name: 'movie.create' }" class="btn btn-primary">
-                    Добавить Фильм
-                </router-link>
-            </div>
-
         </div>
-        <!-- Todo list section -->
+        <!-- list section -->
         <div class="row mx-1 px-5 pb-3 w-80">
             <div class="col mx-auto">
-                <!-- Todo Item 1 -->
+                <!-- Item 1 -->
                 <div class="row px-3 align-items-center todo-item rounded">
 
                     <div class="table-responsive mt-4">
@@ -78,7 +76,6 @@
                                 <th scope="col">Просмотренно</th>
                                 <th scope="col">Рейтинг</th>
                                 <th scope="col">Добавлено</th>
-                                <th colspan="3">Действия</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -120,22 +117,8 @@
                                     <a href="">
                                         {{ new Date(movie.created_at).toLocaleDateString() }}
                                     </a>
-                                    |{{ new Date(movie.created_at).toLocaleTimeString([], {timeStyle: 'short'}) }}
-                                </td>
-                                <td>
-                                    <router-link :to="{name: 'movie.show', params: {id: movie.id}}" style="color: #0571ed">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </router-link>
-                                </td>
-                                <td>
-                                    <router-link :to="{name: 'movie.edit', params: {id: movie.id}}" style="color: #f0c905">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </router-link>
-                                </td>
-                                <td>
-                                    <a @click.prevent="deleteMovie(movie.id)" style="color: #ed0707">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </a>
+                                    <br>
+                                    {{ new Date(movie.created_at).toLocaleTimeString([], {timeStyle: 'short'}) }}
                                 </td>
                             </tr>
                             </tbody>
@@ -269,6 +252,15 @@
     .view-opt-label {
         margin-right: 8px;
 
+    }
+
+    .add-movie-btn{
+        margin-left:20px;
+    }
+
+    #is_viewed {
+        margin-top: 0!important;
+        margin-right: 5px;
     }
 
     .custom-select-sm {

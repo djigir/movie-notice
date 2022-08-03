@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container  py-4">
         <div class="row">
             <!-- Navigation -->
             <nav aria-label="navigation" class="main-navigation">

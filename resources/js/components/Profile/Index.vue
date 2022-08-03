@@ -1,32 +1,58 @@
 <template>
-    <div class="card">
-        <div class="card-body tab-content">
-            <div class="tab-pane active" id="profile">
-                <h6 class="text-center fw-bold">Информация по вашему профилю</h6>
-                <hr>
-                <form>
-                    <div class="form-group">
-                        <label for="fullName">Ваше имя</label>
-                        <input type="text" class="form-control" id="fullName" aria-describedby="fullNameHelp" placeholder="Enter your fullname" value="Kenneth Valdez">
+
+    <div class="container rounded bg-light shadow mt-5 mb-5">
+        <div class="p-1 h1 text-primary mx-auto display-inline-block">
+            <h2 class="text-center fw-bold mt-4">Профиль</h2>
+        </div>
+        <div class="p-2 mx-4 border-black-25 border-bottom"></div>
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                    <span class="font-weight-bold">Edogaru</span>
+                    <span class="text-black-50">edogaru@mail.com.my</span>
+                    <span> </span>
+                </div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Общая информация</h4>
                     </div>
-                    <div class="form-group">
-                        <label for="bio">Your Bio</label>
-                        <textarea class="form-control autosize" id="bio" placeholder="Write something about you" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;">A front-end developer that focus more on user interface design, a web interface wizard, a connector of awesomeness.</textarea>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">Всего фильмов</label>
+                            <input class="form-control" readonly value="100">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Просмотрено</label>
+                            <input class="form-control" value="20" readonly>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Не просмотрено</label>
+                            <input class="form-control" value="70" readonly>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="url">URL</label>
-                        <input type="text" class="form-control" id="url" placeholder="Enter your website address" value="http://benije.ke/pozzivkij">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center experience">
+                        <span>Данные профиля</span>
+                        <span class="btn btn-warning border px-3 p-1 add-experience">
+                            Редактировать
+                        </span>
                     </div>
-                    <div class="form-group">
-                        <label for="location">Location</label>
-                        <input type="text" class="form-control" id="location" placeholder="Enter your location" value="Bay Area, San Francisco, CA">
+                    <br>
+                    <div class="col-md-12">
+                        <label class="labels">Experience in Designing</label>
+                        <input type="text" class="form-control" placeholder="experience" value="">
+                    </div> <br>
+                    <div class="col-md-12">
+                        <label class="labels">Additional Details</label>
+                        <input type="text" class="form-control" placeholder="additional details" value="">
                     </div>
-                    <div class="form-group small text-muted">
-                        All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.
-                    </div>
-                    <button type="button" class="btn btn-primary">Update Profile</button>
-                    <button type="reset" class="btn btn-light">Reset Changes</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -35,10 +61,36 @@
 
 <script>
     export default {
-        name: "Index"
+        name: "Index",
+
+        data() {
+            return {
+                user: null,
+            }
+        },
+
+        mounted() {
+            this.getUserData()
+        },
+
+        methods: {
+            getUserData() {
+                axios.get('api/profile')
+                .then( res => {
+                    console.log(res)
+                })
+            }
+        }
     }
 </script>
 
 <style scoped>
+
+    .add-experience:hover {
+        background: #BA68C8;
+        color: #fff;
+        cursor: pointer;
+        border: solid 1px #BA68C8
+    }
 
 </style>
