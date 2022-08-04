@@ -13,14 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('main');
-});
 
 Auth::routes();
 
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'index'])->name('profile');
-
-Route::get('/{page}', [\App\Http\Controllers\IndexController::class, '__invoke'])
-    ->where('page', '.*')
-    ->middleware(['auth']);
+Route::get('{page}', [\App\Http\Controllers\IndexController::class, '__invoke'])->where('page', '.*');

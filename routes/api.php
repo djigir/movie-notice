@@ -18,6 +18,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('/profile', \App\Http\Controllers\API\ProfileController::class);
-Route::get('/genre', [\App\Http\Controllers\API\GenreController::class, 'index']);
-Route::resource('movie', \App\Http\Controllers\API\MovieController::class);
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::resource('/profile', \App\Http\Controllers\API\ProfileController::class);
+    Route::get('/genre', [\App\Http\Controllers\API\GenreController::class, 'index']);
+    Route::resource('movie', \App\Http\Controllers\API\MovieController::class);
+});
+

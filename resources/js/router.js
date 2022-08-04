@@ -12,6 +12,16 @@ const routes = [
         name: 'profile.index'
     },
     {
+        path: '/login',
+        component: () => import('./components/Auth/Login'),
+        name: 'login'
+    },
+    {
+        path: '/register',
+        component: () => import('./components/Auth/Registration'),
+        name: 'register'
+    },
+    {
         path: '/movie',
         component: () => import('./components/Movie/Index'),
         name: 'movie.index'
@@ -34,7 +44,27 @@ const routes = [
 
 ]
 
-export default createRouter({
-    history: createWebHistory(),
-    routes
+const router = createRouter({
+    routes,
+    history: createWebHistory(process.env.BASE_URL),
 })
+
+router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem('x_xsrf-token')
+
+    if (!token) {
+        if (to.name === 'login' || to.name === 'register') {
+            return next()
+        } else {
+            return next({name: 'login'})
+        }
+    }
+
+    if (to.name === 'login' || to.name === 'register' && token) {
+        return next({name: 'profile.index'})
+    }
+
+    next()
+})
+
+export default router

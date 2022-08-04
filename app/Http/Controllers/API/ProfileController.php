@@ -10,9 +10,7 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $user = auth()->user(); //it's a laravel helper
-
-        dd($user);
+        return auth()->user();
     }
 
 
