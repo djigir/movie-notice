@@ -26,7 +26,7 @@ class MovieController extends Controller
         $filter = app()->make(MovieFilter::class, ['queryParams' => array_filter($data)]);
         $movies = Movie::filter($filter)
             ->orderBy($data['sort_column'], $data['sort_direction'])
-            ->paginate(7, ['*'], 'page', $data['page']);
+            ->paginate(6, ['*'], 'page', $data['page']);
 
         return IndexMovieResource::collection($movies);
     }

@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
     {
         path: '/',
-        component: () => import('./components/App'),
+        component: () => import('./components/Main/Index'),
         name: 'index'
     },
     {
@@ -46,14 +46,14 @@ const routes = [
 
 const router = createRouter({
     routes,
-    history: createWebHistory(process.env.BASE_URL),
+    history: createWebHistory(),
 })
 
 router.beforeEach((to, from, next) => {
-    const token = localStorage.getItem('x_xsrf-token')
+    const token = localStorage.getItem('x_xsrf_token')
 
     if (!token) {
-        if (to.name === 'login' || to.name === 'register') {
+        if (to.name === 'login' || to.name === 'register' || to.name === 'index') {
             return next()
         } else {
             return next({name: 'login'})
