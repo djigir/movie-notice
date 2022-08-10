@@ -17,29 +17,31 @@
             <div id="content">
                 <div class="bg-light p-2 px-md-4 px-3 shadow-sm">
                     <div class="d-flex align-items-center">
-                        <div class="user-select-none">Показхано такое количестов из такого доделать</div>
+                        <div class="user-select-none">
+                            <strong>Всего: </strong>{{ movies_total }}
+                            |
+                            <strong>Показано: </strong>{{ movies_to === null ? 0 : movies_to }}
+                            <strong>Из: </strong>{{ movies_total }}
+                        </div>
                         <div class="fas fa-angle-right px-2"></div>
                         <div id="navigator" class="text-primary"></div>
                     </div>
                 </div>
                 <div class="d-sm-flex align-items-sm-center py-sm-3 px-md-3 location">
 
-                    <input v-model="search" type="text" required placeholder="Введите название, описание или актера для поиска!" class="mx-sm-2 mx-3 my-sm-0 my-2 form-control border-1 add-todo-input bg-transparent rounded" style="max-width: 320px">
+                    <input v-model="search" type="text" required placeholder="Поиск (название, описание или актер)" class="mx-sm-2 mx-3 my-sm-0 my-2 form-control border-1 add-todo-input bg-transparent rounded" style="max-width: 330px">
 
 
-                    <select @click="sortColumn($event)" class="mx-md-2 mx-sm-1 mx-3 my-sm-0 my-2 form-control" id="sort-column-select" style="max-width: 200px">
+                    <select @click="sortColumn($event)" class="mx-md-5 mx-sm-1 mx-3 my-sm-0 my-2 form-control" id="sort-column-select" style="max-width: 200px">
                         <option value="created_at" selected>По дате добавления</option>
                         <option value="rating">По рейтингу</option>
                         <option value="release_year">По году выпуска</option>
                         <option value="is_viewed">(Не) Просмотренные</option>
                     </select>
 
-
-                    <select @click="sortColumn($event)" class="mx-sm-2 mx-3 my-sm-0 my-2 form-control" id="sort-column-select" style="max-width: 200px">
-                        <option value="created_at" selected>По дате добавления</option>
-                        <option value="rating">По рейтингу</option>
-                        <option value="release_year">По году выпуска</option>
-                        <option value="is_viewed">(Не) Просмотренные</option>
+                    <select @change="sortDirection($event)" class="mx-sm-2 mx-3 my-sm-0 my-2 form-control" id="sort-direction-select" style="max-width: 200px">
+                        <option value="desc" selected>По убыванию</option>
+                        <option value="asc">По возрастанию</option>
                     </select>
 
                     <button @click.prevent="resetFilter()" class="btn btn-danger mx-3 my-sm-0 mb-2">Сбросить фильтр</button>
@@ -98,10 +100,9 @@
                                             <router-link :to="{name: 'movie.show', params: {id: movie.id}}">
                                                 {{ movie.title }}
                                             </router-link>
-<!--                                            <span class="city fw-bold"> ( {{ movie.release_year }} )</span>-->
                                         </div>
                                         <div :class="isViewedClass(movie.is_viewed)" class="ms-auto code fw-bold">
-                                            {{ isViewedText2(movie.is_viewed) }}
+                                            {{ isViewedText(movie.is_viewed) }}
                                         </div>
                                     </div>
                                     <div class="rating">
@@ -117,6 +118,14 @@
                                             <span class="fw-bold">Год выхода:</span> {{ movie.release_year }}
                                         </div>
                                         <div>
+                                            <span class="fw-bold">Жанры: </span>
+                                            <span v-for="genre in movie.genres" class="genre">
+                                                <router-link to="/">
+                                                    {{ genre.title }}
+                                                </router-link>
+                                            </span>
+                                        </div>
+                                        <div>
                                             <span class="fw-bold">Описание:</span> {{ movie.description }}
                                         </div>
                                         <div>
@@ -127,7 +136,7 @@
                                             <a href="">
                                                 {{ new Date(movie.created_at).toLocaleDateString() }}
                                             </a>
-                                            {{ new Date(movie.created_at).toLocaleTimeString([], {timeStyle: 'short'}) }}
+                                            | {{ new Date(movie.created_at).toLocaleTimeString([], {timeStyle: 'short'}) }}
                                         </div>
                                     </div>
                                 </div>
@@ -159,211 +168,6 @@
     </section>
 
 
-
-
-
-
-    <div class="container-fluid m-5 p-2 rounded mx-auto bg-light shadow">
-        <!-- App title section -->
-        <div class="row m-1 p-4">
-            <div class="col">
-                <!-- text-right -->
-                <div class="p-1 h1 text-primary mx-auto display-inline-block">
-                    <h2 class="text-center fw-bold">Фильмы</h2>
-                    <router-link :to="{ name: 'movie.create' }" class="btn btn-primary add-movie-btn">
-                        Добавить Фильм
-                    </router-link>
-                </div>
-            </div>
-        </div>
-        <!-- Create todo section -->
-        <div class="row m-1 p-3">
-            <div class="col col-11 mx-auto">
-                <div class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
-                    <div class="col">
-                        <input v-model="search" class="form-control search-inp form-control-lg border-0 add-todo-input bg-transparent rounded" type="text" placeholder="Введите название, описание или актера для поиска! ">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="p-2 mx-4 border-black-25 border-bottom"></div>
-        <!-- View options section -->
-        <div class="row m-1 p-3 px-5 justify-content-end">
-            <div class="col-auto d-flex align-items-center">
-                <input @change="changeIsViewedValue($event)" v-model="viewed" type="checkbox" class="form-check-input" id="is_viewed">
-                <label class="form-check-label" for="is_viewed">Только не просмотреные</label>
-            </div>
-            <div class="col-auto d-flex align-items-center">
-                <select @change="genreFilter($event)" class="custom-select custom-select-sm btn my-2">
-                    <option value="all" selected class="fw-bold">Все</option>
-                    <option v-for="genre_option in genres_options" :value="genre_option.id">{{ genre_option.title }}</option>
-                </select>
-            </div>
-            <div class="col-auto d-flex align-items-center">
-                <select @click="sortColumn($event)" class="custom-select custom-select-sm btn my-2" id="sort-column-select">
-                    <option value="created_at" selected>По дате добавления</option>
-                    <option value="rating">По рейтингу</option>
-                    <option value="release_year">По году выпуска</option>
-                    <option value="is_viewed">(Не) Просмотренные</option>
-                </select>
-            </div>
-            <div class="col-auto d-flex align-items-center px-1 pr-3">
-                <select @change="sortDirection($event)" class="custom-select custom-select-sm btn my-2" id="sort-direction-select">
-                    <option value="desc" selected>По убыванию</option>
-                    <option value="asc">По возрастанию</option>
-                </select>
-            </div>
-
-            <div class="col-auto d-flex align-items-center px-1 pr-3" style="margin-left: 1rem;">
-                <button @click.prevent="resetFilter()" class="btn btn-secondary">Сбросить</button>
-            </div>
-
-        </div>
-        <!-- list section -->
-        <div class="row mx-1 px-5 pb-3 w-80">
-            <div class="col mx-auto">
-                <!-- Item 1 -->
-                <div class="row px-3 align-items-center todo-item rounded">
-
-                    <div class="table-responsive mt-4">
-                        <table class="table text-center table-hover">
-                            <thead>
-                            <tr>
-                                <th scope="col">№</th>
-                                <th scope="col">Название</th>
-                                <th scope="col">Жанры</th>
-                                <th scope="col">Картинка</th>
-                                <th scope="col">Описание</th>
-                                <th scope="col">Актеры</th>
-                                <th scope="col">Год выпуска</th>
-                                <th scope="col">Просмотренно</th>
-                                <th scope="col">Рейтинг</th>
-                                <th scope="col">Добавлено</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="(movie, index) in movies.data">
-                                <th scope="row">{{ index+1 }}</th>
-                                <td>
-                                    <router-link :to="{name: 'movie.show', params: {id: movie.id}}">
-                                        {{ movie.title }}
-                                    </router-link>
-                                </td>
-                                <td>
-                                    <!-- TODO Посмотреть что можно сделать по стилям убрать br жедательно! -->
-                                    <router-link to="/" v-for="genre in movie.genres">
-                                        {{ genre.title }}
-                                        <br>
-                                    </router-link>
-                                </td>
-                                <td>
-                                    <img :src="movie.image" alt="movie-image" width="150">
-                                </td>
-                                <td>{{ movie.description }}</td>
-                                <td>{{ movie.actors }}</td>
-                                <td>
-                                    <a href="#">
-                                        {{ movie.release_year }}
-                                    </a>
-                                </td>
-                                <td>
-                                    <a :class="movie.is_viewed === 1 ? 'text-success' : 'text-danger'" class="fw-bold" href="#">
-                                        {{ isViewedText(movie) }}
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="#">
-                                        {{ movie.rating }}
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="">
-                                        {{ new Date(movie.created_at).toLocaleDateString() }}
-                                    </a>
-                                    <br>
-                                    {{ new Date(movie.created_at).toLocaleTimeString([], {timeStyle: 'short'}) }}
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- START Pagination -->
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3 d-flex">
-                    <ul class="pagination mx-auto">
-                        <LaravelVuePagination :data="movies" @pagination-change-page="getMovies" />
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- END  Pagination -->
-    </div>
-
-
-
-<!--    <section class="py-5">-->
-<!--        <div class="container px-5 my-5">-->
-<!--            <div class="row gx-5 justify-content-center">-->
-<!--                <div class="col-lg-8 col-xl-6">-->
-<!--                    <div class="text-center">-->
-<!--                        <h2 class="fw-bolder">Фильмы</h2>-->
-<!--                        <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="row gx-5">-->
-<!--                <div v-for="(movie, index) in movies.data" class="col-lg-4 mb-5">-->
-<!--                    <div class="card h-100 shadow border-0">-->
-<!--                        <img class="card-img-top" :src="movie.image" alt="movie-image">-->
-<!--                        <div class="card-body p-4">-->
-<!--                            <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>-->
-<!--                            <a class="text-decoration-none link-dark stretched-link" href="#!">-->
-<!--                                <h5 class="card-title mb-3">-->
-<!--                                    {{ movie.title }}</h5>-->
-<!--                            </a>-->
-<!--                            <p class="card-text mb-0">-->
-<!--                                {{ movie.description }}-->
-<!--                            </p>-->
-<!--                        </div>-->
-<!--                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">-->
-<!--                            <div class="d-flex align-items-end justify-content-between">-->
-<!--                                <div class="d-flex align-items-center">-->
-
-<!--                                    <div class="small">-->
-<!--                                        <div class="fw-bold">Kelly Rowan</div>-->
-<!--                                        <div class="text-muted">March 12, 2022 · 6 min read</div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            &lt;!&ndash; Call to action&ndash;&gt;-->
-<!--            <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">-->
-<!--                <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">-->
-<!--                    <div class="mb-4 mb-xl-0">-->
-<!--                        <div class="fs-3 fw-bold text-white">New products, delivered to you.</div>-->
-<!--                        <div class="text-white-50">Sign up for our newsletter for the latest updates.</div>-->
-<!--                    </div>-->
-<!--                    <div class="ms-xl-4">-->
-<!--                        <div class="input-group mb-2">-->
-<!--                            <input class="form-control" type="text" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-newsletter">-->
-<!--                            <button class="btn btn-outline-light" id="button-newsletter" type="button">Sign up</button>-->
-<!--                        </div>-->
-<!--                        <div class="small text-white-50">We care about privacy, and will never share your data.</div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </aside>-->
-<!--        </div>-->
-<!--    </section>-->
-
-
-
 </template>
 
 <script>
@@ -384,6 +188,8 @@
                 sort_column: 'created_at',
                 sort_direction: 'desc',
                 viewed: false,
+                movies_total: null,
+                movies_to: null,
             }
         },
 
@@ -391,6 +197,10 @@
             this.getMovies()
             this.getGenres()
         },
+
+        // updated() {
+        //     this.selectedFilterOptions()
+        // },
 
         watch: {
             search(after, before) {
@@ -411,6 +221,9 @@
                 })
                 .then(res => {
                     this.movies = res.data
+
+                    this.movies_total = res.data.meta.total
+                    this.movies_to = res.data.meta.to
                 })
             },
 
@@ -421,12 +234,7 @@
                 })
             },
 
-            // удалить потом
-            isViewedText(movie) {
-                return movie.is_viewed === 1 ? 'Да' : 'Нет'
-            },
-
-            isViewedText2(is_viewed) {
+            isViewedText(is_viewed) {
                 return is_viewed === 1 ? 'Просмотрено' : 'Не просмотрено'
             },
 
@@ -460,6 +268,33 @@
             changeIsViewedValue() {
                 this.getMovies()
             },
+
+            // selectedFilterOptions() {
+            //     // console.log(this.genre, this.search, this.sort_column, this.sort_direction, this.viewed)
+            //     // this.selected_filter_options = e.title
+            //     console.log(this.genre)
+            //
+            //     let genre = 'Все'
+            //     let search = this.search
+            //     let sort_column = 'По дате добавления'
+            //     let sort_direction = 'По убыванию'
+            //     let is_viewed = 'Все'
+            //     let years = 'Все'
+            //
+            //     this.selected_filter_options = `Жанр: ${genre},
+            //     Поиск по: ${search},
+            //     Сортировка: ${sort_column},
+            //     Тип сортировки: ${sort_direction},
+            //     Статус: ${is_viewed},
+            //     Годы: ${years}`
+            //
+            //     this.genres_options.forEach(element => {
+            //         if (this.genre != null && element.id === this.genre) {
+            //             return this.selected_filter_options = element.title
+            //         }
+            //     })
+            //
+            // },
 
             resetFilter() {
                 this.genres_options = this.getGenres()
@@ -496,7 +331,7 @@
     }
 
     .custom-select-sm {
-        border: 1px solid #0D6EFD;
+        border: 1px solid gray;
     }
 
     /* Range style */
@@ -628,8 +463,12 @@
     }
 
     a {
-        text-decoration: none;
+        /*text-decoration: none;*/
         color: #222
+    }
+
+    a:hover {
+        color: gray;
     }
 
     #content .user-select-none {
@@ -869,7 +708,7 @@
         }
 
         .hotel .btn {
-            width: 120px;
+            width: 140px;
             font-size: 0.85rem
         }
 
@@ -900,4 +739,13 @@
 
     /* delete sr-only class in pagination */
     ::v-deep .sr-only{display:none !important}
+
+    /* add comma after genre title */
+    .genre + .genre:before {
+        content: ", ";
+    }
+
+    .name a{
+        text-decoration: none;
+    }
 </style>

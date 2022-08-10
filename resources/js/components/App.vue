@@ -9,7 +9,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <router-link :to="{ name: 'index' }" class="nav-link active" aria-current="page">
+                                <router-link :to="{ name: 'index' }" class="nav-link" aria-current="page">
                                     Главная
                                 </router-link>
                             </li>
@@ -81,6 +81,11 @@
             getToken() {
                 this.token = localStorage.getItem('x_xsrf_token')
             },
+
+            // addActiveClass() {
+            //     console.log(this.active)
+            //     this.active = 'active';
+            // },
 
             logout() {
                 axios.post('/logout')

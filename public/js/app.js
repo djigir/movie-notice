@@ -23055,6 +23055,10 @@ __webpack_require__.r(__webpack_exports__);
     getToken: function getToken() {
       this.token = localStorage.getItem('x_xsrf_token');
     },
+    // addActiveClass() {
+    //     console.log(this.active)
+    //     this.active = 'active';
+    // },
     logout: function logout() {
       var _this = this;
 
@@ -23195,7 +23199,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     to: {
       name: 'index'
     },
-    "class": "nav-link active",
+    "class": "nav-link",
     "aria-current": "page"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -23422,6 +23426,7 @@ var routes = [{
 }];
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createRouter)({
   routes: routes,
+  linkActiveClass: 'active',
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createWebHistory)()
 });
 router.beforeEach(function (to, from, next) {

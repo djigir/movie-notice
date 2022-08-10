@@ -24,7 +24,8 @@ class MovieController extends Controller
         $data = $request->validated();
 
         $filter = app()->make(MovieFilter::class, ['queryParams' => array_filter($data)]);
-        $movies = Movie::filter($filter)
+        $movies = Movie::where('user_id', auth()->user()->id)
+            ->filter($filter)
             ->orderBy($data['sort_column'], $data['sort_direction'])
             ->paginate(6, ['*'], 'page', $data['page']);
 

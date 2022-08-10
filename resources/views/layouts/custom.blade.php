@@ -17,7 +17,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="app">
+    <div id="app" style="overflow-x: hidden;">
         @yield('content')
     </div>
 </body>

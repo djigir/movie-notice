@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\IndexProfileResource;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -10,7 +11,7 @@ class ProfileController extends Controller
 
     public function index()
     {
-        return auth()->user();
+        return new IndexProfileResource(auth()->user());
     }
 
 

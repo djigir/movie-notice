@@ -23,8 +23,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getUserData: function getUserData() {
+      var _this = this;
+
       axios.get('api/profile').then(function (res) {
-        console.log(res);
+        _this.user = res.data.data;
+        console.log(_this.user);
       });
     }
   }
@@ -50,14 +53,124 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
+  key: 0,
   "class": "container rounded bg-light shadow mt-5 mb-5"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"p-1 h1 text-primary mx-auto display-inline-block\" data-v-d7b08b1e><h2 class=\"text-center fw-bold mt-4\" data-v-d7b08b1e>Профиль</h2></div><div class=\"p-2 mx-4 border-black-25 border-bottom\" data-v-d7b08b1e></div><div class=\"row\" data-v-d7b08b1e><div class=\"col-md-3 border-right\" data-v-d7b08b1e><div class=\"d-flex flex-column align-items-center text-center p-3 py-5\" data-v-d7b08b1e><img class=\"rounded-circle mt-5\" width=\"150px\" src=\"https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg\" data-v-d7b08b1e><span class=\"font-weight-bold\" data-v-d7b08b1e>Edogaru</span><span class=\"text-black-50\" data-v-d7b08b1e>edogaru@mail.com.my</span><span data-v-d7b08b1e></span></div></div><div class=\"col-md-5 border-right\" data-v-d7b08b1e><div class=\"p-3 py-5\" data-v-d7b08b1e><div class=\"d-flex justify-content-between align-items-center mb-3\" data-v-d7b08b1e><h4 class=\"text-right\" data-v-d7b08b1e>Общая информация</h4></div><div class=\"row mt-3\" data-v-d7b08b1e><div class=\"col-md-12\" data-v-d7b08b1e><label class=\"labels\" data-v-d7b08b1e>Всего фильмов</label><input class=\"form-control\" readonly value=\"100\" data-v-d7b08b1e></div><div class=\"col-md-12\" data-v-d7b08b1e><label class=\"labels\" data-v-d7b08b1e>Просмотрено</label><input class=\"form-control\" value=\"20\" readonly data-v-d7b08b1e></div><div class=\"col-md-12\" data-v-d7b08b1e><label class=\"labels\" data-v-d7b08b1e>Не просмотрено</label><input class=\"form-control\" value=\"70\" readonly data-v-d7b08b1e></div></div></div></div><div class=\"col-md-4\" data-v-d7b08b1e><div class=\"p-3 py-5\" data-v-d7b08b1e><div class=\"d-flex justify-content-between align-items-center experience\" data-v-d7b08b1e><span data-v-d7b08b1e>Данные профиля</span><span class=\"btn btn-warning border px-3 p-1 add-experience\" data-v-d7b08b1e> Редактировать </span></div><br data-v-d7b08b1e><div class=\"col-md-12\" data-v-d7b08b1e><label class=\"labels\" data-v-d7b08b1e>Experience in Designing</label><input type=\"text\" class=\"form-control\" placeholder=\"experience\" value=\"\" data-v-d7b08b1e></div> <br data-v-d7b08b1e><div class=\"col-md-12\" data-v-d7b08b1e><label class=\"labels\" data-v-d7b08b1e>Additional Details</label><input type=\"text\" class=\"form-control\" placeholder=\"additional details\" value=\"\" data-v-d7b08b1e></div></div></div></div>", 3);
+var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "p-1 h1 text-primary mx-auto display-inline-block"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+    "class": "text-center fw-bold mt-4"
+  }, "Профиль")], -1
+  /* HOISTED */
+  );
+});
 
-var _hoisted_5 = [_hoisted_2];
+var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "p-2 mx-4 border-black-25 border-bottom"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_4 = {
+  "class": "row"
+};
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-md-6 border-right\" data-v-d7b08b1e><div class=\"p-3 py-5\" data-v-d7b08b1e><div class=\"d-flex justify-content-between align-items-center mb-3\" data-v-d7b08b1e><h4 class=\"text-right\" data-v-d7b08b1e>Общая информация</h4></div><div class=\"row mt-4\" data-v-d7b08b1e><div class=\"col-md-12\" data-v-d7b08b1e><label class=\"labels\" data-v-d7b08b1e>Всего фильмов</label><input class=\"form-control mb-3\" readonly value=\"100\" data-v-d7b08b1e></div><div class=\"col-md-12\" data-v-d7b08b1e><label class=\"labels\" data-v-d7b08b1e>Просмотрено</label><input class=\"form-control mb-3\" value=\"20\" readonly data-v-d7b08b1e></div><div class=\"col-md-12\" data-v-d7b08b1e><label class=\"labels\" data-v-d7b08b1e>Не просмотрено</label><input class=\"form-control\" value=\"70\" readonly data-v-d7b08b1e></div></div></div></div>", 1);
+
+var _hoisted_6 = {
+  "class": "col-md-6"
+};
+var _hoisted_7 = {
+  "class": "p-3 py-5"
+};
+
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "d-flex justify-content-between align-items-center experience"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+    "class": "text-right"
+  }, "Данные профиля"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "btn btn-warning border px-3 p-1 add-experience"
+  }, " Редактировать ")], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_10 = {
+  "class": "col-md-12"
+};
+
+var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "class": "labels"
+  }, "Имя", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_12 = ["value"];
+var _hoisted_13 = {
+  "class": "col-md-12"
+};
+
+var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "class": "labels"
+  }, "Email", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_15 = ["value"];
+var _hoisted_16 = {
+  "class": "col-md-12"
+};
+
+var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "class": "labels"
+  }, "Дата создания", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_18 = ["value"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_5);
+  return $data.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "class": "form-control mb-3",
+    placeholder: "experience",
+    value: $data.user.name,
+    readonly: ""
+  }, null, 8
+  /* PROPS */
+  , _hoisted_12)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "class": "form-control mb-3",
+    placeholder: "additional details",
+    value: $data.user.email,
+    readonly: ""
+  }, null, 8
+  /* PROPS */
+  , _hoisted_15)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "class": "form-control",
+    placeholder: "additional details",
+    value: $data.user.created_at,
+    readonly: ""
+  }, null, 8
+  /* PROPS */
+  , _hoisted_18)])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),

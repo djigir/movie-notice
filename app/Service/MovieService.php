@@ -11,6 +11,8 @@ class MovieService
 {
     public function movieStore($data)
     {
+        $data['user_id'] = auth()->user()->id;
+
         try {
             DB::beginTransaction();
 
