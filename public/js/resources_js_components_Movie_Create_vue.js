@@ -89,7 +89,7 @@ var DEFAULT_IMAGE = 'https://mizez.com/custom/mizez/img/general/no-image-availab
       rating: null,
       genres: [],
       genres_options: [],
-      image: DEFAULT_IMAGE
+      image: ''
     };
   },
   mounted: function mounted() {
@@ -114,7 +114,7 @@ var DEFAULT_IMAGE = 'https://mizez.com/custom/mizez/img/general/no-image-availab
         release_year: this.release_year,
         is_viewed: this.is_viewed,
         rating: this.rating,
-        image: this.image === '' ? DEFAULT_IMAGE : this.image
+        image: this.image
       }).then(function (res) {
         console.log(res);
 
@@ -158,160 +158,106 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
-  "class": "container-fluid m-5 p-2 rounded mx-auto bg-light shadow"
+  "class": "create-movie mb-5 pb-5"
 };
 
-var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "row m-1 p-4"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "col"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "p-1 h1 text-primary text-center mx-auto display-inline-block"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-    "class": "text-center fw-bold"
-  }, "Добавление фильма")])])], -1
-  /* HOISTED */
-  );
-});
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row gx-5 justify-content-center mt-5\" data-v-f8f77174><div class=\"col-lg-8 col-xl-6\" data-v-f8f77174><div class=\"text-center\" data-v-f8f77174><h2 class=\"fw-bolder\" data-v-f8f77174>Добавление фильма</h2><p class=\"lead fw-normal text-muted mb-3\" data-v-f8f77174> На этой странице вы можете сохранить фильм в вашу коллекцию, добавив название, описание, картинку и т.д </p></div></div></div>", 1);
 
-var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "p-2 mx-4 border-black-25 border-bottom"
-  }, null, -1
-  /* HOISTED */
-  );
-});
-
+var _hoisted_3 = {
+  "class": "container rounded bg-white mt-5"
+};
 var _hoisted_4 = {
-  "class": "row mx-1 px-5 pb-3 w-80 mt-5"
-};
-var _hoisted_5 = {
-  "class": "col mx-auto"
-};
-var _hoisted_6 = {
-  "class": "row px-3 align-items-center todo-item rounded"
-};
-var _hoisted_7 = {
-  "class": "container"
-};
-var _hoisted_8 = {
   "class": "row"
 };
+var _hoisted_5 = {
+  "class": "col-md-4 border-right"
+};
+var _hoisted_6 = {
+  "class": "d-flex flex-column align-items-center text-center p-3 py-5"
+};
+var _hoisted_7 = ["src"];
+
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "mt-2"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "Картинка к вашему фильму")], -1
+  /* HOISTED */
+  );
+});
+
 var _hoisted_9 = {
-  "class": "col-12"
+  "class": "col-md-8"
 };
 var _hoisted_10 = {
-  "class": "mb-3"
+  "class": "p-3 py-5"
 };
 
-var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "title",
-    "class": "form-label"
-  }, "Название фильма", -1
-  /* HOISTED */
-  );
-});
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"d-flex justify-content-between align-items-center mb-3\" data-v-f8f77174><div class=\"d-flex flex-row align-items-center back\" data-v-f8f77174><i class=\"fa fa-long-arrow-left mr-1 mb-1\" data-v-f8f77174></i><button class=\"btn btn-outline-info\" data-v-f8f77174>Вернуться назад</button></div><h5 class=\"text-right\" data-v-f8f77174>Форма для добавления</h5></div>", 1);
 
 var _hoisted_12 = {
-  "class": "mb-3"
+  "class": "row mt-2"
 };
 var _hoisted_13 = {
-  "class": "form-group shadow-textarea"
+  "class": "col-md-6"
 };
-
-var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "description"
-  }, "Описание", -1
-  /* HOISTED */
-  );
-});
-
+var _hoisted_14 = {
+  "class": "col-md-6"
+};
 var _hoisted_15 = {
-  "class": "mb-3"
+  "class": "row mt-3"
 };
-
-var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "release_year"
-  }, "Год выпуска", -1
-  /* HOISTED */
-  );
-});
-
+var _hoisted_16 = {
+  "class": "col-md-6"
+};
 var _hoisted_17 = {
-  "class": "mb-3"
+  "class": "col-md-6"
 };
 var _hoisted_18 = {
-  "class": "form-group shadow-textarea"
+  "class": "row mt-3"
 };
-
-var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "actors"
-  }, "Актеры", -1
-  /* HOISTED */
-  );
-});
-
+var _hoisted_19 = {
+  "class": "col-md-6"
+};
 var _hoisted_20 = {
-  "class": "mb-3"
+  "class": "col-md-6"
 };
 
 var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "class": "typo__label"
-  }, "Жанры", -1
+    "for": "rating",
+    id: "rating-label",
+    "class": "form-check-label mt-2"
+  }, "Рейтинг:", -1
   /* HOISTED */
   );
 });
 
 var _hoisted_22 = {
-  "class": "mb-3 form-check"
+  "class": "row mt-3"
+};
+var _hoisted_23 = {
+  "class": "col-md-12"
+};
+var _hoisted_24 = {
+  "class": "row mt-3"
+};
+var _hoisted_25 = {
+  "class": "col-md-6"
 };
 
-var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_26 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "class": "form-check-label",
+    "class": "form-check-label ms-1",
     "for": "is_viewed"
   }, "Просмотренно", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_24 = {
-  "class": "mb-3 form-check rating-form"
+var _hoisted_27 = {
+  "class": "mt-5 text-right"
 };
-
-var _hoisted_25 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "rating",
-    id: "rating-label",
-    "class": "form-check-label"
-  }, "Рейтинг:", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_26 = {
-  "class": "mb-3"
-};
-
-var _hoisted_27 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "movie-image"
-  }, "Картинка", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_28 = {
-  "class": "preview-movie-image"
-};
-var _hoisted_29 = ["src"];
-var _hoisted_30 = ["disabled"];
+var _hoisted_28 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Datepicker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Datepicker");
 
@@ -319,50 +265,49 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_star_rating = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("star-rating");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" App title section "), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("hr "), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Todo list section "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Todo Item 1 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" col-md-6 можно поделить на 2 части "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" breadcrumbs "), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" breadcrumbs "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: $options.previewImage,
+    "class": "mt-5",
+    alt: "movie-img",
+    width: "250"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_7), _hoisted_8])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.title = $event;
     }),
     type: "text",
     "class": "form-control",
-    id: "title",
-    placeholder: "Введите название фильма",
-    "aria-describedby": "title_error",
-    required: ""
+    placeholder: "Название"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.title]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.description = $event;
-    }),
-    "class": "form-control z-depth-1",
-    id: "description",
-    rows: "3",
-    placeholder: "Добавте ваше описание к фильму"
-  }, "\n\n                                        ", 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.description]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Datepicker, {
-    id: "release_year",
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.title]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Datepicker, {
     yearPicker: "",
     modelValue: $data.release_year,
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.release_year = $event;
     }),
     autoApply: "",
     placeholder: "Выберите дату выхода фильма"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+  , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.description = $event;
+    }),
+    "class": "form-control",
+    placeholder: "Добавте ваше описание к фильму"
+  }, "\n                                ", 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.description]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.actors = $event;
     }),
-    "class": "form-control z-depth-1",
-    id: "actors",
-    rows: "3",
+    "class": "form-control",
     placeholder: "Добавте актеров к фильму если вы их знаете"
-  }, "\n\n                                        ", 512
+  }, "\n                                ", 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.actors]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VueMultiselect, {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.actors]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VueMultiselect, {
     modelValue: $data.genres,
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.genres = $event;
@@ -376,20 +321,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "track-by": "title"
   }, null, 8
   /* PROPS */
-  , ["modelValue", "options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-      return $data.is_viewed = $event;
-    }),
-    type: "checkbox",
-    "class": "form-check-input",
-    id: "is_viewed"
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.is_viewed]]), _hoisted_23]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_star_rating, {
+  , ["modelValue", "options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_star_rating, {
     id: "rating",
-    "class": "rating-stars",
+    "class": "rating-stars d-inline-block",
     rating: $data.rating,
-    "onUpdate:rating": _cache[6] || (_cache[6] = function ($event) {
+    "onUpdate:rating": _cache[5] || (_cache[5] = function ($event) {
       return $data.rating = $event;
     }),
     increment: 0.5,
@@ -397,8 +333,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "star-size": 18
   }, null, 8
   /* PROPS */
-  , ["rating", "increment"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+  , ["rating", "increment"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
       return $data.image = $event;
     }),
     type: "text",
@@ -407,22 +343,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Вставте ссылку на картинку к фильму"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.image]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: $options.previewImage,
-    alt: "movie-img",
-    width: "540",
-    height: "340"
-  }, null, 8
-  /* PROPS */
-  , _hoisted_29)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.image]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+      return $data.is_viewed = $event;
+    }),
+    type: "checkbox",
+    "class": "form-check-input",
+    id: "is_viewed"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.is_viewed]]), _hoisted_26])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     disabled: !$options.isDisabled,
     onClick: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.store && $options.store.apply($options, arguments);
     }, ["prevent"])),
-    "class": "btn btn-primary store-btn"
+    "class": "btn btn-success",
+    type: "button"
   }, " Создать ", 8
   /* PROPS */
-  , _hoisted_30)])])])])]);
+  , _hoisted_28)])])])])])]);
 }
 
 /***/ }),
@@ -492,7 +431,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.rating-form[data-v-f8f77174] {\n        padding-left: 0!important;\n}\n#rating-label[data-v-f8f77174] {\n        margin-right: 5px;\n}\n.rating-stars[data-v-f8f77174] {\n        margin: 0!important;\n        padding: 0!important;\n}\n.store-btn[data-v-f8f77174] {\n        margin-top: 1rem;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.rating-form[data-v-f8f77174] {\n        padding-left: 0!important;\n}\n#rating-label[data-v-f8f77174] {\n        margin-right: 5px;\n}\n.rating-stars[data-v-f8f77174] {\n        margin: 0!important;\n        padding: 0!important;\n}\n.store-btn[data-v-f8f77174] {\n        margin-top: 1rem;\n}\n.form-control[data-v-f8f77174]:focus {\n        box-shadow: none;\n        border-color: #BA68C8;\n}\n.profile-button[data-v-f8f77174] {\n        background: #BA68C8;\n        box-shadow: none;\n        border: none;\n}\n.profile-button[data-v-f8f77174]:hover {\n        background: #682773;\n}\n.profile-button[data-v-f8f77174]:focus {\n        background: #682773;\n        box-shadow: none;\n}\n.profile-button[data-v-f8f77174]:active {\n        background: #682773;\n        box-shadow: none;\n}\n.back[data-v-f8f77174]:hover {\n        color: #682773;\n        cursor: pointer;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

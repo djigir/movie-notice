@@ -1,11 +1,13 @@
 <template>
 
     <section class="movie-section py-5">
-        <div class="row gx-5 justify-content-center ">
+        <div class="row gx-5 justify-content-center">
             <div class="col-lg-8 col-xl-6">
                 <div class="text-center">
                     <h2 class="fw-bolder">Фильмы</h2>
-                    <p class="lead fw-normal text-muted mb-3">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
+                    <p class="lead fw-normal text-muted mb-3">
+                        На этой странице вы можете посмотреть все добавленные вами фильмы и сериалы, а также отсортировать их по нужным вам параметрам
+                    </p>
                     <router-link :to="{ name: 'movie.create' }" class="btn btn-primary add-movie-btn text-light">
                         Добавить Фильм
                     </router-link>
@@ -13,7 +15,7 @@
             </div>
         </div>
 
-        <div class="container my-sm-5 border p-0 bg-sec-light mt-5">
+        <div v-if="movies.data" class="container my-sm-5 border p-0 bg-sec-light mt-5">
             <div id="content">
                 <div class="bg-light p-2 px-md-4 px-3 shadow-sm">
                     <div class="d-flex align-items-center">
@@ -30,7 +32,6 @@
                 <div class="d-sm-flex align-items-sm-center py-sm-3 px-md-3 location">
 
                     <input v-model="search" type="text" required placeholder="Поиск (название, описание или актер)" class="mx-sm-2 mx-3 my-sm-0 my-2 form-control border-1 add-todo-input bg-transparent rounded" style="max-width: 330px">
-
 
                     <select @click="sortColumn($event)" class="mx-md-5 mx-sm-1 mx-3 my-sm-0 my-2 form-control" id="sort-column-select" style="max-width: 200px">
                         <option value="created_at" selected>По дате добавления</option>
@@ -64,12 +65,20 @@
                                 <div id="property" class="collapse show">
                                     <div class="my-1">
                                         <label class="tick">Не просмотреные
-                                            <input @change="changeIsViewedValue($event)" v-model="viewed" type="checkbox">
+                                            <input @change="changeViewedStatus($event)"
+                                                   v-model="viewed"
+                                                   :true-value="false"
+                                                   :false-value="null"
+                                                   type="checkbox">
                                             <span class="check"></span>
                                         </label>
                                         <!-- TODO сделать аналог для  Просмотреные -->
                                         <label class="tick mt-2">Просмотреные
-                                            <input @change="changeIsViewedValue($event)" v-model="viewed" type="checkbox">
+                                            <input @change="changeViewedStatus($event)"
+                                                   v-model="viewed"
+                                                   :true-value="true"
+                                                   :false-value="null"
+                                                   type="checkbox">
                                             <span class="check"></span>
                                         </label>
                                     </div>
@@ -88,68 +97,70 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-white p-2 border" id="hotels">
-                        <div v-for="(movie, index) in movies.data" class="hotel py-2 px-2 pb-4 border-bottom">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <img :src="movie.image" alt="" class="hotel-img">
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="d-md-flex align-items-md-center">
-                                        <div class="name">
-                                            <router-link :to="{name: 'movie.show', params: {id: movie.id}}">
-                                                {{ movie.title }}
-                                            </router-link>
-                                        </div>
-                                        <div :class="isViewedClass(movie.is_viewed)" class="ms-auto code fw-bold">
-                                            {{ isViewedText(movie.is_viewed) }}
-                                        </div>
+                    <!-- if movie isset show list of movies  -->
+                    <div v-if="movies_total > 0" class="bg-white p-2 border" id="hotels">
+                            <div v-for="(movie, index) in movies.data" class="hotel py-2 px-2 pb-4 border-bottom">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <img :src="movie.image" alt="" class="hotel-img">
                                     </div>
-                                    <div class="rating">
-                                        <star-rating id="rating" class="rating-stars"
-                                            v-model:rating="movie.rating"
-                                             :read-only="true"
-                                            :max-rating="10"
-                                            :star-size="12"
-                                        />
-                                    </div>
-                                    <div class="d-flex flex-column pt-1">
-                                        <div>
-                                            <span class="fw-bold">Год выхода:</span> {{ movie.release_year }}
+                                    <div class="col-lg-9">
+                                        <div class="d-md-flex align-items-md-center">
+                                            <div class="name">
+                                                <router-link :to="{name: 'movie.show', params: {id: movie.id}}">
+                                                    {{ movie.title }}
+                                                </router-link>
+                                            </div>
+                                            <div :class="isViewedClass(movie.is_viewed)" class="ms-auto code fw-bold">
+                                                {{ isViewedText(movie.is_viewed) }}
+                                            </div>
                                         </div>
-                                        <div>
-                                            <span class="fw-bold">Жанры: </span>
-                                            <span v-for="genre in movie.genres" class="genre">
+                                        <div class="rating">
+                                            <star-rating id="rating" class="rating-stars"
+                                                v-model:rating="movie.rating"
+                                                :increment="0.5"
+                                                :read-only="true"
+                                                :max-rating="10"
+                                                :star-size="12"
+                                            />
+                                        </div>
+                                        <div class="d-flex flex-column pt-1">
+                                            <div>
+                                                <span class="fw-bold">Год выхода:</span> {{ movie.release_year }}
+                                            </div>
+                                            <div>
+                                                <span class="fw-bold">Жанры: </span>
+                                                <span v-for="genre in movie.genres" class="genre">
                                                 <router-link to="/">
                                                     {{ genre.title }}
                                                 </router-link>
                                             </span>
-                                        </div>
-                                        <div>
-                                            <span class="fw-bold">Описание:</span> {{ movie.description }}
-                                        </div>
-                                        <div>
-                                            <span class="fw-bold">Актеры:</span> {{ movie.actors }}
-                                        </div>
-                                        <div>
-                                            <span class="fw-bold">Добавленно: </span>
-                                            <a href="">
-                                                {{ new Date(movie.created_at).toLocaleDateString() }}
-                                            </a>
-                                            | {{ new Date(movie.created_at).toLocaleTimeString([], {timeStyle: 'short'}) }}
+                                            </div>
+                                            <div>
+                                                <span class="fw-bold">Описание:</span> {{ movie.description }}
+                                            </div>
+                                            <div>
+                                                <span class="fw-bold">Актеры:</span> {{ movie.actors }}
+                                            </div>
+                                            <div>
+                                                <span class="fw-bold">Добавленно: </span>
+                                                <a href="">
+                                                    {{ new Date(movie.created_at).toLocaleDateString() }}
+                                                </a>
+                                                | {{ new Date(movie.created_at).toLocaleTimeString([], {timeStyle: 'short'}) }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end mt-4">
+                                    <router-link :to="{ name: 'movie.show', params: {id: movie.id} }" class="btn btn-success text-uppercase">
+                                        Посмотреть
+                                    </router-link>
+                                    <router-link :to="{ name: 'movie.edit', params: {id: movie.id} }" class="btn enquiry text-uppercase mx-2">
+                                        Редактировать
+                                    </router-link>
+                                </div>
                             </div>
-                            <div class="d-flex justify-content-end mt-4">
-                                <router-link :to="{ name: 'movie.show', params: {id: movie.id} }" class="btn btn-success text-uppercase">
-                                    Посмотреть
-                                </router-link>
-                                <router-link :to="{ name: 'movie.edit', params: {id: movie.id} }" class="btn enquiry text-uppercase mx-2">
-                                    Редактировать
-                                </router-link>
-                            </div>
-                        </div>
                         <!-- START  Pagination -->
                         <div class="container">
                             <div class="row">
@@ -161,6 +172,11 @@
                             </div>
                         </div>
                         <!-- END  Pagination -->
+                    </div>
+                    <!-- if movie = 0 show not result -->
+                    <div v-else class="bg-white p-2 border" id="hotels">
+                        <h3 class="text-center mt-5">По данному запросу нет результатов!</h3>
+                        <p class="text-center">Попробуйте изменить поисковой запрос или примените другие фильтры</p>
                     </div>
                 </div>
             </div>
@@ -187,7 +203,7 @@
                 search: '',
                 sort_column: 'created_at',
                 sort_direction: 'desc',
-                viewed: false,
+                viewed: null,
                 movies_total: null,
                 movies_to: null,
             }
@@ -197,10 +213,6 @@
             this.getMovies()
             this.getGenres()
         },
-
-        // updated() {
-        //     this.selectedFilterOptions()
-        // },
 
         watch: {
             search(after, before) {
@@ -249,7 +261,6 @@
                 })
             },
 
-
             sortColumn(event) {
                 this.sort_column = event.target.value
                 this.getMovies()
@@ -265,36 +276,9 @@
                 this.getMovies()
             },
 
-            changeIsViewedValue() {
+            changeViewedStatus() {
                 this.getMovies()
             },
-
-            // selectedFilterOptions() {
-            //     // console.log(this.genre, this.search, this.sort_column, this.sort_direction, this.viewed)
-            //     // this.selected_filter_options = e.title
-            //     console.log(this.genre)
-            //
-            //     let genre = 'Все'
-            //     let search = this.search
-            //     let sort_column = 'По дате добавления'
-            //     let sort_direction = 'По убыванию'
-            //     let is_viewed = 'Все'
-            //     let years = 'Все'
-            //
-            //     this.selected_filter_options = `Жанр: ${genre},
-            //     Поиск по: ${search},
-            //     Сортировка: ${sort_column},
-            //     Тип сортировки: ${sort_direction},
-            //     Статус: ${is_viewed},
-            //     Годы: ${years}`
-            //
-            //     this.genres_options.forEach(element => {
-            //         if (this.genre != null && element.id === this.genre) {
-            //             return this.selected_filter_options = element.title
-            //         }
-            //     })
-            //
-            // },
 
             resetFilter() {
                 this.genres_options = this.getGenres()
@@ -302,7 +286,7 @@
                 this.search = ''
                 this.sort_column = 'created_at'
                 this.sort_direction = 'desc'
-                this.viewed = false
+                this.viewed = null
                 // reset selected value in layout
                 document.getElementById('sort-column-select').value = this.sort_column
                 document.getElementById('sort-direction-select').value = this.sort_direction

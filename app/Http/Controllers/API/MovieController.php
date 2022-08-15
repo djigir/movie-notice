@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Filters\MovieFilter;
 use App\Http\Requests\API\Movie\IndexRequest;
 use App\Http\Requests\API\Movie\StoreRequest;
 use App\Http\Requests\API\Movie\UpdateRequest;
@@ -22,12 +21,7 @@ class MovieController extends Controller
     public function index(IndexRequest $request)
     {
         $data = $request->validated();
-
-        $filter = app()->make(MovieFilter::class, ['queryParams' => array_filter($data)]);
-        $movies = Movie::where('user_id', auth()->user()->id)
-            ->filter($filter)
-            ->orderBy($data['sort_column'], $data['sort_direction'])
-            ->paginate(6, ['*'], 'page', $data['page']);
+        $movies = $this->movieService->showMovies($data);
 
         return IndexMovieResource::collection($movies);
     }

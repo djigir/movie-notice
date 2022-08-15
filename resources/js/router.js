@@ -12,6 +12,11 @@ const routes = [
         name: 'profile.index'
     },
     {
+        path: '/profile/:id/edit',
+        component: () => import('./components/Profile/Edit'),
+        name: 'profile.edit'
+    },
+    {
         path: '/login',
         component: () => import('./components/Auth/Login'),
         name: 'login'
@@ -40,6 +45,12 @@ const routes = [
         path: '/movie/:id/edit',
         component: () => import('./components/Movie/Edit'),
         name: 'movie.edit'
+    },
+    {
+        path: '/movie/add-info',
+        component: () => import('./components/Movie/Info'),
+        name: 'movie.info'
+
     },
 
 ]

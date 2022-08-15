@@ -32,9 +32,13 @@ class MovieFilter extends AbstractFilter
 
     protected function viewed(Builder $builder, $value)
     {
-        // check "VALUE" need exactly as a "STRING" because it comes from front-end like "STRING"
-        if ($value != 'false') {
+        /** check "VALUE" need exactly as a "STRING" because it comes from front-end like "STRING" **/
+        if ($value == 'false') {
             $builder->where('is_viewed', 0);
+        }
+
+        if ($value == 'true') {
+            $builder->where('is_viewed', 1);
         }
     }
 

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\Profile\UpdateRequest;
 use App\Http\Resources\IndexProfileResource;
-use Illuminate\Http\Request;
+use App\Http\Resources\ShowProfileResource;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -15,53 +17,24 @@ class ProfileController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function show(User $user)
     {
-        //
+        return new ShowProfileResource(auth()->user());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function update(UpdateRequest $request, User $user)
     {
-        //
+        $data = $request->validated();
+        auth()->user()->update($data);
+
+        return response('user data updated successfully', 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroy(User $user)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        auth()->user()->delete();
+        response([]);
     }
 }

@@ -1,145 +1,21 @@
 <template>
-
-    <section class="movie-details" v-if="movie">
-        <!-- breadcrumbs -->
-        <div class="row gx-5 justify-content-center mt-5">
-            <div class="col-lg-8 col-xl-6">
-                <div class="text-center">
-                    <h2 class="fw-bolder">{{ movie.title }}</h2>
-                    <p class="lead fw-normal text-muted mb-3">Вы находитесь на странице просмотра фильма здесь вы можете посмотреть все данные о фильме, а так же почитать отзывы</p>
-                    <router-link :to="{ name: 'movie.index' }" class="btn btn-primary add-movie-btn text-light">
-                        Назад к списку
-                    </router-link>
-                </div>
-            </div>
-        </div>
-        <!-- breadcrumbs -->
-
-        <div class="container mt-5 mb-5">
-            <div class="row">
-                <div class="col-md-7">
-                    <img :src="movie.image" alt="project-image" class="rounded" style="max-height: 425px">
-                    <div class="project-info-box">
-                        <p><b>Тип информации: </b>
-                            <router-link to="/" class="ms-1">Мои данные</router-link>
-                            <router-link :to="{ name: 'movie.info' }" class="ms-1">HD rezka</router-link>
-                            <router-link to="/" class="ms-1">КиноПоиск</router-link>
-                        </p>
-                    </div><!-- / project-info-box -->
-                    <!-- доделать таб тут и парсить данныке -->
-                    <div class="additional-info project-info-box mt-0">
-                        <p><b>Тип информации: </b>
-                            kdflksdlkflkd
-                        </p>
-                        <p><b>Тип информации: </b>
-                            kdflksdlkflkd
-                        </p>
-                        <p>dksakds</p>
-                        <p>dksakds</p>
-                        <p>dksakds</p>
-                        <p>dksakds</p>
-                    </div>
-                </div><!-- / column -->
-
-                <div class="col-md-5">
-
-                    <div class="project-info-box mt-0">
-                        <p><b>Название: </b> {{ movie.title }}</p>
-                        <p><b>Год выхода: </b> {{ movie.release_year }}</p>
-                        <p><b>Жанры: </b>
-                            <span v-for="genre in movie.genres" class="genre">
-                                <a>
-                                    {{ genre.title }}
-                                </a>
-                            </span>
-                        </p>
-                        <p><b>Актеры: </b> {{ movie.actors }}</p>
-                        <p><b>Статус: </b>
-                            <span :class="isViewedClass(movie.is_viewed)">
-                                {{ isViewedText(movie.is_viewed) }}
-                            </span>
-                        </p>
-                        <p><b>Рейтинг: </b>
-                            <star-rating id="rating" class="rating-stars d-inline-block"
-                                 v-model:rating="movie.rating"
-                                 :increment="0.5"
-                                 :read-only="true"
-                                 :max-rating="10"
-                                 :star-size="16"
-                            />
-                        </p>
-                        <p class="mb-0"><b>Добавлено: </b>
-                            {{ new Date(this.movie.created_at).toLocaleDateString() }}
-                              | <span class="text-primary">{{ new Date(movie.created_at).toLocaleTimeString([], {timeStyle: 'short'}) }}</span>
-                        </p>
-                    </div><!-- / project-info-box -->
-
-                    <div class="project-info-box mt-0">
-                        <h5 style="color: #686c6d"><b>Описание:</b></h5>
-                        <p class="mb-0">{{ movie.description }}</p>
-                    </div><!-- / project-info-box -->
-
-                    <div class="project-info-box mt-0 mb-0">
-                        <p class="mb-0">
-                            <span class="fw-bold mr-10 va-middle hide-mobile">Действия:</span>
-                            <router-link class="btn btn-block btn-warning ms-2" :to="{name: 'movie.edit', params: {id: this.movie.id}}">
-                                Редактировать
-                            </router-link>
-                            <button @click="deleteMovie(movie.id)" class="btn btn-block btn-danger ms-3">Удалить</button>
-                        </p>
-                    </div><!-- / project-info-box -->
-                </div><!-- / column -->
-            </div>
-        </div>
-    </section>
-
+    <div class="additional-info project-info-box mt-0">
+        <p><b>Тип информации: </b>
+            kdflksdlkflkd
+        </p>
+        <p><b>Тип информации: </b>
+            kdflksdlkflkd
+        </p>
+        <p>dksakds</p>
+        <p>dksakds</p>
+        <p>dksakds</p>
+        <p>dksakds</p>
+    </div>
 </template>
-<!-- TODO если неь жанров вывести какую-то надпись -->
+
 <script>
-    import StarRating from "vue-star-rating";
-
     export default {
-        name: "Show",
-
-        components: {StarRating},
-
-        data() {
-            return {
-                movie: null
-            }
-        },
-
-        mounted() {
-            this.getMovie()
-        },
-
-        methods: {
-            getMovie() {
-                axios.get(`/api/movie/${this.$route.params.id}`)
-                .then(res => {
-                    this.movie = res.data.data
-                })
-            },
-
-            deleteMovie(id) {
-                /* TODO передклать на свит алерт */
-                const confirmation = confirm('Вы действительно хотите удалить этот фильм фильм?')
-                if (confirmation) {
-                    axios.delete(`/api/movie/${id}`)
-                    .then(res => {
-                        this.$router.push({name: 'movie.index'})
-                    })
-                }
-            },
-
-            isViewedText(is_viewed) {
-                return is_viewed === 1 ? 'Просмотрено' : 'Не просмотрено'
-            },
-
-            isViewedClass(is_viewed) {
-                return is_viewed === 1 ? 'text-success' : 'text-danger'
-            },
-        },
+        name: "Info"
     }
 </script>
 
@@ -547,10 +423,5 @@
     }
     b, strong {
         font-weight: 700 !important;
-    }
-
-    /* add comma after genre title */
-    .genre + .genre:before {
-        content: ", ";
     }
 </style>

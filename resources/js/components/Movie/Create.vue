@@ -1,119 +1,112 @@
 <template>
 
-    <div class="container-fluid m-5 p-2 rounded mx-auto bg-light shadow">
-        <!-- App title section -->
-        <div class="row m-1 p-4">
-            <div class="col">
-                <div class="p-1 h1 text-primary text-center mx-auto display-inline-block">
-                    <h2 class="text-center fw-bold">Добавление фильма</h2>
+    <section class="create-movie mb-5 pb-5">
+        <!-- breadcrumbs -->
+        <div class="row gx-5 justify-content-center mt-5">
+            <div class="col-lg-8 col-xl-6">
+                <div class="text-center">
+                    <h2 class="fw-bolder">Добавление фильма</h2>
+                    <p class="lead fw-normal text-muted mb-3">
+                        На этой странице вы можете сохранить фильм в вашу коллекцию, добавив название, описание, картинку и т.д
+                    </p>
                 </div>
             </div>
         </div>
-        <!--hr -->
-        <div class="p-2 mx-4 border-black-25 border-bottom"></div>
+        <!-- breadcrumbs -->
 
-        <!-- Todo list section -->
-        <div class="row mx-1 px-5 pb-3 w-80 mt-5">
-            <div class="col mx-auto">
-                <!-- Todo Item 1 -->
-                <div class="row px-3 align-items-center todo-item rounded">
-
-                    <div class="container">
-                        <div class="row">
-                            <!-- col-md-6 можно поделить на 2 части -->
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <label for="title" class="form-label">Название фильма</label>
-                                    <input v-model="title" type="text" class="form-control" id="title" placeholder="Введите название фильма" aria-describedby="title_error" required>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="form-group shadow-textarea">
-                                        <label for="description">Описание</label>
-                                        <textarea v-model="description" class="form-control z-depth-1" id="description" rows="3" placeholder="Добавте ваше описание к фильму">
-
-                                        </textarea>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="release_year">Год выпуска</label>
-
-                                    <Datepicker
-                                        id="release_year"
-                                        yearPicker
-                                        v-model="release_year"
-                                        autoApply
-                                        placeholder="Выберите дату выхода фильма"
-                                    >
-                                    </Datepicker>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="form-group shadow-textarea">
-                                        <label for="actors">Актеры</label>
-                                        <textarea v-model="actors" class="form-control z-depth-1" id="actors" rows="3" placeholder="Добавте актеров к фильму если вы их знаете">
-
-                                        </textarea>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="typo__label">Жанры</label>
-                                    <VueMultiselect
-                                        v-model="genres"
-                                        :options="genres_options"
-                                        :multiple="true"
-                                        :close-on-select="true"
-                                        :preserve-search="true"
-                                        label="title"
-                                        placeholder="Выберите жанры"
-                                        track-by="title"
-                                    />
-                                </div>
-
-                                <div class="mb-3 form-check">
-                                    <input v-model="is_viewed" type="checkbox" class="form-check-input" id="is_viewed">
-                                    <label class="form-check-label" for="is_viewed">Просмотренно</label>
-                                </div>
-
-                                <div class="mb-3 form-check rating-form">
-
-                                    <label for="rating" id="rating-label" class="form-check-label">Рейтинг:</label>
-                                    <star-rating id="rating" class="rating-stars"
-                                         v-model:rating="rating"
-                                         :increment="0.5"
-                                         :max-rating="10"
-                                         :star-size="18"
-                                    />
-
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="movie-image">Картинка</label>
-                                    <input v-model="image" type="text" class="form-control" id="movie-image" placeholder="Вставте ссылку на картинку к фильму">
-                                </div>
-                                <div class="preview-movie-image">
-                                    <img :src="previewImage" alt="movie-img" width="540" height="340">
-                                </div>
-
+        <div class="container rounded bg-white mt-5">
+            <div class="row">
+                <div class="col-md-4 border-right">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        <img :src="previewImage" class="mt-5" alt="movie-img" width="250">
+                        <span class="mt-2"><b>Картинка к вашему фильму</b></span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
+                                <button class="btn btn-outline-info">Вернуться назад</button>
+                            </div>
+                            <h5 class="text-right">Форма для добавления</h5>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <input v-model="title" type="text" class="form-control" placeholder="Название">
+                            </div>
+                            <div class="col-md-6">
+                                <Datepicker
+                                    yearPicker
+                                    v-model="release_year"
+                                    autoApply
+                                    placeholder="Выберите дату выхода фильма"
+                                >
+                                </Datepicker>
                             </div>
                         </div>
-                        <button :disabled="!isDisabled" @click.prevent="store" class="btn btn-primary store-btn">
-                            Создать
-                        </button>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <textarea v-model="description" class="form-control" placeholder="Добавте ваше описание к фильму">
+                                </textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <textarea v-model="actors" class="form-control" placeholder="Добавте актеров к фильму если вы их знаете">
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <VueMultiselect
+                                    v-model="genres"
+                                    :options="genres_options"
+                                    :multiple="true"
+                                    :close-on-select="true"
+                                    :preserve-search="true"
+                                    label="title"
+                                    placeholder="Выберите жанры"
+                                    track-by="title"
+                                />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="rating" id="rating-label" class="form-check-label mt-2">Рейтинг:</label>
+                                <star-rating id="rating" class="rating-stars d-inline-block"
+                                    v-model:rating="rating"
+                                    :increment="0.5"
+                                    :max-rating="10"
+                                    :star-size="18"
+                                />
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <input v-model="image" type="text" class="form-control" id="movie-image" placeholder="Вставте ссылку на картинку к фильму">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <input v-model="is_viewed" type="checkbox" class="form-check-input" id="is_viewed">
+                                <label class="form-check-label ms-1" for="is_viewed">Просмотренно</label>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-right">
+                            <button :disabled="!isDisabled" @click.prevent="store" class="btn btn-success" type="button">
+                                Создать
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
 </template>
 
 <script>
-    const DEFAULT_IMAGE = 'https://mizez.com/custom/mizez/img/general/no-image-available.png'
+    const DEFAULT_IMAGE = 'https://mizez.com/custom/mizez/img/general/no-image-available.png';
 
     import Datepicker from '@vuepic/vue-datepicker';
-    import '@vuepic/vue-datepicker/dist/main.css'
-    import StarRating from 'vue-star-rating'
+    import '@vuepic/vue-datepicker/dist/main.css';
+    import StarRating from 'vue-star-rating';
     import VueMultiselect from 'vue-multiselect/src/Multiselect.vue';
 
     export default {
@@ -137,7 +130,7 @@
                 rating: null,
                 genres: [],
                 genres_options: [],
-                image: DEFAULT_IMAGE
+                image: '',
             }
         },
 
@@ -162,7 +155,7 @@
                     release_year: this.release_year,
                     is_viewed: this.is_viewed,
                     rating: this.rating,
-                    image: this.image === '' ? DEFAULT_IMAGE : this.image
+                    image: this.image
                 })
                 .then( res => {
                     console.log(res)
@@ -205,4 +198,35 @@
     .store-btn {
         margin-top: 1rem;
     }
+
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #BA68C8;
+    }
+
+    .profile-button {
+        background: #BA68C8;
+        box-shadow: none;
+        border: none;
+    }
+
+    .profile-button:hover {
+        background: #682773;
+    }
+
+    .profile-button:focus {
+        background: #682773;
+        box-shadow: none;
+    }
+
+    .profile-button:active {
+        background: #682773;
+        box-shadow: none;
+    }
+
+    .back:hover {
+        color: #682773;
+        cursor: pointer;
+    }
+
 </style>

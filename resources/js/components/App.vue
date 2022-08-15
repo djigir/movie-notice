@@ -82,11 +82,6 @@
                 this.token = localStorage.getItem('x_xsrf_token')
             },
 
-            // addActiveClass() {
-            //     console.log(this.active)
-            //     this.active = 'active';
-            // },
-
             logout() {
                 axios.post('/logout')
                 .then(res => {

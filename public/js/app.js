@@ -23055,10 +23055,6 @@ __webpack_require__.r(__webpack_exports__);
     getToken: function getToken() {
       this.token = localStorage.getItem('x_xsrf_token');
     },
-    // addActiveClass() {
-    //     console.log(this.active)
-    //     this.active = 'active';
-    // },
     logout: function logout() {
       var _this = this;
 
@@ -23287,18 +23283,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/App */ "./resources/js/components/App.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-/*
-import { createApp } from 'vue';
-import router from './router';
-import App from './components/App';
-
-createApp({
-    components:{App}
-}).use(router).mount('#app')
-*/
-
-/* new include  */
-
 
 
 
@@ -23388,6 +23372,12 @@ var routes = [{
   },
   name: 'profile.index'
 }, {
+  path: '/profile/:id/edit',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_components_Profile_Edit_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Profile/Edit */ "./resources/js/components/Profile/Edit.vue"));
+  },
+  name: 'profile.edit'
+}, {
   path: '/login',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Auth_Login_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Auth/Login */ "./resources/js/components/Auth/Login.vue"));
@@ -23423,6 +23413,12 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ "resources_js_components_Movie_Edit_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Movie/Edit */ "./resources/js/components/Movie/Edit.vue"));
   },
   name: 'movie.edit'
+}, {
+  path: '/movie/add-info',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_components_Movie_Info_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Movie/Info */ "./resources/js/components/Movie/Info.vue"));
+  },
+  name: 'movie.info'
 }];
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createRouter)({
   routes: routes,
@@ -50353,7 +50349,7 @@ function useRoute() {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Main_Index_vue":1,"resources_js_components_Profile_Index_vue":1,"resources_js_components_Auth_Login_vue":1,"resources_js_components_Auth_Registration_vue":1,"resources_js_components_Movie_Index_vue":1,"resources_js_components_Movie_Create_vue":1,"resources_js_components_Movie_Show_vue":1,"resources_js_components_Movie_Edit_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Main_Index_vue":1,"resources_js_components_Profile_Index_vue":1,"resources_js_components_Profile_Edit_vue":1,"resources_js_components_Auth_Login_vue":1,"resources_js_components_Auth_Registration_vue":1,"resources_js_components_Movie_Index_vue":1,"resources_js_components_Movie_Create_vue":1,"resources_js_components_Movie_Show_vue":1,"resources_js_components_Movie_Edit_vue":1,"resources_js_components_Movie_Info_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

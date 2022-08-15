@@ -30,7 +30,7 @@ __webpack_require__.r(__webpack_exports__);
       search: '',
       sort_column: 'created_at',
       sort_direction: 'desc',
-      viewed: false,
+      viewed: null,
       movies_total: null,
       movies_to: null
     };
@@ -39,9 +39,6 @@ __webpack_require__.r(__webpack_exports__);
     this.getMovies();
     this.getGenres();
   },
-  // updated() {
-  //     this.selectedFilterOptions()
-  // },
   watch: {
     search: function search(after, before) {
       this.getMovies();
@@ -98,42 +95,16 @@ __webpack_require__.r(__webpack_exports__);
       this.genre = event.target.value;
       this.getMovies();
     },
-    changeIsViewedValue: function changeIsViewedValue() {
+    changeViewedStatus: function changeViewedStatus() {
       this.getMovies();
     },
-    // selectedFilterOptions() {
-    //     // console.log(this.genre, this.search, this.sort_column, this.sort_direction, this.viewed)
-    //     // this.selected_filter_options = e.title
-    //     console.log(this.genre)
-    //
-    //     let genre = 'Все'
-    //     let search = this.search
-    //     let sort_column = 'По дате добавления'
-    //     let sort_direction = 'По убыванию'
-    //     let is_viewed = 'Все'
-    //     let years = 'Все'
-    //
-    //     this.selected_filter_options = `Жанр: ${genre},
-    //     Поиск по: ${search},
-    //     Сортировка: ${sort_column},
-    //     Тип сортировки: ${sort_direction},
-    //     Статус: ${is_viewed},
-    //     Годы: ${years}`
-    //
-    //     this.genres_options.forEach(element => {
-    //         if (this.genre != null && element.id === this.genre) {
-    //             return this.selected_filter_options = element.title
-    //         }
-    //     })
-    //
-    // },
     resetFilter: function resetFilter() {
       this.genres_options = this.getGenres();
       this.genre = 'all';
       this.search = '';
       this.sort_column = 'created_at';
       this.sort_direction = 'desc';
-      this.viewed = false; // reset selected value in layout
+      this.viewed = null; // reset selected value in layout
 
       document.getElementById('sort-column-select').value = this.sort_column;
       document.getElementById('sort-direction-select').value = this.sort_direction;
@@ -186,7 +157,7 @@ var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
     "class": "lead fw-normal text-muted mb-3"
-  }, "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.", -1
+  }, " На этой странице вы можете посмотреть все добавленные вами фильмы и сериалы, а также отсортировать их по нужным вам параметрам ", -1
   /* HOISTED */
   );
 });
@@ -194,6 +165,7 @@ var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Добавить Фильм ");
 
 var _hoisted_8 = {
+  key: 0,
   "class": "container my-sm-5 border p-0 bg-sec-light mt-5"
 };
 var _hoisted_9 = {
@@ -416,6 +388,7 @@ var _hoisted_45 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"box\" data-v-137a5278><div class=\"box-label text-uppercase d-flex align-items-center\" data-v-137a5278>Год <button class=\"btn ms-auto\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#amenities\" aria-expanded=\"false\" aria-controls=\"amenities\" data-v-137a5278><span class=\"fas fa-plus\" data-v-137a5278></span></button></div><div id=\"amenities\" class=\"collapse show\" data-v-137a5278><div class=\"my-1\" data-v-137a5278><label class=\"tick\" data-v-137a5278>Parking <input type=\"checkbox\" checked=\"checked\" data-v-137a5278><span class=\"check\" data-v-137a5278></span></label></div></div></div>", 1);
 
 var _hoisted_47 = {
+  key: 0,
   "class": "bg-white p-2 border",
   id: "hotels"
 };
@@ -512,6 +485,20 @@ var _hoisted_69 = {
 var _hoisted_70 = {
   "class": "pagination mx-auto"
 };
+
+var _hoisted_71 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "bg-white p-2 border",
+    id: "hotels"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+    "class": "text-center mt-5"
+  }, "По данному запросу нет результатов!"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+    "class": "text-center"
+  }, "Попробуйте изменить поисковой запрос или примените другие фильтры")], -1
+  /* HOISTED */
+  );
+});
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
@@ -533,7 +520,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["to"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.movies_total) + " | ", 1
+  , ["to"])])])]), $data.movies.data ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.movies_total) + " | ", 1
   /* TEXT */
   ), _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.movies_to === null ? 0 : $data.movies_to) + " ", 1
   /* TEXT */
@@ -594,25 +581,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* HYDRATE_EVENTS */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [_hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_40, [_hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     onChange: _cache[5] || (_cache[5] = function ($event) {
-      return $options.changeIsViewedValue($event);
+      return $options.changeViewedStatus($event);
     }),
     "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
       return $data.viewed = $event;
     }),
+    "true-value": false,
+    "false-value": null,
     type: "checkbox"
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.viewed]]), _hoisted_42]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" TODO сделать аналог для  Просмотреные "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_43, [_hoisted_44, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     onChange: _cache[7] || (_cache[7] = function ($event) {
-      return $options.changeIsViewedValue($event);
+      return $options.changeViewedStatus($event);
     }),
     "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
       return $data.viewed = $event;
     }),
+    "true-value": true,
+    "false-value": null,
     type: "checkbox"
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.viewed]]), _hoisted_45])])])]), _hoisted_46])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.movies.data, function (movie, index) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.viewed]]), _hoisted_45])])])]), _hoisted_46])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" if movie isset show list of movies  "), $data.movies_total > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_47, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.movies.data, function (movie, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: movie.image,
       alt: "",
@@ -648,12 +639,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "onUpdate:rating": function onUpdateRating($event) {
         return movie.rating = $event;
       },
+      increment: 0.5,
       "read-only": true,
       "max-rating": 10,
       "star-size": 12
     }, null, 8
     /* PROPS */
-    , ["rating", "onUpdate:rating"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_57, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(movie.release_year), 1
+    , ["rating", "onUpdate:rating", "increment"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_57, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(movie.release_year), 1
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_58, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(movie.genres, function (genre) {
       return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
@@ -724,7 +716,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onPaginationChangePage: $options.getMovies
   }, null, 8
   /* PROPS */
-  , ["data", "onPaginationChangePage"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END  Pagination ")])])])])]);
+  , ["data", "onPaginationChangePage"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END  Pagination ")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: 1
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" if movie = 0 show not result "), _hoisted_71], 2112
+  /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+  ))])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
