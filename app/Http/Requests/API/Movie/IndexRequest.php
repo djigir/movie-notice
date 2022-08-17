@@ -30,6 +30,7 @@ class IndexRequest extends FormRequest
             'sort_direction' => 'nullable|string',
             'page' => 'nullable|integer',
             'viewed' => 'nullable|string',
+            'years' => 'nullable|array'
         ];
     }
 }

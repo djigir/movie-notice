@@ -65,7 +65,7 @@
                                 <div id="property" class="collapse show">
                                     <div class="my-1">
                                         <label class="tick">Не просмотреные
-                                            <input @change="changeViewedStatus($event)"
+                                            <input @change="getMovies(1)"
                                                    v-model="viewed"
                                                    :true-value="false"
                                                    :false-value="null"
@@ -74,7 +74,7 @@
                                         </label>
                                         <!-- TODO сделать аналог для  Просмотреные -->
                                         <label class="tick mt-2">Просмотреные
-                                            <input @change="changeViewedStatus($event)"
+                                            <input @change="getMovies(1)"
                                                    v-model="viewed"
                                                    :true-value="true"
                                                    :false-value="null"
@@ -85,13 +85,40 @@
                                 </div>
                             </div>
                             <div class="box">
-                                <div class="box-label text-uppercase d-flex align-items-center">Год <button class="btn ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#amenities" aria-expanded="false" aria-controls="amenities"> <span class="fas fa-plus"></span> </button> </div>
+                                <div class="box-label text-uppercase d-flex align-items-center mb-3">Год выхода <button class="btn ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#amenities" aria-expanded="false" aria-controls="amenities"> <span class="fas fa-plus"></span> </button> </div>
                                 <div id="amenities" class="collapse show">
-                                    <div class="my-1">
-                                        <label class="tick">Parking
-                                            <input type="checkbox" checked="checked">
-                                               <span class="check"></span>
-                                        </label>
+                                    <div v-if="years_range.length" class="my-1">
+                                        <vue-slider v-model="years_range"
+                                            :drag-on-click="true"
+                                            :min="+min_year"
+                                            :max="+max_year"
+                                            :tooltip="'active'"
+                                            :enableCross="false"
+                                            :lazy="true"
+                                            @drag-end="getMovies(1)"/>
+                                        <!-- years range inputs   -->
+                                        <div class="form_control d-flex justify-content-between">
+                                            <div class="form_control_container d-inline-block">
+                                                <div class="form_control_container__time text-start">От</div>
+                                                <input class="form_control_container__time__input"
+                                                       type="number"
+                                                       id="fromInput"
+                                                       :value="years_range[0]"
+                                                       :min="+min_year"
+                                                       :max="+max_year"
+                                                        readonly/>
+                                            </div>
+                                            <div class="form_control_container d-inline-block">
+                                                <div class="form_control_container__time text-end">До</div>
+                                                <input class="form_control_container__time__input"
+                                                       type="number"
+                                                       id="toInput"
+                                                       :value="years_range[1]"
+                                                       :min="+min_year"
+                                                       :max="+max_year"
+                                                        readonly/>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +133,7 @@
                                     </div>
                                     <div class="col-lg-9">
                                         <div class="d-md-flex align-items-md-center">
-                                            <div class="name">
+                                            <div class="name movie-link">
                                                 <router-link :to="{name: 'movie.show', params: {id: movie.id}}">
                                                     {{ movie.title }}
                                                 </router-link>
@@ -130,7 +157,7 @@
                                             </div>
                                             <div>
                                                 <span class="fw-bold">Жанры: </span>
-                                                <span v-for="genre in movie.genres" class="genre">
+                                                <span v-for="genre in movie.genres" class="genre movie-link">
                                                 <router-link to="/">
                                                     {{ genre.title }}
                                                 </router-link>
@@ -142,7 +169,7 @@
                                             <div>
                                                 <span class="fw-bold">Актеры:</span> {{ movie.actors }}
                                             </div>
-                                            <div>
+                                            <div class="movie-link">
                                                 <span class="fw-bold">Добавленно: </span>
                                                 <a href="">
                                                     {{ new Date(movie.created_at).toLocaleDateString() }}
@@ -188,18 +215,27 @@
 
 <script>
     import LaravelVuePagination from 'laravel-vue-pagination';
-    import StarRating from 'vue-star-rating'
+    import StarRating from 'vue-star-rating';
+    import VueSlider from 'vue-slider-component'
+    import 'vue-slider-component/theme/antd.css'
 
     export default {
         name: "Index",
 
-        components: { LaravelVuePagination, StarRating },
+        components: {
+            LaravelVuePagination,
+            StarRating,
+            VueSlider,
+        },
 
         data() {
             return {
                 movies: {},
                 genres_options: [],
                 genre: null,
+                years_range: [],
+                min_year: null,
+                max_year: null,
                 search: '',
                 sort_column: 'created_at',
                 sort_direction: 'desc',
@@ -212,6 +248,7 @@
         mounted() {
             this.getMovies()
             this.getGenres()
+            this.getYearsRange()
         },
 
         watch: {
@@ -228,7 +265,8 @@
                         sort_column: this.sort_column,
                         sort_direction: this.sort_direction,
                         genre: this.genre,
-                        viewed: this.viewed
+                        viewed: this.viewed,
+                        years: this.years_range
                     }
                 })
                 .then(res => {
@@ -243,6 +281,16 @@
                 axios.get('/api/genre')
                 .then( res => {
                     this.genres_options = res.data.data
+                })
+            },
+
+            getYearsRange() {
+                axios.get('/api/years-range')
+                .then(res => {
+                    this.min_year = res.data.years.min
+                    this.max_year = res.data.years.max
+
+                    this.years_range = [+this.min_year, +this.max_year]
                 })
             },
 
@@ -276,10 +324,6 @@
                 this.getMovies()
             },
 
-            changeViewedStatus() {
-                this.getMovies()
-            },
-
             resetFilter() {
                 this.genres_options = this.getGenres()
                 this.genre = 'all'
@@ -287,6 +331,7 @@
                 this.sort_column = 'created_at'
                 this.sort_direction = 'desc'
                 this.viewed = null
+                this.years_range = [+this.min_year, +this.max_year]
                 // reset selected value in layout
                 document.getElementById('sort-column-select').value = this.sort_column
                 document.getElementById('sort-direction-select').value = this.sort_direction
@@ -446,12 +491,11 @@
         width: 82%
     }
 
-    a {
-        /*text-decoration: none;*/
+    .movie-link a {
         color: #222
     }
 
-    a:hover {
+    .movie-link a:hover {
         color: gray;
     }
 
@@ -729,7 +773,13 @@
         content: ", ";
     }
 
+    /* range years */
+    #fromInput{font-size: 12px}
+    #toInput{font-size: 12px}
+
+
     .name a{
         text-decoration: none;
     }
+
 </style>

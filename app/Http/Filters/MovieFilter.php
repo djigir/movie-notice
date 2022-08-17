@@ -11,13 +11,15 @@ class MovieFilter extends AbstractFilter
     const GENRE = 'genre';
     const VIEWED = 'viewed';
     const SEARCH = 'search';
+    const YEARS = 'years';
 
     protected function getCallback(): array
     {
         return [
             self::GENRE => [$this, 'genre'],
             self::VIEWED => [$this, 'viewed'],
-            self::SEARCH => [$this, 'search']
+            self::SEARCH => [$this, 'search'],
+            self::YEARS => [$this, 'years']
         ];
     }
 
@@ -50,5 +52,9 @@ class MovieFilter extends AbstractFilter
             ->orWhere('actors', 'LIKE', '%'.$value.'%');
     }
 
+    protected function years(Builder $builder, $value)
+    {
+        $builder->whereBetween('release_year', $value);
+    }
 
 }

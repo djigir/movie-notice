@@ -56,4 +56,19 @@ class MovieController extends Controller
         $movie->delete();
         return response([]);
     }
+
+    public function yearsRange()
+    {
+        $maxYear = auth()->user()->movies()->orderBy('release_year', 'DESC')->first()->release_year;
+        $minYear = auth()->user()->movies()->orderBy('release_year', 'ASC')->first()->release_year;
+
+        $result = [
+            'years' => [
+                'max' => $maxYear,
+                'min' => $minYear
+            ]
+        ];
+
+        return response()->json($result);
+    }
 }

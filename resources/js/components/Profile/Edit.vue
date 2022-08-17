@@ -22,7 +22,11 @@
                 <div class="col-md-6">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center experience">
-                            <h4 class="text-right">Форма редактирования</h4>
+                            <p class="text-right">
+                                <router-link :to="{name: 'profile.index'}">
+                                    Назад к профилю
+                                </router-link>
+                            </p>
                             <button @click.prevent="update" class="btn btn-warning border px-3 p-1 add-experience">
                                 Сохранить
                             </button>
