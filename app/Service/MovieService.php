@@ -17,9 +17,7 @@ class MovieService
     {
         $filter = app()->make(MovieFilter::class, ['queryParams' => array_filter($data)]);
 
-        // TODO auth()->user()->movies() попробовать сделать так !!!!!!!!!!!!!!!!!!!!!!
-        return Movie::where('user_id', auth()->user()->id)
-            ->filter($filter)
+        return auth()->user()->movies()->filter($filter)
             ->orderBy($data['sort_column'], $data['sort_direction'])
             ->paginate(self::PER_PAGE, ['*'], 'page', $data['page']);
     }

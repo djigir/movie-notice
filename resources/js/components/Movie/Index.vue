@@ -181,7 +181,7 @@
                                 </div>
                                 <div class="d-flex justify-content-end mt-4">
                                     <router-link :to="{ name: 'movie.show', params: {id: movie.id} }" class="btn btn-success text-uppercase">
-                                        Посмотреть
+                                        Подробнее
                                     </router-link>
                                     <router-link :to="{ name: 'movie.edit', params: {id: movie.id} }" class="btn enquiry text-uppercase mx-2">
                                         Редактировать
@@ -344,39 +344,13 @@
 </script>
 
 <style scoped>
-    /* TODO убрать подсветку инпута ПОИСКА при клике   */
-    .view-opt-label {
-        margin-right: 8px;
-
-    }
 
     .add-movie-btn{
         margin-left:20px;
     }
 
-    #is_viewed {
-        margin-top: 0!important;
-        margin-right: 5px;
-    }
-
     .custom-select-sm {
         border: 1px solid gray;
-    }
-
-    /* Range style */
-
-    .range-slider {
-        width: 300px;
-        margin: auto;
-        text-align: center;
-        position: relative;
-        height: 6em;
-    }
-
-    .range-slider input[type=range] {
-        position: absolute;
-        left: 0;
-        bottom: 0;
     }
 
     input[type=number] {
@@ -659,10 +633,6 @@
         font-weight: normal;
         font-size: 0.85rem
     }
-
-    /*#filter {*/
-    /*    width: 200px*/
-    /*}*/
 
     .hotel .fas,
     .hotel .far {
