@@ -70,7 +70,8 @@
                         </p>
                         <p class="mb-0"><b>Добавлено: </b>
                             {{ new Date(this.movie.created_at).toLocaleDateString() }}
-                              | <span class="text-primary">{{ new Date(movie.created_at).toLocaleTimeString([], {timeStyle: 'short'}) }}</span>
+                             : {{ new Date(movie.created_at).toLocaleTimeString([], {timeStyle: 'short'}) }}
+                            <i class="fa-regular fa-clock"></i>
                         </p>
                     </div><!-- / project-info-box -->
 
@@ -82,7 +83,8 @@
                     <div class="project-info-box mt-0 mb-0">
                         <p class="mb-0">
                             <span class="fw-bold mr-10 va-middle hide-mobile">Действия:</span>
-                            <router-link class="btn btn-block btn-warning ms-2" :to="{name: 'movie.edit', params: {id: this.movie.id}}">
+                            <router-link class="btn btn-block btn-warning ms-2"
+                                         :to="{name: 'movie.edit', params: {id: this.movie.id, metaTitle: `MovieNotes|Редактирование фильма ${movie.title}`}}">
                                 Редактировать
                             </router-link>
                             <button @click="deleteMovie(movie.id)" class="btn btn-block btn-danger ms-3">Удалить</button>
@@ -96,12 +98,14 @@
 </template>
 <!-- TODO если неь жанров вывести какую-то надпись -->
 <script>
+    const DEFAULT_IMAGE = 'https://mizez.com/custom/mizez/img/general/no-image-available.png';
     import StarRating from "vue-star-rating";
+    import Swal from 'sweetalert2';
 
     export default {
         name: "Show",
 
-        components: {StarRating},
+        components: {StarRating, Swal},
 
         data() {
             return {
@@ -122,14 +126,42 @@
             },
 
             deleteMovie(id) {
-                /* TODO передклать на свит алерт */
-                const confirmation = confirm('Вы действительно хотите удалить этот фильм фильм?')
-                if (confirmation) {
-                    axios.delete(`/api/movie/${id}`)
-                    .then(res => {
-                        this.$router.push({name: 'movie.index'})
-                    })
-                }
+
+                Swal.fire({
+                    title: `Вы действительно хотитие удалить фильм "${this.movie.title}"?`,
+                    icon: 'question',
+                    showCloseButton: true,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Да',
+                    confirmButtonColor: '#dc3545',
+                    showCancelButton: true,
+                    cancelButtonText: 'Отмена',
+                }).then(res => {
+
+                    if (res.isConfirmed) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: `Фильм "${this.movie.title}" был успешно удален!`
+                        })
+
+                        axios.delete(`/api/movie/${id}`)
+                        .then(res => {
+                            this.$router.push({name: 'movie.index'})
+                        })
+                    }
+                })
             },
 
             isViewedText(is_viewed) {

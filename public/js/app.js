@@ -23364,55 +23364,91 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Main_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Main/Index */ "./resources/js/components/Main/Index.vue"));
   },
-  name: 'index'
+  name: 'index',
+  meta: {
+    title: 'MovieNotes|Главная',
+    withParams: false
+  }
 }, {
   path: '/profile',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Profile_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Profile/Index */ "./resources/js/components/Profile/Index.vue"));
   },
-  name: 'profile.index'
+  name: 'profile.index',
+  meta: {
+    title: 'MovieNotes|Профиль ',
+    withParams: true
+  }
 }, {
   path: '/profile/:id/edit',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Profile_Edit_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Profile/Edit */ "./resources/js/components/Profile/Edit.vue"));
   },
-  name: 'profile.edit'
+  name: 'profile.edit',
+  meta: {
+    title: 'MovieNotes|Редактирование профиля ',
+    withParams: true
+  }
 }, {
   path: '/login',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Auth_Login_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Auth/Login */ "./resources/js/components/Auth/Login.vue"));
   },
-  name: 'login'
+  name: 'login',
+  meta: {
+    title: 'MovieNotes|Вход',
+    withParams: false
+  }
 }, {
   path: '/register',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Auth_Registration_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Auth/Registration */ "./resources/js/components/Auth/Registration.vue"));
   },
-  name: 'register'
+  name: 'register',
+  meta: {
+    title: 'MovieNotes|Регистрация',
+    withParams: false
+  }
 }, {
   path: '/movie',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Movie_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Movie/Index */ "./resources/js/components/Movie/Index.vue"));
   },
-  name: 'movie.index'
+  name: 'movie.index',
+  meta: {
+    title: 'MovieNotes|Список фильмов',
+    withParams: false
+  }
 }, {
   path: '/movie/create',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Movie_Create_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Movie/Create */ "./resources/js/components/Movie/Create.vue"));
   },
-  name: 'movie.create'
+  name: 'movie.create',
+  meta: {
+    title: 'MovieNotes|Создание фильма',
+    withParams: false
+  }
 }, {
   path: '/movie/:id',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Movie_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Movie/Show */ "./resources/js/components/Movie/Show.vue"));
   },
-  name: 'movie.show'
+  name: 'movie.show',
+  meta: {
+    title: 'MovieNotes|Фильм ',
+    withParams: true
+  }
 }, {
   path: '/movie/:id/edit',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Movie_Edit_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Movie/Edit */ "./resources/js/components/Movie/Edit.vue"));
   },
-  name: 'movie.edit'
+  name: 'movie.edit',
+  meta: {
+    title: 'MovieNotes|Фильм ',
+    withParams: true
+  }
 }, {
   path: '/movie/add-info',
   component: function component() {
@@ -23426,6 +23462,8 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createWebHistory)()
 });
 router.beforeEach(function (to, from, next) {
+  /** set meta title **/
+  window.document.title = !to.meta.withParams || typeof to.params.metaTitle == 'undefined' ? to.meta.title : to.params.metaTitle;
   var token = localStorage.getItem('x_xsrf_token');
 
   if (!token) {

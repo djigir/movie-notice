@@ -110,6 +110,7 @@
     import '@vuepic/vue-datepicker/dist/main.css';
     import StarRating from 'vue-star-rating';
     import VueMultiselect from 'vue-multiselect/src/Multiselect.vue';
+    import Swal from 'sweetalert2';
 
     export default {
         name: "Create",
@@ -117,7 +118,8 @@
         components: {
             Datepicker,
             StarRating,
-            VueMultiselect
+            VueMultiselect,
+            Swal
         },
 
         data() {
@@ -160,7 +162,24 @@
                     image: this.image
                 })
                 .then( res => {
-                    console.log(res)
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: `Фильм "${this.title}" успешно создан!`
+                    })
+
                     this.$router.push({name: 'movie.index'})
                 })
                 .catch(err => {

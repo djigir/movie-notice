@@ -25,7 +25,7 @@
                             <strong>Показано: </strong>{{ movies_to === null ? 0 : movies_to }}
                             <strong>Из: </strong>{{ movies_total }}
                         </div>
-                        <div class="fas fa-angle-right px-2"></div>
+                        <div class="px-2"></div>
                         <div id="navigator" class="text-primary"></div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="d-sm-flex">
                     <div class="me-sm-2">
-                        <div id="filter" class="p-2 bg-light ms-md-4 ms-sm-2 border">
+                        <div id="filter" class="p-2 bg-light ms-md-4 ms-sm-2 border" style="min-width: 225px">
                             <div class="border-bottom h5 text-uppercase">Фильтр</div>
                             <div class="box border-bottom">
                                 <div class="box-label text-uppercase d-flex align-items-center">Жанр <button class="btn ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#inner-box" aria-expanded="false" aria-controls="inner-box"> <span class="fas fa-plus"></span> </button> </div>
@@ -134,7 +134,9 @@
                                     <div class="col-lg-9">
                                         <div class="d-md-flex align-items-md-center">
                                             <div class="name movie-link">
-                                                <router-link :to="{name: 'movie.show', params: {id: movie.id}}">
+                                                <router-link
+                                                    :to="{name: 'movie.show',
+                                                        params: {id: movie.id, metaTitle: `MovieNotes|Фильм ${movie.title}`}}">
                                                     {{ movie.title }}
                                                 </router-link>
                                             </div>
@@ -174,16 +176,19 @@
                                                 <a href="">
                                                     {{ new Date(movie.created_at).toLocaleDateString() }}
                                                 </a>
-                                                | {{ new Date(movie.created_at).toLocaleTimeString([], {timeStyle: 'short'}) }}
+                                                :
+                                                {{ new Date(movie.created_at).toLocaleTimeString([], {timeStyle: 'short'}) }}
+                                                <i class="fa-regular fa-clock"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end mt-4">
-                                    <router-link :to="{ name: 'movie.show', params: {id: movie.id} }" class="btn btn-success text-uppercase">
+                                    <router-link :to="{ name: 'movie.show', params: {id: movie.id, metaTitle: `MovieNotes|Фильм ${movie.title}`} }" class="btn btn-success text-uppercase">
                                         Подробнее
                                     </router-link>
-                                    <router-link :to="{ name: 'movie.edit', params: {id: movie.id} }" class="btn enquiry text-uppercase mx-2">
+                                    <router-link :to="{ name: 'movie.edit', params:
+                                        {id: movie.id, metaTitle: `MovieNotes|Редактирование фильма ${movie.title}`} }" class="btn enquiry text-uppercase mx-2">
                                         Редактировать
                                     </router-link>
                                 </div>
@@ -218,6 +223,7 @@
     import StarRating from 'vue-star-rating';
     import VueSlider from 'vue-slider-component'
     import 'vue-slider-component/theme/antd.css'
+    import Swal from "sweetalert2";
 
     export default {
         name: "Index",
@@ -251,6 +257,10 @@
             this.getYearsRange()
         },
 
+        updated() {
+
+        },
+
         watch: {
             search(after, before) {
                 this.getMovies()
@@ -274,6 +284,7 @@
 
                     this.movies_total = res.data.meta.total
                     this.movies_to = res.data.meta.to
+
                 })
             },
 
@@ -295,11 +306,15 @@
             },
 
             isViewedText(is_viewed) {
-                return is_viewed === 1 ? 'Просмотрено' : 'Не просмотрено'
+                return is_viewed === 1
+                    ? 'Просмотрено'
+                    : 'Не просмотрено'
             },
 
             isViewedClass(is_viewed) {
-                return is_viewed === 1 ? 'text-success' : 'text-danger'
+                return is_viewed === 1
+                    ? 'text-success'
+                    : 'text-danger'
             },
 
             deleteMovie(id) {

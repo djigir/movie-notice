@@ -5,11 +5,13 @@
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
                     <div class="text-center my-5">
-                        <h1 class="display-5 fw-bolder text-white mb-2">Present your business in a whole new way</h1>
-                        <p class="lead text-white-50 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
+                        <h1 class="display-5 fw-bolder text-white mb-2">Добро пожаловать на MovieNotes!</h1>
+                        <p class="lead text-white-50 mb-4">Сайт для создание собственной коллекции фильмов</p>
                         <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                            <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
-                            <a class="btn btn-outline-light btn-lg px-4" href="#!">Learn More</a>
+                            <router-link :to="{name: 'movie.index'}" class="btn btn-primary btn-lg px-4 me-sm-3">
+                                Начать
+                            </router-link>
+                            <a class="btn btn-outline-light btn-lg px-4" href="#features">Подробнее</a>
                         </div>
                     </div>
                 </div>
@@ -20,34 +22,30 @@
 
     <!-- Features section-->
     <section class="py-5 border-bottom" id="features">
+        <h2 class="text-center fw-bold pb-4">Как это работает?</h2>
+        <hr>
         <div class="container px-5 my-5">
             <div class="row gx-5">
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
-                    <h2 class="h4 fw-bolder">Featured title</h2>
-                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a class="text-decoration-none" href="#!">
-                        Call to action
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
+                    <h2 class="h4 fw-bolder">Шаг 1</h2>
+                    <p>
+                        <b>Зарегистрируйтесь</b> или <b>войдите</b> в аккаунт, при добавлении фильмов заполняйте как можно детальней и больше полей.
+                    </p>
                 </div>
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-building"></i></div>
-                    <h2 class="h4 fw-bolder">Featured title</h2>
-                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a class="text-decoration-none" href="#!">
-                        Call to action
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
+                    <h2 class="h4 fw-bolder">Шаг 2</h2>
+                    <p>
+                        Если вы узнали новую информацию о фильме, вы можете <b>отредактировать</b> уже добавленный фильм в вашей коллекции, это поможет работать <b>поиску</b> и <b>фильтру</b> корректней
+                    </p>
                 </div>
                 <div class="col-lg-4">
                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
-                    <h2 class="h4 fw-bolder">Featured title</h2>
-                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a class="text-decoration-none" href="#!">
-                        Call to action
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
+                    <h2 class="h4 fw-bolder">Шаг 3</h2>
+                    <p>
+                        После просмотра фильма, измените статус фильма на <b>"Просмотрено"</b> и добавите свой рейтинг, это нужно для правильной работы фильтра со статусом, а так же для отображения актуальной статистики в вашем профиле.
+                    </p>
                 </div>
             </div>
         </div>

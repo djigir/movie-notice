@@ -35,6 +35,6 @@ class ProfileController extends Controller
     public function destroy(User $user)
     {
         auth()->user()->delete();
-        response([]);
+        return response([]);
     }
 }

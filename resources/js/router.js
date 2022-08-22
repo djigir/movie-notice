@@ -4,47 +4,83 @@ const routes = [
     {
         path: '/',
         component: () => import('./components/Main/Index'),
-        name: 'index'
+        name: 'index',
+        meta: {
+            title: 'MovieNotes|Главная',
+            withParams: false,
+        }
     },
     {
         path: '/profile',
         component: () => import('./components/Profile/Index'),
-        name: 'profile.index'
+        name: 'profile.index',
+        meta: {
+            title: 'MovieNotes|Профиль ',
+            withParams: true,
+        }
     },
     {
         path: '/profile/:id/edit',
         component: () => import('./components/Profile/Edit'),
-        name: 'profile.edit'
+        name: 'profile.edit',
+        meta: {
+            title: 'MovieNotes|Редактирование профиля ',
+            withParams: true,
+        }
     },
     {
         path: '/login',
         component: () => import('./components/Auth/Login'),
-        name: 'login'
+        name: 'login',
+        meta: {
+            title: 'MovieNotes|Вход',
+            withParams: false,
+        }
     },
     {
         path: '/register',
         component: () => import('./components/Auth/Registration'),
-        name: 'register'
+        name: 'register',
+        meta: {
+            title: 'MovieNotes|Регистрация',
+            withParams: false,
+        }
     },
     {
         path: '/movie',
         component: () => import('./components/Movie/Index'),
-        name: 'movie.index'
+        name: 'movie.index',
+        meta: {
+            title: 'MovieNotes|Список фильмов',
+            withParams: false,
+        }
     },
     {
         path: '/movie/create',
         component: () => import('./components/Movie/Create'),
-        name: 'movie.create'
+        name: 'movie.create',
+        meta: {
+            title: 'MovieNotes|Создание фильма',
+            withParams: false,
+        }
     },
     {
         path: '/movie/:id',
         component: () => import('./components/Movie/Show'),
-        name: 'movie.show'
+        name: 'movie.show',
+        meta: {
+            title: 'MovieNotes|Фильм ',
+            withParams: true
+        }
     },
     {
         path: '/movie/:id/edit',
         component: () => import('./components/Movie/Edit'),
-        name: 'movie.edit'
+        name: 'movie.edit',
+        meta: {
+            title: 'MovieNotes|Фильм ',
+            withParams: true
+        }
     },
     {
         path: '/movie/add-info',
@@ -62,6 +98,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    /** set meta title **/
+    window.document.title =
+            !to.meta.withParams || typeof(to.params.metaTitle) == 'undefined'
+            ? to.meta.title
+            : to.params.metaTitle
+
     const token = localStorage.getItem('x_xsrf_token')
 
     if (!token) {

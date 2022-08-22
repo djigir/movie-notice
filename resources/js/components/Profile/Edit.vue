@@ -22,8 +22,9 @@
                 <div class="col-md-6">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center experience">
-                            <p class="text-right">
+                            <p class="text-right back-link">
                                 <router-link :to="{name: 'profile.index'}">
+                                    <i class="fa-solid fa-arrow-left-long"></i>
                                     Назад к профилю
                                 </router-link>
                             </p>
@@ -87,5 +88,12 @@
 </script>
 
 <style scoped>
+    .back-link a{
+        color: black;
+        text-decoration: none;
+    }
 
+    .back-link a:hover {
+        color: gray;
+    }
 </style>
