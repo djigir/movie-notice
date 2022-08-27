@@ -56,36 +56,28 @@
     <section class="py-5 border-bottom">
         <div class="container px-5 my-5 px-5">
             <div class="text-center mb-5">
-                <h2 class="fw-bolder">Customer testimonials</h2>
-                <p class="lead mb-0">Our customers love working with us</p>
+                <h2 class="fw-bolder">Последнии Новинки</h2>
+                <p class="lead mb-0">Фильмы, Сериалы, Мультфильмы и Аниме</p>
             </div>
             <div class="row gx-5 justify-content-center">
-                <div class="col-lg-6">
-                    <!-- Testimonial 1-->
-                    <div class="card mb-4">
-                        <div class="card-body p-4">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0"><i class="bi bi-chat-right-quote-fill text-primary fs-1"></i></div>
-                                <div class="ms-4">
-                                    <p class="mb-1">Thank you for putting together such a great product. We loved working with you and the whole team, and we will be recommending you to others!</p>
-                                    <div class="small text-muted">- Client Name, Location</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Testimonial 2-->
-                    <div class="card">
-                        <div class="card-body p-4">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0"><i class="bi bi-chat-right-quote-fill text-primary fs-1"></i></div>
-                                <div class="ms-4">
-                                    <p class="mb-1">The whole team was a huge help with putting things together for our company and brand. We will be hiring them again in the near future for additional work!</p>
-                                    <div class="small text-muted">- Client Name, Location</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+<!--                <div class="col-lg-6" v-if="images">-->
+<!--                    <carousel :itemsToShow="4" :wrapAround="true">-->
+<!--                        <slide v-for="image in images" :key="image">-->
+<!--                            <img :src="image" alt="movie-img">-->
+<!--                            <br>-->
+<!--                        </slide>-->
+
+<!--                        <template #addons>-->
+<!--                            <div>-->
+<!--                                ds-->
+<!--                            </div>-->
+<!--                            <navigation />-->
+<!--                            <pagination />-->
+<!--                        </template>-->
+<!--                    </carousel>-->
+<!--                </div>-->
+
             </div>
         </div>
     </section>
@@ -104,10 +96,6 @@
                     <!-- * * * * * * * * * * * * * * *-->
                     <!-- * * SB Forms Contact Form * *-->
                     <!-- * * * * * * * * * * * * * * *-->
-                    <!-- This form is pre-integrated with SB Forms.-->
-                    <!-- To make this form functional, sign up at-->
-                    <!-- https://startbootstrap.com/solution/contact-forms-->
-                    <!-- to get an API token!-->
                     <form id="contactForm" data-sb-form-api-token="API_TOKEN">
                         <!-- Name input-->
                         <div class="form-floating mb-3">
@@ -163,11 +151,68 @@
 </template>
 
 <script>
+    // import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
+    // import 'vue3-carousel/dist/carousel.css';
+
     export default {
-        name: "Index"
+        name: "Index",
+        // components: {
+        //     Carousel,
+        //     Slide,
+        //     Pagination,
+        //     Navigation,
+        // },
+
+        data() {
+            return {
+                images: null,
+                details: null,
+                // carousel settings
+                settings: {
+                    itemsToShow: 1,
+                    snapAlign: 'center',
+                },
+            }
+        },
+
+        mounted() {
+            this.getNoveltiesMovies()
+        },
+
+        methods: {
+            getNoveltiesMovies() {
+                axios.get('/api/get-parse-movies')
+                .then(res => {
+                    this.images = res.data.images
+                    this.details = res.data.details
+                })
+            }
+        },
     }
 </script>
 
 <style scoped>
 
+    .carousel__prev--in-active,
+    .carousel__next--in-active {
+        display: none;
+    }
+    .carousel__slide > .carousel__item {
+        transform: scale(1);
+        opacity: 0.5;
+        transition: 0.5s;
+    }
+    .carousel__slide--visible > .carousel__item {
+        opacity: 1;
+        transform: rotateY(0);
+    }
+    .carousel__slide--next > .carousel__item {
+        transform: scale(0.9) translate(-10px);
+    }
+    .carousel__slide--prev > .carousel__item {
+        transform: scale(0.9) translate(10px);
+    }
+    .carousel__slide--active > .carousel__item {
+        transform: scale(1.1);
+    }
 </style>
