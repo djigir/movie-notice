@@ -59,26 +59,58 @@
                 <h2 class="fw-bolder">Последнии Новинки</h2>
                 <p class="lead mb-0">Фильмы, Сериалы, Мультфильмы и Аниме</p>
             </div>
-            <div class="row gx-5 justify-content-center">
 
-<!--                <div class="col-lg-6" v-if="images">-->
-<!--                    <carousel :itemsToShow="4" :wrapAround="true">-->
-<!--                        <slide v-for="image in images" :key="image">-->
-<!--                            <img :src="image" alt="movie-img">-->
-<!--                            <br>-->
-<!--                        </slide>-->
-
-<!--                        <template #addons>-->
-<!--                            <div>-->
-<!--                                ds-->
+<!--            <section class="new-movies-gallery">-->
+<!--                <div class="container">-->
+<!--                    <div class="row">-->
+<!--                        <div v-for="image in images" class="col-lg-4 mb-4">-->
+<!--                            <div class="card">-->
+<!--                                <img :src="image" alt="" class="card-img-top">-->
+<!--                                <div class="card-body">-->
+<!--                                    <h5 class="card-title">Sunset</h5>-->
+<!--                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum similique repellat a laborum, rerum voluptates ipsam eos quo tempore iusto dolore modi dolorum in pariatur. Incidunt repellendus praesentium quae!</p>-->
+<!--                                    <a href="" class="btn btn-outline-success btn-sm">Read More</a>-->
+<!--                                    <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>-->
+<!--                                </div>-->
 <!--                            </div>-->
-<!--                            <navigation />-->
-<!--                            <pagination />-->
-<!--                        </template>-->
-<!--                    </carousel>-->
+<!--                        </div>-->
+<!--                    </div>-->
 <!--                </div>-->
+<!--            </section>-->
 
-            </div>
+            <section class="new-movies-gallery">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 mb-4">
+                            <carousel :settings="settings" :breakpoints="breakpoints" v-if="images">
+                                <slide v-for="(image, index) in images" :key="image.id">
+                                    <router-link class="show-new-movie-link" :to="{name: 'profile.index'}">
+                                        <div class="carousel__item">
+                                                <img :src="image" alt="movie-img" width="185">
+                                            <p class="new-movie-title mt-2 fw-bold">
+                                                {{ details[index]['title'] }}
+                                            </p>
+                                            <span class="new-movie-details mt-2">
+                                                {{ details[index]['year'] }},
+                                                {{ details[index]['country'] }},
+                                                {{ details[index]['genre'] }}
+                                            </span>
+                                        </div>
+                                    </router-link>
+                                </slide>
+
+                                <template #addons>
+                                    <navigation />
+                                    <pagination class="mt-5" />
+                                </template>
+                            </carousel>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
         </div>
     </section>
     <!-- Testimonials section-->
@@ -151,17 +183,17 @@
 </template>
 
 <script>
-    // import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
-    // import 'vue3-carousel/dist/carousel.css';
+    import 'vue3-carousel/dist/carousel.css';
+    import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 
     export default {
         name: "Index",
-        // components: {
-        //     Carousel,
-        //     Slide,
-        //     Pagination,
-        //     Navigation,
-        // },
+        components: {
+            Carousel,
+            Slide,
+            Pagination,
+            Navigation,
+        },
 
         data() {
             return {
@@ -169,8 +201,18 @@
                 details: null,
                 // carousel settings
                 settings: {
-                    itemsToShow: 1,
+                    itemsToShow: 3,
+                    itemsToScroll: 3,
+                    // autoplay: 3000,
+                    wrapAround: 'true',
                     snapAlign: 'center',
+                },
+                // breakpoints are mobile first
+                breakpoints: {
+                    1024: {
+                        itemsToShow: 3,
+                        snapAlign: 'center',
+                    }
                 },
             }
         },
@@ -181,7 +223,7 @@
 
         methods: {
             getNoveltiesMovies() {
-                axios.get('/api/get-parse-movies')
+                axios.get('api/parse/movies')
                 .then(res => {
                     this.images = res.data.images
                     this.details = res.data.details
@@ -193,26 +235,18 @@
 
 <style scoped>
 
-    .carousel__prev--in-active,
-    .carousel__next--in-active {
-        display: none;
+    .show-new-movie-link{
+        text-decoration: none;
+        color: black;
     }
-    .carousel__slide > .carousel__item {
-        transform: scale(1);
-        opacity: 0.5;
-        transition: 0.5s;
+
+    .carousel__item {
+        padding: 1.5rem;
     }
-    .carousel__slide--visible > .carousel__item {
-        opacity: 1;
-        transform: rotateY(0);
+
+    .carousel__item:hover{
+        background: gray;
+        color: white;
     }
-    .carousel__slide--next > .carousel__item {
-        transform: scale(0.9) translate(-10px);
-    }
-    .carousel__slide--prev > .carousel__item {
-        transform: scale(0.9) translate(10px);
-    }
-    .carousel__slide--active > .carousel__item {
-        transform: scale(1.1);
-    }
+
 </style>

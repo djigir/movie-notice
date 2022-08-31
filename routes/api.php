@@ -19,11 +19,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::get('get-parse-movies', [\App\Http\Controllers\API\ParserMovieController::class, 'index']);
+//    Route::get('get-parse-movies', [\App\Http\Controllers\API\ParserMovieController::class, 'index']);
+    Route::controller(\App\Http\Controllers\API\ParserMovieController::class)
+        ->prefix('parse')
+        ->group(function () {
+            Route::get('movies', 'index');
+            Route::get('movie', 'show');
+        });
+
     Route::get('/genre', [\App\Http\Controllers\API\GenreController::class, 'index']);
+
     Route::get('/years-range', [\App\Http\Controllers\API\MovieController::class, 'yearsRange']);
+
     Route::resource('/profile', \App\Http\Controllers\API\ProfileController::class)
         ->except(['create', 'store', 'edit']);
+
     Route::resource('movie', \App\Http\Controllers\API\MovieController::class)
         ->except(['create', 'edit']);
 });
