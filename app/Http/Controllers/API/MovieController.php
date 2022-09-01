@@ -13,6 +13,12 @@ use App\Service\MovieService;
 
 class MovieController extends Controller
 {
+
+    /**
+     * @var MovieService
+     */
+    private MovieService $movieService;
+
     public function __construct(MovieService $movieService)
     {
         $this->movieService = $movieService;

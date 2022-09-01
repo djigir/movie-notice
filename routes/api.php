@@ -19,7 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-//    Route::get('get-parse-movies', [\App\Http\Controllers\API\ParserMovieController::class, 'index']);
     Route::controller(\App\Http\Controllers\API\ParserMovieController::class)
         ->prefix('parse')
         ->group(function () {

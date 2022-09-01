@@ -25,8 +25,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      images: null,
-      details: null,
+      movies: null,
       // carousel settings
       settings: {
         itemsToShow: 3,
@@ -45,15 +44,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.getNoveltiesMovies();
+    this.getNewMovies();
   },
   methods: {
-    getNoveltiesMovies: function getNoveltiesMovies() {
+    getNewMovies: function getNewMovies() {
       var _this = this;
 
       axios.get('api/parse/movies').then(function (res) {
-        _this.images = res.data.images;
-        _this.details = res.data.details;
+        _this.movies = res.data;
       });
     }
   }
@@ -125,7 +123,7 @@ var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<section class=\"py-5 border-bottom\" id=\"features\" data-v-59a3f387><h2 class=\"text-center fw-bold pb-4\" data-v-59a3f387>Как это работает?</h2><hr data-v-59a3f387><div class=\"container px-5 my-5\" data-v-59a3f387><div class=\"row gx-5\" data-v-59a3f387><div class=\"col-lg-4 mb-5 mb-lg-0\" data-v-59a3f387><div class=\"feature bg-primary bg-gradient text-white rounded-3 mb-3\" data-v-59a3f387><i class=\"bi bi-collection\" data-v-59a3f387></i></div><h2 class=\"h4 fw-bolder\" data-v-59a3f387>Шаг 1</h2><p data-v-59a3f387><b data-v-59a3f387>Зарегистрируйтесь</b> или <b data-v-59a3f387>войдите</b> в аккаунт, при добавлении фильмов заполняйте как можно детальней и больше полей. </p></div><div class=\"col-lg-4 mb-5 mb-lg-0\" data-v-59a3f387><div class=\"feature bg-primary bg-gradient text-white rounded-3 mb-3\" data-v-59a3f387><i class=\"bi bi-building\" data-v-59a3f387></i></div><h2 class=\"h4 fw-bolder\" data-v-59a3f387>Шаг 2</h2><p data-v-59a3f387> Если вы узнали новую информацию о фильме, вы можете <b data-v-59a3f387>отредактировать</b> уже добавленный фильм в вашей коллекции, это поможет работать <b data-v-59a3f387>поиску</b> и <b data-v-59a3f387>фильтру</b> корректней </p></div><div class=\"col-lg-4\" data-v-59a3f387><div class=\"feature bg-primary bg-gradient text-white rounded-3 mb-3\" data-v-59a3f387><i class=\"bi bi-toggles2\" data-v-59a3f387></i></div><h2 class=\"h4 fw-bolder\" data-v-59a3f387>Шаг 3</h2><p data-v-59a3f387> После просмотра фильма, измените статус фильма на <b data-v-59a3f387>&quot;Просмотрено&quot;</b> и добавите свой рейтинг, это нужно для правильной работы фильтра со статусом, а так же для отображения актуальной статистики в вашем профиле. </p></div></div></div></section>", 1);
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<section class=\"py-5 border-bottom\" id=\"features\" data-v-59a3f387><h2 class=\"text-center fw-bold pb-4\" data-v-59a3f387>Как это работает?</h2><hr data-v-59a3f387><div class=\"container px-5 my-5\" data-v-59a3f387><div class=\"row gx-5\" data-v-59a3f387><div class=\"col-lg-4 mb-5 mb-lg-0\" data-v-59a3f387><div class=\"feature bg-primary bg-gradient text-white rounded-3 mb-3\" data-v-59a3f387><i class=\"bi bi-collection\" data-v-59a3f387></i></div><h2 class=\"h4 fw-bolder\" data-v-59a3f387>Шаг 1</h2><p data-v-59a3f387><b data-v-59a3f387>Зарегистрируйтесь</b> или <b data-v-59a3f387>войдите</b> в аккаунт, при добавлении фильмов заполняйте как можно детальней и больше полей. </p></div><div class=\"col-lg-4 mb-5 mb-lg-0\" data-v-59a3f387><div class=\"feature bg-primary bg-gradient text-white rounded-3 mb-3\" data-v-59a3f387><i class=\"bi bi-building\" data-v-59a3f387></i></div><h2 class=\"h4 fw-bolder\" data-v-59a3f387>Шаг 2</h2><p data-v-59a3f387> Если вы хотите добавить новую информацию о фильме, вы можете <b data-v-59a3f387>отредактировать</b> уже добавленный фильм в вашей коллекции, это поможет работать <b data-v-59a3f387>поиску</b> и <b data-v-59a3f387>фильтру</b> корректней </p></div><div class=\"col-lg-4\" data-v-59a3f387><div class=\"feature bg-primary bg-gradient text-white rounded-3 mb-3\" data-v-59a3f387><i class=\"bi bi-toggles2\" data-v-59a3f387></i></div><h2 class=\"h4 fw-bolder\" data-v-59a3f387>Шаг 3</h2><p data-v-59a3f387> После просмотра фильма, измените статус фильма на <b data-v-59a3f387>&quot;Просмотрено&quot;</b> и добавите свой рейтинг, это нужно для правильной работы фильтра по статусам, а так же для отображения актуальной статистики в вашем профиле. </p></div></div></div></section>", 1);
 
 var _hoisted_12 = {
   "class": "py-5 border-bottom"
@@ -141,13 +139,13 @@ var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
     "class": "fw-bolder"
   }, "Последнии Новинки"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
     "class": "lead mb-0"
-  }, "Фильмы, Сериалы, Мультфильмы и Аниме")], -1
+  }, "Фильмов, Сериалов, Мультфильмов и Аниме")], -1
   /* HOISTED */
   );
 });
 
 var _hoisted_15 = {
-  "class": "new-movies-gallery"
+  "class": "new-movies-slider"
 };
 var _hoisted_16 = {
   "class": "container"
@@ -196,47 +194,45 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["to"]), _hoisted_10])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Header"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Features section"), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Features section"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Testimonials section"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <section class=\"new-movies-gallery\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <div class=\"container\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <div class=\"row\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        <div v-for=\"image in images\" class=\"col-lg-4 mb-4\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            <div class=\"card\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                <img :src=\"image\" alt=\"\" class=\"card-img-top\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                <div class=\"card-body\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    <h5 class=\"card-title\">Sunset</h5>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    <p class=\"card-text\">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum similique repellat a laborum, rerum voluptates ipsam eos quo tempore iusto dolore modi dolorum in pariatur. Incidunt repellendus praesentium quae!</p>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    <a href=\"\" class=\"btn btn-outline-success btn-sm\">Read More</a>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    <a href=\"\" class=\"btn btn-outline-danger btn-sm\"><i class=\"far fa-heart\"></i></a>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </section>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [$data.images ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_carousel, {
+  , ["to"]), _hoisted_10])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Header"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Features section"), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Features section"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Slider section"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [$data.movies ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_carousel, {
     key: 0,
     settings: $data.settings,
     breakpoints: $data.breakpoints
   }, {
     addons: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_navigation), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pagination, {
-        "class": "mt-5"
+        "class": "mt-2"
       })];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.images, function (image, index) {
+      return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.movies, function (movie, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_slide, {
-          key: image.id
+          key: movie.id
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
             return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
               "class": "show-new-movie-link",
-              to: {
-                name: 'profile.index'
-              }
+              to: "/"
             }, {
               "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-                  src: image,
+                  src: movie.image,
                   alt: "movie-img",
                   width: "185"
                 }, null, 8
                 /* PROPS */
-                , _hoisted_20), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.details[index]['title']), 1
+                , _hoisted_20), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(movie.title), 1
                 /* TEXT */
-                ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.details[index]['year']) + ", " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.details[index]['country']) + ", " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.details[index]['genre']), 1
+                ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(movie.year) + ", " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(movie.country) + ", " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(movie.genre), 1
                 /* TEXT */
                 )])];
               }),
               _: 2
               /* DYNAMIC */
 
-            }, 1032
-            /* PROPS, DYNAMIC_SLOTS */
-            , ["to"])];
+            }, 1024
+            /* DYNAMIC_SLOTS */
+            )];
           }),
           _: 2
           /* DYNAMIC */
@@ -253,7 +249,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["settings", "breakpoints"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Testimonials section"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Contact section"), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Contact section")], 64
+  , ["settings", "breakpoints"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Slider section"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Contact section"), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Contact section")], 64
   /* STABLE_FRAGMENT */
   );
 }

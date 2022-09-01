@@ -37,14 +37,14 @@
                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-building"></i></div>
                     <h2 class="h4 fw-bolder">Шаг 2</h2>
                     <p>
-                        Если вы узнали новую информацию о фильме, вы можете <b>отредактировать</b> уже добавленный фильм в вашей коллекции, это поможет работать <b>поиску</b> и <b>фильтру</b> корректней
+                        Если вы хотите добавить новую информацию о фильме, вы можете <b>отредактировать</b> уже добавленный фильм в вашей коллекции, это поможет работать <b>поиску</b> и <b>фильтру</b> корректней
                     </p>
                 </div>
                 <div class="col-lg-4">
                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
                     <h2 class="h4 fw-bolder">Шаг 3</h2>
                     <p>
-                        После просмотра фильма, измените статус фильма на <b>"Просмотрено"</b> и добавите свой рейтинг, это нужно для правильной работы фильтра со статусом, а так же для отображения актуальной статистики в вашем профиле.
+                        После просмотра фильма, измените статус фильма на <b>"Просмотрено"</b> и добавите свой рейтинг, это нужно для правильной работы фильтра по статусам, а так же для отображения актуальной статистики в вашем профиле.
                     </p>
                 </div>
             </div>
@@ -52,56 +52,37 @@
     </section>
     <!-- Features section-->
 
-    <!-- Testimonials section-->
+    <!-- Slider section-->
     <section class="py-5 border-bottom">
         <div class="container px-5 my-5 px-5">
             <div class="text-center mb-5">
                 <h2 class="fw-bolder">Последнии Новинки</h2>
-                <p class="lead mb-0">Фильмы, Сериалы, Мультфильмы и Аниме</p>
+                <p class="lead mb-0">Фильмов, Сериалов, Мультфильмов и Аниме</p>
             </div>
 
-<!--            <section class="new-movies-gallery">-->
-<!--                <div class="container">-->
-<!--                    <div class="row">-->
-<!--                        <div v-for="image in images" class="col-lg-4 mb-4">-->
-<!--                            <div class="card">-->
-<!--                                <img :src="image" alt="" class="card-img-top">-->
-<!--                                <div class="card-body">-->
-<!--                                    <h5 class="card-title">Sunset</h5>-->
-<!--                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum similique repellat a laborum, rerum voluptates ipsam eos quo tempore iusto dolore modi dolorum in pariatur. Incidunt repellendus praesentium quae!</p>-->
-<!--                                    <a href="" class="btn btn-outline-success btn-sm">Read More</a>-->
-<!--                                    <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </section>-->
-
-            <section class="new-movies-gallery">
+            <section class="new-movies-slider">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 mb-4">
-                            <carousel :settings="settings" :breakpoints="breakpoints" v-if="images">
-                                <slide v-for="(image, index) in images" :key="image.id">
-                                    <router-link class="show-new-movie-link" :to="{name: 'profile.index'}">
+                            <carousel :settings="settings" :breakpoints="breakpoints" v-if="movies">
+                                <slide v-for="(movie, index) in movies" :key="movie.id">
+                                    <router-link class="show-new-movie-link" to="/">
                                         <div class="carousel__item">
-                                                <img :src="image" alt="movie-img" width="185">
+                                            <img :src="movie.image" alt="movie-img" width="185">
                                             <p class="new-movie-title mt-2 fw-bold">
-                                                {{ details[index]['title'] }}
+                                                {{ movie.title }}
                                             </p>
                                             <span class="new-movie-details mt-2">
-                                                {{ details[index]['year'] }},
-                                                {{ details[index]['country'] }},
-                                                {{ details[index]['genre'] }}
+                                                {{ movie.year }},
+                                                {{ movie.country }},
+                                                {{ movie.genre }}
                                             </span>
                                         </div>
                                     </router-link>
                                 </slide>
-
                                 <template #addons>
                                     <navigation />
-                                    <pagination class="mt-5" />
+                                    <pagination class="mt-2" />
                                 </template>
                             </carousel>
                         </div>
@@ -109,11 +90,9 @@
                 </div>
             </section>
 
-
-
         </div>
     </section>
-    <!-- Testimonials section-->
+    <!-- Slider section-->
 
     <!-- Contact section-->
     <section class="bg-light py-5">
@@ -197,8 +176,7 @@
 
         data() {
             return {
-                images: null,
-                details: null,
+                movies: null,
                 // carousel settings
                 settings: {
                     itemsToShow: 3,
@@ -218,15 +196,14 @@
         },
 
         mounted() {
-            this.getNoveltiesMovies()
+            this.getNewMovies()
         },
 
         methods: {
-            getNoveltiesMovies() {
+            getNewMovies() {
                 axios.get('api/parse/movies')
                 .then(res => {
-                    this.images = res.data.images
-                    this.details = res.data.details
+                    this.movies = res.data
                 })
             }
         },
