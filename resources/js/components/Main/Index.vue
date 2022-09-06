@@ -66,7 +66,8 @@
                         <div class="col-lg-12 mb-4">
                             <carousel :settings="settings" :breakpoints="breakpoints" v-if="movies">
                                 <slide v-for="(movie, index) in movies" :key="movie.id">
-                                    <router-link class="show-new-movie-link" to="/">
+                                    <router-link class="show-new-movie-link" :to="{name: 'main.show',
+                                    params: {link: movie.link, metaTitle: `MovieNotes|Фильм ${movie.title}`}}">
                                         <div class="carousel__item">
                                             <img :src="movie.image" alt="movie-img" width="185">
                                             <p class="new-movie-title mt-2 fw-bold">

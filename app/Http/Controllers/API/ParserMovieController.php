@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Service\MovieService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class ParserMovieController extends Controller
@@ -20,17 +21,16 @@ class ParserMovieController extends Controller
 
     public function index()
     {
-//        $movies = $this->movieService->getNewMoviesFromHDrezka();
-        /* TODO добавить больше времени для кеша */
-        $movies = Cache::remember('new_movies', now()->addMinutes(1), function () {
+        $movies = Cache::remember('new_movies', now()->addWeek(), function () {
             return $this->movieService->getNewMoviesFromHDrezka();
         });
 
         return response()->json($movies);
     }
 
-    public function show()
+    public function show(Request $request)
     {
-        dd(1111);
+        dd(11111);
+        return response()->json(11111);
     }
 }

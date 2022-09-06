@@ -4,10 +4,19 @@ const routes = [
     {
         path: '/',
         component: () => import('./components/Main/Index'),
-        name: 'index',
+        name: 'main.index',
         meta: {
             title: 'MovieNotes|Главная',
             withParams: false,
+        }
+    },
+    {
+        path: '/new-movie-show/:link',
+        component: () => import('./components/Main/Show'),
+        name: 'main.show',
+        meta: {
+            title: 'MovieNotes|Фильм ',
+            withParams: true,
         }
     },
     {

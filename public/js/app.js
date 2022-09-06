@@ -23181,7 +23181,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Responsive navbar"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
-      name: 'index'
+      name: 'main.index'
     },
     "class": "navbar-brand"
   }, {
@@ -23191,9 +23191,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  }, 8
+  /* PROPS */
+  , ["to"]), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
-      name: 'index'
+      name: 'main.index'
     },
     "class": "nav-link",
     "aria-current": "page"
@@ -23204,7 +23206,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_10, [$data.token ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+  }, 8
+  /* PROPS */
+  , ["to"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_10, [$data.token ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
     key: 0,
     to: {
       name: 'movie.index'
@@ -23364,10 +23368,20 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Main_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Main/Index */ "./resources/js/components/Main/Index.vue"));
   },
-  name: 'index',
+  name: 'main.index',
   meta: {
     title: 'MovieNotes|Главная',
     withParams: false
+  }
+}, {
+  path: '/new-movie-show/:link',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_components_Main_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Main/Show */ "./resources/js/components/Main/Show.vue"));
+  },
+  name: 'main.show',
+  meta: {
+    title: 'MovieNotes|Фильм ',
+    withParams: true
   }
 }, {
   path: '/profile',
@@ -50387,7 +50401,7 @@ function useRoute() {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Main_Index_vue":1,"resources_js_components_Profile_Index_vue":1,"resources_js_components_Profile_Edit_vue":1,"resources_js_components_Auth_Login_vue":1,"resources_js_components_Auth_Registration_vue":1,"resources_js_components_Movie_Index_vue":1,"resources_js_components_Movie_Create_vue":1,"resources_js_components_Movie_Show_vue":1,"resources_js_components_Movie_Edit_vue":1,"resources_js_components_Movie_Info_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Main_Index_vue":1,"resources_js_components_Main_Show_vue":1,"resources_js_components_Profile_Index_vue":1,"resources_js_components_Profile_Edit_vue":1,"resources_js_components_Auth_Login_vue":1,"resources_js_components_Auth_Registration_vue":1,"resources_js_components_Movie_Index_vue":1,"resources_js_components_Movie_Create_vue":1,"resources_js_components_Movie_Show_vue":1,"resources_js_components_Movie_Edit_vue":1,"resources_js_components_Movie_Info_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

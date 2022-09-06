@@ -212,7 +212,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
             return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
               "class": "show-new-movie-link",
-              to: "/"
+              to: {
+                name: 'main.show',
+                params: {
+                  link: movie.link,
+                  metaTitle: "MovieNotes|\u0424\u0438\u043B\u044C\u043C ".concat(movie.title)
+                }
+              }
             }, {
               "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
@@ -230,9 +236,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               _: 2
               /* DYNAMIC */
 
-            }, 1024
-            /* DYNAMIC_SLOTS */
-            )];
+            }, 1032
+            /* PROPS, DYNAMIC_SLOTS */
+            , ["to"])];
           }),
           _: 2
           /* DYNAMIC */

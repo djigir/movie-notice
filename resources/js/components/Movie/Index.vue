@@ -184,11 +184,13 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end mt-4">
-                                    <router-link :to="{ name: 'movie.show', params: {id: movie.id, metaTitle: `MovieNotes|Фильм ${movie.title}`} }" class="btn btn-success text-uppercase">
+                                    <router-link :to="{ name: 'movie.show',
+                                    params: {id: movie.id, metaTitle: `MovieNotes|Фильм ${movie.title}`} }" class="btn btn-success text-uppercase">
                                         Подробнее
                                     </router-link>
-                                    <router-link :to="{ name: 'movie.edit', params:
-                                        {id: movie.id, metaTitle: `MovieNotes|Редактирование фильма ${movie.title}`} }" class="btn enquiry text-uppercase mx-2">
+
+                                    <router-link :to="{ name: 'movie.edit',
+                                    params: {id: movie.id, metaTitle: `MovieNotes|Редактирование фильма ${movie.title}`} }" class="btn enquiry text-uppercase mx-2">
                                         Редактировать
                                     </router-link>
                                 </div>

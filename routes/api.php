@@ -23,8 +23,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         ->prefix('parse')
         ->group(function () {
             Route::get('movies', 'index');
-            Route::get('movie', 'show');
+            Route::get('new-movie-show/{link}', [\App\Http\Controllers\API\ParserMovieController::class, 'show']);
         });
+
+
 
     Route::get('/genre', [\App\Http\Controllers\API\GenreController::class, 'index']);
 
