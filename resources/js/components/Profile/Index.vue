@@ -1,18 +1,13 @@
 <template>
 
     <section class="section about-section gray-bg" id="about" v-if="user">
-        <!-- breadcrumbs -->
-        <div class="row gx-5 justify-content-center mb-5">
-            <div class="col-lg-8 col-xl-6">
-                <div class="text-center">
-                    <h2 class="fw-bolder">Профиль</h2>
-                    <p class="lead fw-normal text-muted mb-3">
-                        На этой странице вы можете посмотреть ваши регистрационные данные, а также статистику по данному профилю
-                    </p>
-                </div>
-            </div>
-        </div>
-        <!-- breadcrumbs -->
+
+        <PageHeader
+            class="mb-5"
+            :title="'Профиль'"
+            :description="'На этой странице вы можете посмотреть ваши регистрационные данные, а также статистику по данному профилю'"
+        >
+        </PageHeader>
 
         <div class="container">
             <div class="row align-items-center flex-row-reverse">
@@ -110,14 +105,44 @@
             },
 
             deleteUser(id) {
-                const confirmation = confirm('Вы действительно хотите удалить свой профиль?')
-                if (confirmation) {
-                    axios.delete(`/api/profile/${id}`)
-                    .then(res => {
-                        localStorage.removeItem('x_xsrf_token')
-                        this.$router.push({name: 'index'})
-                    })
-                }
+
+                this.$swal.fire({
+                    title: 'Вы действительно хотите удалить свой профиль?',
+                    icon: 'question',
+                    showCloseButton: true,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Да',
+                    confirmButtonColor: '#dc3545',
+                    showCancelButton: true,
+                    cancelButtonText: 'Отмена',
+                }).then(res => {
+
+                    if (res.isConfirmed) {
+                        const Toast = this.$swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', this.$swal.stopTimer)
+                                toast.addEventListener('mouseleave', this.$swal.resumeTimer)
+                            }
+                        })
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: `Профиль с именем "${this.user.name}" был успешно удален!`
+                        })
+
+                        axios.delete(`/api/profile/${id}`)
+                        .then(res => {
+                            localStorage.removeItem('x_xsrf_token')
+                            this.$router.push({name: 'main.index'})
+                        })
+                    }
+                })
+
             },
         }
     }

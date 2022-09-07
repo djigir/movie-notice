@@ -19,13 +19,11 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-end">Пароль</label>
 
                                 <div class="col-md-6">
                                     <input v-model="password" id="password" type="password" class="form-control" name="password" required autocomplete="current-password">
-
                                     <!-- error here -->
-
                                 </div>
                             </div>
 
@@ -35,7 +33,7 @@
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember">
 
                                         <label class="form-check-label" for="remember">
-                                            Remember Me
+                                            Запомнить меня
                                         </label>
                                     </div>
                                 </div>
@@ -48,7 +46,7 @@
                                     </button>
 
                                     <a class="btn btn-link">
-                                        Forgot Your Password?
+                                        Забыли пароль?
                                     </a>
                                 </div>
                             </div>

@@ -11,6 +11,7 @@ use App\Models\User;
 class ProfileController extends Controller
 {
 
+    /* TODO убрать метод, оставить только show */
     public function index()
     {
         return new IndexProfileResource(auth()->user());
@@ -23,7 +24,7 @@ class ProfileController extends Controller
     }
 
 
-    public function update(UpdateRequest $request, User $user)
+    public function update(UpdateRequest $request)
     {
         $data = $request->validated();
         auth()->user()->update($data);
@@ -32,7 +33,7 @@ class ProfileController extends Controller
     }
 
 
-    public function destroy(User $user)
+    public function destroy()
     {
         auth()->user()->delete();
         return response([]);

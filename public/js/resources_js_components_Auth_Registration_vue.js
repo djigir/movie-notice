@@ -74,7 +74,7 @@ var _hoisted_4 = {
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "card-header"
-}, "Register", -1
+}, "Регистрация", -1
 /* HOISTED */
 );
 
@@ -88,7 +88,7 @@ var _hoisted_7 = {
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "name",
   "class": "col-md-4 col-form-label text-md-end"
-}, "Name", -1
+}, "Имя", -1
 /* HOISTED */
 );
 
@@ -102,7 +102,7 @@ var _hoisted_10 = {
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "email",
   "class": "col-md-4 col-form-label text-md-end"
-}, "Email Address", -1
+}, "Email", -1
 /* HOISTED */
 );
 
@@ -116,7 +116,7 @@ var _hoisted_13 = {
 var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "password",
   "class": "col-md-4 col-form-label text-md-end"
-}, "Password", -1
+}, "Пароль", -1
 /* HOISTED */
 );
 
@@ -130,7 +130,7 @@ var _hoisted_16 = {
 var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "password-confirm",
   "class": "col-md-4 col-form-label text-md-end"
-}, "Confirm Password", -1
+}, "Подтвердить пароль", -1
 /* HOISTED */
 );
 

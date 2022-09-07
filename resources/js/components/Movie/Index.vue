@@ -1,19 +1,15 @@
 <template>
 
     <section class="movie-section py-5">
-        <div class="row gx-5 justify-content-center">
-            <div class="col-lg-8 col-xl-6">
-                <div class="text-center">
-                    <h2 class="fw-bolder">Фильмы</h2>
-                    <p class="lead fw-normal text-muted mb-3">
-                        На этой странице вы можете посмотреть все добавленные вами фильмы и сериалы, а также отсортировать их по нужным вам параметрам
-                    </p>
-                    <router-link :to="{ name: 'movie.create' }" class="btn btn-primary add-movie-btn text-light">
-                        Добавить Фильм
-                    </router-link>
-                </div>
-            </div>
-        </div>
+
+        <PageHeader
+            :title="'Фильмы'"
+            :description="'На этой странице вы можете посмотреть все добавленные вами фильмы и сериалы, а также отсортировать их по нужным вам параметрам'"
+            :isButton="true"
+            :to="{name: 'movie.create'}"
+        >
+            <slot>Добавить Фильм</slot>
+        </PageHeader>
 
         <div v-if="movies.data" class="container my-sm-5 border p-0 bg-sec-light mt-5">
             <div id="content">
@@ -72,7 +68,7 @@
                                                    type="checkbox">
                                             <span class="check"></span>
                                         </label>
-                                        <!-- TODO сделать аналог для  Просмотреные -->
+
                                         <label class="tick mt-2">Просмотреные
                                             <input @change="getMovies(1)"
                                                    v-model="viewed"
@@ -88,7 +84,7 @@
                                 <div class="box-label text-uppercase d-flex align-items-center mb-3">Год выхода <button class="btn ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#amenities" aria-expanded="false" aria-controls="amenities"> <span class="fas fa-plus"></span> </button> </div>
                                 <div id="amenities" class="collapse show">
                                     <div v-if="years_range.length" class="my-1">
-                                        <vue-slider v-model="years_range"
+                                        <VueSlider v-model="years_range"
                                             :drag-on-click="true"
                                             :min="+min_year"
                                             :max="+max_year"
@@ -145,7 +141,7 @@
                                             </div>
                                         </div>
                                         <div class="rating">
-                                            <star-rating id="rating" class="rating-stars"
+                                            <VueStarRating id="rating" class="rating-stars"
                                                 v-model:rating="movie.rating"
                                                 :increment="0.5"
                                                 :read-only="true"
@@ -207,11 +203,13 @@
                         </div>
                         <!-- END  Pagination -->
                     </div>
+
                     <!-- if movie = 0 show not result -->
                     <div v-else class="bg-white p-2 border" id="hotels">
                         <h3 class="text-center mt-5">По данному запросу нет результатов!</h3>
                         <p class="text-center">Попробуйте изменить поисковой запрос или примените другие фильтры</p>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -221,20 +219,9 @@
 </template>
 
 <script>
-    import LaravelVuePagination from 'laravel-vue-pagination';
-    import StarRating from 'vue-star-rating';
-    import VueSlider from 'vue-slider-component'
-    import 'vue-slider-component/theme/antd.css'
-    import Swal from "sweetalert2";
 
     export default {
         name: "Index",
-
-        components: {
-            LaravelVuePagination,
-            StarRating,
-            VueSlider,
-        },
 
         data() {
             return {
@@ -257,10 +244,6 @@
             this.getMovies()
             this.getGenres()
             this.getYearsRange()
-        },
-
-        updated() {
-
         },
 
         watch: {

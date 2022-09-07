@@ -1,18 +1,13 @@
 <template>
 
     <section class="edit-movie mb-5 pb-5">
-        <!-- breadcrumbs -->
-        <div class="row gx-5 justify-content-center mt-5">
-            <div class="col-lg-8 col-xl-6">
-                <div class="text-center">
-                    <h2 class="fw-bolder">Редактирование фильма</h2>
-                    <p class="lead fw-normal text-muted mb-3">
-                        Вы находитесь на странице редактирование фильма здесь вы можете изменить информацию о данном фильме
-                    </p>
-                </div>
-            </div>
-        </div>
-        <!-- breadcrumbs -->
+
+        <PageHeader
+            class="mt-5"
+            :title="'Редактирование фильма'"
+            :description="'Вы находитесь на странице редактирование фильма здесь вы можете изменить информацию о данном фильме'"
+        >
+        </PageHeader>
 
         <div class="container rounded bg-white mt-5">
             <div class="row">
@@ -37,13 +32,13 @@
                                 <input v-model="title" type="text" class="form-control" placeholder="Название">
                             </div>
                             <div class="col-md-6">
-                                <Datepicker
+                                <VueDatePicker
                                     yearPicker
                                     v-model="release_year"
                                     autoApply
                                     placeholder="Выберите дату выхода фильма"
                                 >
-                                </Datepicker>
+                                </VueDatePicker>
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -58,7 +53,7 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-6">
-                                <VueMultiselect
+                                <vue-multiselect
                                     v-model="genres"
                                     :options="genres_options"
                                     :multiple="true"
@@ -71,7 +66,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="rating" id="rating-label" class="form-check-label mt-2">Рейтинг:</label>
-                                <star-rating id="rating" class="rating-stars d-inline-block"
+                                <VueStarRating id="rating" class="rating-stars d-inline-block"
                                      v-model:rating="rating"
                                      :increment="0.5"
                                      :max-rating="10"
@@ -104,24 +99,10 @@
 </template>
 
 <script>
-    const DEFAULT_IMAGE = 'https://mizez.com/custom/mizez/img/general/no-image-available.png'
-
-    import Datepicker from "@vuepic/vue-datepicker";
-    import '@vuepic/vue-datepicker/dist/main.css'
-    import StarRating from 'vue-star-rating'
-    import VueMultiselect from 'vue-multiselect/src/Multiselect.vue';
-    import Swal from 'sweetalert2';
-
+    const DEFAULT_IMAGE = 'https://mizez.com/custom/mizez/img/general/no-image-available.png';
 
     export default {
         name: "Edit",
-
-        components: {
-            Datepicker,
-            StarRating,
-            VueMultiselect,
-            Swal
-        },
 
         data() {
             return {
@@ -176,22 +157,21 @@
                     image: this.image === '' ? DEFAULT_IMAGE : this.image
                 })
                 .then( res => {
-                    const Toast = Swal.mixin({
+                    this.$swal.mixin({
                         toast: true,
                         position: 'top-end',
                         showConfirmButton: false,
                         timer: 3000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            toast.addEventListener('mouseenter', this.$swal.stopTimer)
+                            toast.addEventListener('mouseleave', this.$swal.resumeTimer)
                         }
-                    })
-
-                    Toast.fire({
+                    }).fire({
                         icon: 'success',
                         title: `Фильм "${this.title}" успешно обновлен!`
                     })
+
                     this.$router.push({name: 'movie.show', params: {id: this.$route.params.id}})
                 })
             }

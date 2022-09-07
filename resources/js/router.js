@@ -116,7 +116,7 @@ router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('x_xsrf_token')
 
     if (!token) {
-        if (to.name === 'login' || to.name === 'register' || to.name === 'index') {
+        if (to.name === 'login' || to.name === 'register' || to.name === 'main.index') {
             return next()
         } else {
             return next({name: 'login'})

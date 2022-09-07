@@ -1,18 +1,14 @@
 <template>
 
     <section class="section about-section gray-bg" id="about">
-        <!-- breadcrumbs -->
-        <div class="row gx-5 justify-content-center mb-5">
-            <div class="col-lg-8 col-xl-6">
-                <div class="text-center">
-                    <h2 class="fw-bolder">Редактирование профиля</h2>
-                    <p class="lead fw-normal text-muted mb-3">
-                        На этой странице вы можете изменить ваше Имя и Email
-                    </p>
-                </div>
-            </div>
-        </div>
-        <!-- breadcrumbs -->
+
+        <PageHeader
+            class="mt-5"
+            :title="'Редактирование профиля'"
+            :description="'На этой странице вы можете изменить ваше Имя и Email'"
+        >
+        </PageHeader>
+
         <div class="container rounded bg-light shadow mt-5 mb-5">
             <div class="p-1 h1 mx-auto display-inline-block">
                 <h2 class="text-center fw-bold mt-4">Форма редактирования</h2>

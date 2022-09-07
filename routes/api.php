@@ -18,15 +18,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::controller(\App\Http\Controllers\API\ParserMovieController::class)
+    ->prefix('parse')
+    ->group(function () {
+        Route::get('movies', 'index');
+        Route::get('new-movie-show/{link}', [\App\Http\Controllers\API\ParserMovieController::class, 'show']);
+    });
+
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::controller(\App\Http\Controllers\API\ParserMovieController::class)
-        ->prefix('parse')
-        ->group(function () {
-            Route::get('movies', 'index');
-            Route::get('new-movie-show/{link}', [\App\Http\Controllers\API\ParserMovieController::class, 'show']);
-        });
-
-
 
     Route::get('/genre', [\App\Http\Controllers\API\GenreController::class, 'index']);
 

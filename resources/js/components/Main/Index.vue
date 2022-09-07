@@ -64,8 +64,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 mb-4">
-                            <carousel :settings="settings" :breakpoints="breakpoints" v-if="movies">
-                                <slide v-for="(movie, index) in movies" :key="movie.id">
+                            <Carousel :settings="settings" :breakpoints="breakpoints" v-if="movies">
+                                <CarouselSlide v-for="(movie, index) in movies" :key="movie.id">
                                     <router-link class="show-new-movie-link" :to="{name: 'main.show',
                                     params: {link: movie.link, metaTitle: `MovieNotes|Фильм ${movie.title}`}}">
                                         <div class="carousel__item">
@@ -80,12 +80,12 @@
                                             </span>
                                         </div>
                                     </router-link>
-                                </slide>
+                                </CarouselSlide>
                                 <template #addons>
                                     <navigation />
                                     <pagination class="mt-2" />
                                 </template>
-                            </carousel>
+                            </Carousel>
                         </div>
                     </div>
                 </div>
@@ -163,17 +163,8 @@
 </template>
 
 <script>
-    import 'vue3-carousel/dist/carousel.css';
-    import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
-
     export default {
         name: "Index",
-        components: {
-            Carousel,
-            Slide,
-            Pagination,
-            Navigation,
-        },
 
         data() {
             return {

@@ -51,11 +51,12 @@
 
             <!-- Footer-->
             <footer class="py-5 bg-dark">
-                <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+                <div class="container px-5">
+                    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p>
+                </div>
             </footer>
             <!-- Footer-->
         </div>
-
 
 </template>
 
@@ -95,15 +96,6 @@
 </script>
 
 <style scoped>
-    .nav-btn a {
-        color: white;
-        text-decoration: none;
-    }
-
-    .nav-btn {
-        margin-right: 1rem;
-        margin-bottom: 1rem;
-    }
 
     .wrapper {
         display: flex;

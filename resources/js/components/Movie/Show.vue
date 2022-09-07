@@ -1,19 +1,16 @@
 <template>
 
     <section class="movie-details" v-if="movie">
-        <!-- breadcrumbs -->
-        <div class="row gx-5 justify-content-center mt-5">
-            <div class="col-lg-8 col-xl-6">
-                <div class="text-center">
-                    <h2 class="fw-bolder">{{ movie.title }}</h2>
-                    <p class="lead fw-normal text-muted mb-3">Вы находитесь на странице просмотра фильма здесь вы можете посмотреть все данные о фильме, а так же почитать отзывы</p>
-                    <router-link :to="{ name: 'movie.index' }" class="btn btn-primary add-movie-btn text-light">
-                        Назад к списку
-                    </router-link>
-                </div>
-            </div>
-        </div>
-        <!-- breadcrumbs -->
+
+        <PageHeader
+            class="mt-5"
+            :title="movie.title"
+            :description="'Вы находитесь на странице просмотра фильма здесь вы можете посмотреть все данные о фильме, а так же почитать отзывы'"
+            :isButton="true"
+            :to="{ name: 'movie.index' }"
+        >
+            <slot>Назад к списку</slot>
+        </PageHeader>
 
         <div class="container mt-5 mb-5">
             <div class="row">
@@ -60,7 +57,7 @@
                             </span>
                         </p>
                         <p><b>Рейтинг: </b>
-                            <star-rating id="rating" class="rating-stars d-inline-block"
+                            <VueStarRating id="rating" class="rating-stars d-inline-block"
                                  v-model:rating="movie.rating"
                                  :increment="0.5"
                                  :read-only="true"
@@ -99,13 +96,9 @@
 <!-- TODO если неь жанров вывести какую-то надпись -->
 <script>
     const DEFAULT_IMAGE = 'https://mizez.com/custom/mizez/img/general/no-image-available.png';
-    import StarRating from "vue-star-rating";
-    import Swal from 'sweetalert2';
 
     export default {
         name: "Show",
-
-        components: {StarRating, Swal},
 
         data() {
             return {
@@ -127,7 +120,7 @@
 
             deleteMovie(id) {
 
-                Swal.fire({
+                this.$swal.fire({
                     title: `Вы действительно хотитие удалить фильм "${this.movie.title}"?`,
                     icon: 'question',
                     showCloseButton: true,
@@ -139,15 +132,15 @@
                 }).then(res => {
 
                     if (res.isConfirmed) {
-                        const Toast = Swal.mixin({
+                        const Toast = this.$swal.mixin({
                             toast: true,
                             position: 'top-end',
                             showConfirmButton: false,
                             timer: 3000,
                             timerProgressBar: true,
                             didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                toast.addEventListener('mouseenter', this.$swal.stopTimer)
+                                toast.addEventListener('mouseleave', this.$swal.resumeTimer)
                             }
                         })
 
@@ -162,6 +155,7 @@
                         })
                     }
                 })
+
             },
 
             isViewedText(is_viewed) {
